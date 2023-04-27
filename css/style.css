@@ -867,6 +867,7 @@ testimonial__header{
 .footer__container{
   row-gap: 3.5rem;
   padding: 0 1rem;
+  align-items: end;
 }
 
 .footer__bg{
@@ -880,7 +881,7 @@ testimonial__header{
 }
 
 .footer__subtitle{
-  font-size: var(--small-font-size);
+  font-size: var(--normal-font-size);
 }
 
 .footer__links{
@@ -992,7 +993,7 @@ testimonial__header{
     
   }
   .home__blod{
-    width: 180px;
+    width: 380px;
   }
 
   .skills__title{
@@ -1284,9 +1285,13 @@ testimonial__header{
     padding-top: 5.5rem;
     column-gap: 2rem;
   }
+
+  .home
   
   .home__scroll{
     display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .home__scroll-button{
