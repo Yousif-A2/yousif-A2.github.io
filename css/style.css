@@ -1085,8 +1085,6 @@ testimonial__header{
     margin-right: auto;
   }
 
- 
-
   body{
     margin: 0;
   }
@@ -1207,6 +1205,7 @@ testimonial__header{
 
   .footer{
     width: 100%;
+    margin-bottom: 0;
   }
 
   .footer__container{
@@ -1349,6 +1348,10 @@ testimonial__header{
   
   .new-project__data{
     padding-top: .8rem;
+  }
+
+  .footer{
+    margin-bottom: 0;
   }
 
   .footer__container{
