@@ -553,6 +553,10 @@ img {
   column-gap: 1.5rem;
 }
 
+.left-qualification{
+  margin-left: 8rem;
+}
+
 .qualification__title{
   font-size: var(--normal-font-size);
   font-weight: var(--font-medium);
@@ -561,7 +565,7 @@ img {
 .qualification__subtitle{
   display: inline-block;
   font-size: var(--small-font-size);
-  margin-bottom: var(--mb-1);
+  
 }
 
 .qualification__calendar{
@@ -579,7 +583,7 @@ img {
 
 .qualification__line{
   display: block;
-  width: 1px;
+  width: 2px;
   height: 100%;
   background-color: var(--first-color);
   transform: translate(6px, -7px);
@@ -1004,10 +1008,12 @@ testimonial__header{
   }
 
   .qualification__data{
-    gap: .5rem;
+    gap: 3rem;
   }
 
-  
+  .left-qualification{
+    margin-left: 2rem;
+  }
 
   .services__container{
     grid-template-columns: max-content;
