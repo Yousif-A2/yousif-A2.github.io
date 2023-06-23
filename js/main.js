@@ -68,6 +68,27 @@ tabs.forEach(tab => {
     })
 })
 
+// Projects Tabs
+const tabp = document.querySelectorAll('[data-target-p]'),
+        tabContentp = document.querySelectorAll('[data-content-p]')
+        console.log(tabp)
+
+tabp.forEach(tab => {
+    tab.addEventListener('click', () => {
+        const target = document.querySelector(tab.dataset.targetP)
+
+        tabContentp.forEach(tabContent => {
+            tabContent.classList.remove('projects__active')
+        })
+        target.classList.add('projects__active')
+
+        tabp.forEach(tab => {
+            tab.classList.remove('projects__active')
+        })
+        tab.classList.add('projects__active')
+    })
+})
+
 
 // Services Modal
 const modalViews = document.querySelectorAll('.services__modal'),
