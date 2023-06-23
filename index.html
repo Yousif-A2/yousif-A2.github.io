@@ -22,14 +22,15 @@
                                 <i class="uil uil-estate nav__icon"></i> Home
                             </a>
                         </li>
-                        <li class="nav__item">
-                            <a href="#about" class="nav__link">
-                                <i class="uil uil-user nav__icon"></i> About me
-                            </a>
-                        </li>
+                        
                         <li class="nav__item">
                             <a href="#skills" class="nav__link">
                                 <i class="uil uil-file-alt nav__icon"></i> Skills
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#qualification" class="nav__link">
+                                <i class="uil uil-briefcase-alt nav__icon"></i> Qualification
                             </a>
                         </li>
                         <li class="nav__item">
@@ -37,6 +38,7 @@
                                 <i class="uil uil-briefcase-alt nav__icon"></i> Service
                             </a>
                         </li>
+                        
                         <li class="nav__item">
                             <a href="#projects" class="nav__link">
                                 <i class="uil uil-scenery nav__icon"></i> Projects
@@ -96,50 +98,38 @@
                         </div>
                         <div class="home__data">
                             <h1 class="home__title">Hi, I'm Yousif</h1>
-                            <h3 class="home__subtitle">Frontend Developer</h3>
+                            <h3 class="home__subtitle">Freelancer Developer</h3>
                             <p class="home__description">I'm a Frontend Developer, I have experience in HTML, CSS, JavaScript, React, and Node.js</p>
+                            <div class="about__info">
+                                <div>
+                                    <span class="about__info-title">10+</span>
+                                    <span class="about__info-name">Years <br> experience</span>
+                                </div>
+                                <div>
+                                    <span class="about__info-title">20+</span>
+                                    <span class="about__info-name">Completed <br> projects</span>
+                                </div>
+                                <div>
+                                    <span class="about__info-title">05+</span>
+                                    <span class="about__info-name">Companies <br> worked</span>
+                                </div>
+                            </div>
+                
+                                <a download="" href="Assets/Yousif_CV.pdf" class="button button--flex">
+                                    Download CV <i class="uil uil-download-alt button__icon"></i>
+                                </a>
+                            
                             <a href="#contact" class="button button--flex">
                                 Contact me <i class="uil uil-message button__icon"></i>
                             </a>
                         </div>
                     </div>
                     <div class="home__scroll ">
-                        <a href="#about" class="home__scroll-button button--flex">
+                        <a href="#skills" class="home__scroll-button button--flex">
                             <i class="uil uil-mouse-alt home__scroll-mouse"></i>
                             <span class="home__scroll-name">Scroll down</span>
                             <i class="uil uil-arrow-down home__scroll-arrow"></i>
                         </a>
-                </div>
-            </secction>
-            <!--==================== ABOUT ====================-->
-            <secction class="about section" id="about">
-                <h2 class="section__title">About me</h2>
-                <span class="section__subtitle">My introduction</span>
-
-                <div class="about__container container grid">
-                    <img src="Assets/img/aboutme.jpg" alt="" class="about__img">
-                    <div class="about__data">
-                        <p class="about__description">I'm a Frontend Developer, I have experience in HTML, CSS, JavaScript, React, and Node.js</p>
-                        <div class="about__info">
-                            <div>
-                                <span class="about__info-title">10+</span>
-                                <span class="about__info-name">Years <br> experience</span>
-                            </div>
-                            <div>
-                                <span class="about__info-title">20+</span>
-                                <span class="about__info-name">Completed <br> projects</span>
-                            </div>
-                            <div>
-                                <span class="about__info-title">05+</span>
-                                <span class="about__info-name">Companies <br> worked</span>
-                            </div>
-                        </div>
-                        <div class="about__buttons">
-                            <a download="" href="Assets/Yousif_CV.pdf" class="button button--flex">
-                                Download CV <i class="uil uil-download-alt button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </secction>
             <!--==================== SKILLS ====================-->
@@ -302,7 +292,7 @@
                 </div>
             </section>
             <!--==================== qualification ====================-->
-            <section class="qualification section">
+            <section class="qualification section" id="qualification">
                 <h2 class="section__title">Qualification</h2>
                 <span class="section__subtitle">My personal journey</span>
 
@@ -513,7 +503,21 @@
                         </div>
                     </div>
             </section>
-
+            <!--==================== NEW PROJECT ====================-->
+            <section class="new-project section" id="new-projects">
+                <div class="new-project-bg">
+                    <div class="new-project__container container grid">
+                        <div class="new-project__data">
+                            <h2 class="new-project__title">You have a new project</h2>
+                            <p class="new-project__description">Contact me for any web design or development</p>
+                            <a href="#contact" class="button button--flex button--white">
+                                Contact Me
+                                <i class="uil uil-message project__icon button__icon"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <!--==================== PROJECTS ====================-->
             <section class="projects section" id="projects">
                 <h2 class="section__title">Projects</h2>
@@ -624,21 +628,7 @@
                 </div>
             </section>
 
-            <!--==================== NEW PROJECT ====================-->
-            <section class="new-project section">
-                <div class="new-project-bg">
-                    <div class="new-project__container container grid">
-                        <div class="new-project__data">
-                            <h2 class="new-project__title">You have a new project</h2>
-                            <p class="new-project__description">Contact me for any web design or development</p>
-                            <a href="#contact" class="button button--flex button--white">
-                                Contact Me
-                                <i class="uil uil-message project__icon button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+
             
             <!--==================== TESTIMONIAL ====================-->
             <!-- <section class="testimonial sectio">
@@ -796,9 +786,9 @@
             </footer>
 
             <!--==================== SCROLL TOP ====================-->
-            <!-- <a href="#" wclass="scrollup" id="scroll-up">
+             <a href="#" wclass="scrollup" id="scroll-up">
                 <i class="uil uil-arrow-up scrollup__icon"></i>
-            </a> -->
+            </a> 
 
 
 

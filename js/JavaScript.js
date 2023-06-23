@@ -1,4 +1,3 @@
-console.log('Hello World')
 
 // Accordion Skills
 const skillsContent = document.getElementsByClassName('skills__content'),
