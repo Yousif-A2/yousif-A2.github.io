@@ -1192,7 +1192,7 @@ testimonial__header{
     font-size: 2rem;
   }
   .services__content{
-    padding: 6rem 0 2.5rem;
+    padding: center;
   }
   .services__modal-content{
     width: 450px;
@@ -1343,7 +1343,7 @@ testimonial__header{
     font-size: 2rem;
   }
   .services__content{
-    padding: 6rem 0 2.5rem;
+    padding: center;
   }
   .services__modal-content{
     width: 450px;
