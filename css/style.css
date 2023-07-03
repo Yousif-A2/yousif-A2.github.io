@@ -116,7 +116,7 @@ a {
 }
 
 img {
-    max-width: 100%;
+    max-width: 50%;
     height: auto;
 }
 
@@ -352,9 +352,10 @@ nav {
 /*==================== ABOUT ====================*/
 .about__img {
     width: 200px;
-    border-radius: 0.5rem;
+    border-radius: 4.5rem;
     justify-self: center;
     align-self: center;
+    max-width: 50%;
 }
 
 .about__description {
@@ -873,7 +874,7 @@ testimonial__header {
 }
 
 .footer__title {
-    font-size: white;
+    font-size: var(--h2-font-size);
     margin-bottom: var(--mb-0-25);
 }
 
