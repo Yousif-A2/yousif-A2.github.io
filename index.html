@@ -16,6 +16,15 @@
         <link rel="stylesheet" href="css/style.css" />
         <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" /> -->
         <title>Yousif`s Portfolio</title>
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+        ></script>
+        <script type="text/javascript">
+            (function () {
+                emailjs.init("EHbwHNOepI3FFk_7e");
+            })();
+        </script>
     </head>
     <body>
         <header class="header" id="header">
@@ -1085,7 +1094,7 @@
                             <div class="contact__content">
                                 <input
                                     type="text"
-                                    name="name"
+                                    id="name"
                                     class="contact__input contact"
                                     placeholder="Your Name"
                                     required
@@ -1095,7 +1104,7 @@
                             <div class="contact__content">
                                 <input
                                     type="email"
-                                    name="email"
+                                    id="email"
                                     class="contact__input contact"
                                     placeholder="Your Email"
                                     required
@@ -1105,7 +1114,7 @@
                             <div class="contact__content">
                                 <input
                                     type="text"
-                                    name="project"
+                                    id="project"
                                     class="contact__input contact"
                                     placeholder="Type of your Project"
                                 />
@@ -1113,8 +1122,7 @@
 
                             <div class="contact__content">
                                 <textarea
-                                    name="meassage"
-                                    id=""
+                                    id="message"
                                     cols="0"
                                     rows="7"
                                     class="contact__input contact"
@@ -1123,10 +1131,13 @@
                             </div>
                         </div>
                         <div>
-                            <a href="" class="button button--flex">
+                            <button
+                                onclick="sendMail()"
+                                class="button button--flex"
+                            >
                                 Send Message
                                 <i class="uil uil-message button__icon"></i>
-                            </a>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -1209,8 +1220,9 @@
             </footer>
         </main>
 
-        <script src="js/main.js"></script>
-        <script src="js/swiper-bundle.min.js"></script>
+        <script src="js\main.js"></script>
+        <script src="js\swiper-bundle.min.js"></script>
+        <script src="js\emailjs.js"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script> -->
         <script>
             var swiper = new Swiper(".mySwiper", {
