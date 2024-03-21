@@ -13,8 +13,8 @@
     --first-color-lighter: hsl(var(--hue-color), 92%, 85%);
     --title-color: hsl(var(--hue-color), 8%, 15%);
     --text-color: hsl(var(--hue-color), 8%, 45%);
-    --text-color-light: hsl(var(--hue-color), 8%, 65%);
-    --input-color: hsl(var(--hue-color), 30%, 90%);
+    --text-color-light: hsl(var(--hue-color), 8%, 35%);
+    --input-color: hsl(var(--hue-color), 30%, 100%);
     --body-color: hsl(var(--hue-color), 40%, 100%);
     --container-color: #f4f4f4;
     --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
@@ -59,9 +59,11 @@ body.dark-theme {
     --title-color: hsl(var(--hue-color), 8%, 95%);
     --text-color: hsl(var(--hue-color), 8%, 75%);
     --input-color: hsl(var(--hue-color), 29%, 16%);
+    background-image: linear-gradient(152deg, rgba(93, 93, 93, 0.02) 0%, rgba(93, 93, 93, 0.02) 3%,rgba(71, 71, 71, 0.02) 3%, rgba(71, 71, 71, 0.02) 9%,rgba(11, 11, 11, 0.02) 9%, rgba(11, 11, 11, 0.02) 52%,rgba(198, 198, 198, 0.02) 52%, rgba(198, 198, 198, 0.02) 85%,rgba(231, 231, 231, 0.02) 85%, rgba(231, 231, 231, 0.02) 100%),linear-gradient(50deg, rgba(25, 25, 25, 0.02) 0%, rgba(25, 25, 25, 0.02) 28%,rgba(53, 53, 53, 0.02) 28%, rgba(53, 53, 53, 0.02) 29%,rgba(146, 146, 146, 0.02) 29%, rgba(146, 146, 146, 0.02) 32%,rgba(172, 172, 172, 0.02) 32%, rgba(172, 172, 172, 0.02) 80%,rgba(178, 178, 178, 0.02) 80%, rgba(178, 178, 178, 0.02) 100%),linear-gradient(108deg, rgba(235, 235, 235, 0.02) 0%, rgba(235, 235, 235, 0.02) 1%,rgba(126, 126, 126, 0.02) 1%, rgba(126, 126, 126, 0.02) 69%,rgba(60, 60, 60, 0.02) 69%, rgba(60, 60, 60, 0.02) 75%,rgba(162, 162, 162, 0.02) 75%, rgba(162, 162, 162, 0.02) 96%,rgba(186, 186, 186, 0.02) 96%, rgba(186, 186, 186, 0.02) 100%),linear-gradient(58deg, rgba(184, 184, 184, 0.02) 0%, rgba(184, 184, 184, 0.02) 6%,rgba(73, 73, 73, 0.02) 6%, rgba(73, 73, 73, 0.02) 11%,rgba(9, 9, 9, 0.02) 11%, rgba(9, 9, 9, 0.02) 72%,rgba(197, 197, 197, 0.02) 72%, rgba(197, 197, 197, 0.02) 82%,rgba(225, 225, 225, 0.02) 82%, rgba(225, 225, 225, 0.02) 100%),linear-gradient(103deg, rgba(24, 24, 24, 0.02) 0%, rgba(24, 24, 24, 0.02) 5%,rgba(240, 240, 240, 0.02) 5%, rgba(240, 240, 240, 0.02) 78%,rgba(12, 12, 12, 0.02) 78%, rgba(12, 12, 12, 0.02) 83%,rgba(52, 52, 52, 0.02) 83%, rgba(52, 52, 52, 0.02) 93%,rgba(22,22,22, 0.02) 93%, rgba(22,22,22, 0.02) 100%),linear-gradient(90deg, rgb(0,6,0),rgb(0,6,0));
     --body-color: hsl(var(--hue-color), 85%, 5%);
     --container-color: hsl(var(--hue-color), 29%, 16%);
 }
+
 
 /*========== Button Dark/Light ==========*/
 .nav__btns {
@@ -92,10 +94,11 @@ html {
 }
 
 body {
+    background-image: linear-gradient(144deg, rgba(192, 192, 192, 0.03) 0%, rgba(192, 192, 192, 0.03) 23%,rgba(36, 36, 36, 0.03) 23%, rgba(36, 36, 36, 0.03) 29%,rgba(248, 248, 248, 0.03) 29%, rgba(248, 248, 248, 0.03) 44%,rgba(250, 250, 250, 0.03) 44%, rgba(250, 250, 250, 0.03) 61%,rgba(36, 36, 36, 0.03) 61%, rgba(36, 36, 36, 0.03) 100%),linear-gradient(200deg, rgba(81, 81, 81, 0.03) 0%, rgba(81, 81, 81, 0.03) 68%,rgba(36, 36, 36, 0.03) 68%, rgba(36, 36, 36, 0.03) 82%,rgba(187, 187, 187, 0.03) 82%, rgba(187, 187, 187, 0.03) 95%,rgba(13, 13, 13, 0.03) 95%, rgba(13, 13, 13, 0.03) 97%,rgba(107, 107, 107, 0.03) 97%, rgba(107, 107, 107, 0.03) 100%),linear-gradient(228deg, rgba(248, 248, 248, 0.03) 0%, rgba(248, 248, 248, 0.03) 25%,rgba(125, 125, 125, 0.03) 25%, rgba(125, 125, 125, 0.03) 28%,rgba(228, 228, 228, 0.03) 28%, rgba(228, 228, 228, 0.03) 32%,rgba(185, 185, 185, 0.03) 32%, rgba(185, 185, 185, 0.03) 84%,rgba(82, 82, 82, 0.03) 84%, rgba(82, 82, 82, 0.03) 100%),linear-gradient(244deg, rgba(15, 15, 15, 0.03) 0%, rgba(15, 15, 15, 0.03) 35%,rgba(224, 224, 224, 0.03) 35%, rgba(224, 224, 224, 0.03) 52%,rgba(251, 251, 251, 0.03) 52%, rgba(251, 251, 251, 0.03) 69%,rgba(83, 83, 83, 0.03) 69%, rgba(83, 83, 83, 0.03) 72%,rgba(219, 219, 219, 0.03) 72%, rgba(219, 219, 219, 0.03) 100%),linear-gradient(338deg, rgba(57, 57, 57, 0.03) 0%, rgba(57, 57, 57, 0.03) 32%,rgba(166, 166, 166, 0.03) 32%, rgba(166, 166, 166, 0.03) 54%,rgba(161, 161, 161, 0.03) 54%, rgba(161, 161, 161, 0.03) 56%,rgba(158, 158, 158, 0.03) 56%, rgba(158, 158, 158, 0.03) 61%,rgba(25, 25, 25, 0.03) 61%, rgba(25, 25, 25, 0.03) 100%),linear-gradient(90deg, rgb(225, 225, 225),rgb(231, 231, 231));
     margin: 0 0 var(--header-height) 0;
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
-    background-color: var(--body-color);
+    /* background-color: var(--body-color); */
     color: var(--text-color);
 }
 
@@ -159,7 +162,7 @@ img {
     bottom: 0;
     left: 0;
     z-index: var(--z-fixed);
-    background-color: var(--body-color);
+    background-color: rgba(0, 0, 0, 0.12);
 }
 
 /*==================== NAV ====================*/
@@ -923,7 +926,9 @@ testimonial__header {
     background-color: var(--body-color);
     border-radius: 0.5rem;
 }
-
+body::-webkit-scrollbar-track {
+    background: inherit;
+}
 ::-webkit-scrollbar-thumb {
     background-color: var(--first-color);
     border-radius: 0.5rem;
