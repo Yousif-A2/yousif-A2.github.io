@@ -1,0 +1,623 @@
+{
+    "site": {
+        "title": "الموقع الشخصي ليوسف",
+        "logoText": "الموقع الشخصي ليوسف"
+    },
+    "navigation": [
+        {
+            "id": "home",
+            "label": "الرئيسية",
+            "icon": "uil uil-estate"
+        },
+        {
+            "id": "about",
+            "label": "نبذة",
+            "icon": "uil uil-user"
+        },
+        {
+            "id": "skills",
+            "label": "المهارات",
+            "icon": "uil uil-file-check-alt"
+        },
+        {
+            "id": "qualification",
+            "label": "المؤهلات",
+            "icon": "uil uil-briefcase-alt"
+        },
+        {
+            "id": "service",
+            "label": "الخدمات",
+            "icon": "uil uil-server-network-alt"
+        },
+        {
+            "id": "projects",
+            "label": "المشاريع",
+            "icon": "uil uil-folder-open"
+        },
+        {
+            "id": "contact",
+            "label": "التواصل",
+            "icon": "uil uil-message"
+        }
+    ],
+    "home": {
+        "socialLinks": [
+            {
+                "label": "LinkedIn",
+                "icon": "uil uil-linkedin-alt",
+                "url": "https://www.linkedin.com/in/yalnasser/"
+            },
+            
+            {
+                "label": "GitHub",
+                "icon": "uil uil-github-alt",
+                "url": "https://github.com/Yousif-A2"
+            },
+            {
+                "label": "Hugging Face",
+                "icon": "hf-icon",
+                "url": "https://huggingface.co/Yousif22"
+            },
+            {
+                "label": "X",
+                "icon": "uil uil-twitter-alt",
+                "url": "https://twitter.com/yousif_022"
+            }
+        ],
+        "image": {
+            "src": "Assets/img/after editing.jpg",
+            "alt": "صورة يوسف"
+        },
+        "title": "مرحباً، أنا يوسف",
+        "subtitle": "مهندس حاسوب ومطوّر مستقل",
+        "description": "اختبر قوة الابتكار مع مطوّر حر شغوف بصناعة تجارب رقمية سلسة. من التطبيقات المعتمدة على الذكاء الاصطناعي إلى المواقع المتجاوبة، فلنحوّل رؤيتك إلى واقع.",
+        "cta": {
+            "label": "تواصل معي",
+            "href": "#contact",
+            "icon": "uil uil-message"
+        },
+        "scroll": {
+            "label": "مرّر للأسفل",
+            "href": "#about",
+            "mouseIcon": "uil uil-mouse-alt",
+            "arrowIcon": "uil uil-arrow-down"
+        }
+    },
+    "about": {
+        "title": "من أنا",
+        "subtitle": "تعريف سريع",
+        "image": {
+            "src": "Assets/img/about.png",
+            "alt": "صورة تعريفية"
+        },
+        "description": "مرحباً بك في موقعي الشخصي! أنا مطوّر حر أستثمر التقنية لصناعة حلول مبتكرة. أمتلك خبرة واسعة في تنفيذ مشاريع الذكاء الاصطناعي، وتطوير البرمجيات، والمواقع، وتطبيقات الأجهزة الذكية. أستمتع بالتحديات وأبحث دائماً عن حلول أنيقة للمشكلات المعقدة. رحلتي في عالم التقنية منحتني فهماً عميقاً للغات وأطر العمل المختلفة، وأحرص باستمرار على متابعة أحدث التوجهات لضمان تقديم أفضل النتائج. لنحوّل أفكارك إلى منتجات رقمية مميزة.",
+        "stats": [
+            {
+                "value": "08+",
+                "label": "سنوات الخبرة"
+            },
+            {
+                "value": "20+",
+                "label": "مشاريع منجزة"
+            },
+            {
+                "value": "04+",
+                "label": "شركات تعاونت معها"
+            }
+        ],
+        "buttons": [
+            {
+                "label": "تصفح السيرة الذاتية",
+                "href": "https://drive.google.com/file/d/16RB5LDw8RtXw10e3m8h_DQT9G0SB6FfT/view?usp=drive_link",
+                "icon": "uil uil-download-alt",            
+                "target": "_blank",
+                "rel": "noopener noreferrer"
+            
+            }
+        ]
+    },
+    "skills": {
+        "title": "المهارات",
+        "subtitle": "مهاراتي التقنية",
+        "groups": [
+            {
+                "title": "تطوير الواجهة الأمامية",
+                "subtitle": "أكثر من 4 سنوات",
+                "icon": "uil uil-brackets-curly",
+                "isOpen": true,
+                "items": [
+                    {
+                        "name": "HTML",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "CSS",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "JavaScript",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "React",
+                        "percentage": 100
+                    }
+                ]
+            },
+            {
+                "title": "الذكاء الاصطناعي",
+                "subtitle": "أكثر من 4 سنوات",
+                "icon": "uil uil-brain",
+                "isOpen": false,
+                "items": [
+                    {
+                        "name": "Machine Learning",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "Deep Learning",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "Python",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "TensorFlow",
+                        "percentage": 100
+                    }
+                ]
+            },
+            {
+                "title": "الإلكترونيات",
+                "subtitle": "أكثر من 4 سنوات",
+                "icon": "uil uil-robot",
+                "isOpen": false,
+                "items": [
+                    {
+                        "name": "Arduino",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "Raspberry Pi",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "Circuit Design",
+                        "percentage": 100
+                    }
+                ]
+            }
+        ]
+    },
+    "qualification": {
+        "title": "المؤهلات",
+        "subtitle": "رحلتي المهنية",
+        "tabs": [
+            {
+                "id": "education",
+                "label": "التعليم",
+                "icon": {
+                    "src": "https://cdn.lordicon.com/lenjvibx.json",
+                    "trigger": "morph",
+                    "state": "morph-open"
+                }
+            },
+            {
+                "id": "work",
+                "label": "الخبرة",
+                "icon": {
+                    "src": "https://cdn.lordicon.com/rdfmytjv.json",
+                    "trigger": "hover",
+                    "stroke": "bold"
+                }
+            }
+        ],
+        "entries": {
+            "education": [
+                {
+                    "title": "بكالوريوس هندسة الحاسب",
+                    "subtitle": "جامعة الملك فيصل",
+                    "period": "2019 - 2024",
+                    "alignment": "left"
+                },
+                {
+                    "title": "Udacity",
+                    "subtitle": "هندسة الأمن السيبراني",
+                    "period": "4 يناير 2023",
+                    "alignment": "right"
+                },
+                {
+                    "title": "Udacity",
+                    "subtitle": "تطوير واجهات الويب",
+                    "period": "28 مارس 2020",
+                    "alignment": "left"
+                }
+            ],
+            "work": [
+                {
+                    "title": "تجربة المستخدم",
+                    "subtitle": "GGC Consulting",
+                    "period": "أغسطس 2022 - سبتمبر 2022",
+                    "alignment": "left"
+                },
+                {
+                    "title": "أخصائي دعم تقني",
+                    "subtitle": "ABYAT",
+                    "period": "مارس 2021 - أبريل 2021",
+                    "alignment": "right"
+                },
+                {
+                    "title": "مدرب تقني",
+                    "subtitle": "SAFCSP",
+                    "period": "نوفمبر 2019 - فبراير 2020",
+                    "alignment": "left"
+                },
+                {
+                    "title": "مطوّر مستقل",
+                    "period": "2019 - الآن",
+                    "alignment": "right"
+                }
+            ]
+        }
+    },
+    "services": {
+        "title": "الخدمات",
+        "subtitle": "ماذا أقدّم",
+        "items": [
+            {
+                "title": "تطوير الويب",
+                "icon": "uil uil-browser",
+                "modalTitle": "تصميم وتطوير الويب",
+                "features": [
+                    "تصاميم متجاوبة لجميع الأجهزة",
+                    "تجربة مستخدم عصرية",
+                    "اختبارات ونشر موثوق"
+                ]
+            },
+            {
+                "title": "تطوير التطبيقات",
+                "icon": "uil uil-mobile-android",
+                "modalTitle": "تطوير التطبيقات",
+                "features": [
+                    "كتابة وتنظيم الشيفرة",
+                    "تحسين الأداء والجودة",
+                    "التصميم والنمذجة الأولية"
+                ]
+            },
+            {
+                "title": "نمذجة الذكاء الاصطناعي",
+                "icon": "uil uil-brain",
+                "modalTitle": "حلول الذكاء الاصطناعي",
+                "features": [
+                    "تحليل البيانات",
+                    "هندسة البيانات",
+                    "النشر والإطلاق"
+                ]
+            }
+        ]
+    },
+    "cta": {
+        "title": "هل لديك مشروع جديد؟",
+        "description": "تواصل معي لأي مشروع أو تطوير تقني",
+        "button": {
+            "label": "تواصل الآن",
+            "href": "#contact",
+            "icon": "uil uil-message"
+        }
+    },
+    "projects": {
+        "title": "المشاريع",
+        "subtitle": {
+            "heading": "أحدث الأعمال",
+            "cta": {
+                "text": "اطّلع على المزيد في GitHub",
+                "href": "https://github.com/Yousif-A2",
+                "icon": "uil uil-github-alt"
+            }
+        },
+        "tabs": [
+            {
+                "id": "AI",
+                "label": "الذكاء الاصطناعي",
+                "icon": "uil uil-brain"
+            },
+            {
+                "id": "web",
+                "label": "الويب",
+                "icon": "uil uil-window"
+            }
+        ],
+        "groups": {
+            "AI": [
+                {
+                    "title": "نمذجة تتبع الأجسام في الفيديو",
+                    "description": "نموذج يتتبّع الأجسام داخل الفيديو بدقة وفي الزمن الحقيقي، مما يسهّل تحليل المشاهد وتوقع الحركة.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/object-tracking-video.jpg",
+                            "alt": "نموذج تتبع الأجسام"
+                        }
+                    ],
+                    "cta": {
+                        "label": "تجربة",
+                        "href": "https://github.com/Yousif-A2/object-tracking-video",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "نموذج كشف الوجوه",
+                    "description": "حل يحدد مواقع الوجوه في الصور والفيديو، مع قابلية التوسع لتطبيقات التعرف على الهوية وتحليل المشاعر.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/Face_Detection.jpg",
+                            "alt": "كشف الوجوه"
+                        }
+                    ],
+                    "cta": {
+                        "label": "تجربة",
+                        "href": "https://github.com/Yousif-A2/Face_Detection/tree/master",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "تحليل أخبار الأسهم باستخدام اللغة",
+                    "description": "نظام يعالج الأخبار الاقتصادية ويستخرج مؤشرات تساعد على فهم اتجاهات الأسواق والشركات.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/NLP.jpg",
+                            "alt": "تحليل أخبار الأسهم"
+                        }
+                    ],
+                    "cta": {
+                        "label": "تجربة",
+                        "href": "#",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "تطبيق Secure Link",
+                    "description": "تطبيق يعتمد على الذكاء الاصطناعي لاكتشاف الروابط الاحتيالية بسرعة، مبني بتقنية Flutter لتجربة آمنة.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/malicious_phish.png",
+                            "alt": "شاشة تطبيق Secure Link",
+                            "style": {
+                                "width": "15%"
+                            }
+                        },
+                        {
+                            "src": "Assets/projects-img/malicious_phish2.png",
+                            "alt": "نتائج تحليل الروابط في Secure Link",
+                            "style": {
+                                "width": "15%"
+                            }
+                        }
+                    ],
+                    "cta": {
+                        "label": "تجربة",
+                        "href": "https://app.flutterflow.io/share/ghsdfghjkl-oiqtxp",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "كشف المشاعر باستخدام CNN",
+                    "description": "نموذج يعتمد على الشبكات الالتفافية لتحليل تعابير الوجوه في الوقت الحقيقي بهدف دعم التفاعل الذكي.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/object-tracking-video.jpg",
+                            "alt": "لوحة معلومات مشروع تحليل المشاعر"
+                        }
+                    ],
+                    "cta": {
+                        "label": "تجربة",
+                        "href": "https://github.com/Yousif-A2/Emotion_detection_with_CNN-main",
+                        "icon": "uil uil-arrow-right"
+                    }
+                }
+            ],
+            "web": [
+                {
+                    "title": "امتداد تسجيل KFU",
+                    "description": "امتداد للمتصفح يسهّل تسجيل المقررات عبر إدخال أرقام CRN وإتمام العملية تلقائياً خلال ثوانٍ.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/KFU registration-V2 Pro.png",
+                            "alt": "امتداد تسجيل KFU"
+                        }
+                    ],
+                    "cta": {
+                        "label": "تجربة",
+                        "href": "https://chrome.google.com/webstore/detail/kfu-registration-v2-pro/nibolaajjcnkfdhfkeminnhclfpaobgm",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "لعبة المطابقة",
+                    "description": "لعبة ويب تفاعلية لاختبار الذاكرة والسرعة عبر مطابقة البطاقات خلال زمن محدد.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/Matching Game.png",
+                            "alt": "لعبة المطابقة"
+                        }
+                    ],
+                    "cta": {
+                        "label": "تجربة",
+                        "href": "https://yousif-A2.github.io/Matching-Game-Udacity-FEND-/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "موقع قائمة المطعم",
+                    "description": "واجهة تفاعلية لطلب الأطباق وإضافتها إلى السلة مع تحديث السعر الإجمالي لحظياً.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/Restaurant-menu-web.png",
+                            "alt": "موقع قائمة المطعم"
+                        }
+                    ],
+                    "cta": {
+                        "label": "تجربة",
+                        "href": "https://yousif-A2.github.io/Restaurant-menu-web/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "منصة ألعاب أركيد",
+                    "description": "مجموعة ألعاب متصفح مبنية بـ HTML وCSS وJavaScript لتقديم تجربة لعب سلسة وممتعة.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/frontend-nanodegree-arcade-game.png",
+                            "alt": "ألعاب أركيد"
+                        }
+                    ],
+                    "cta": {
+                        "label": "تجربة",
+                        "href": "https://yousif-A2.github.io/frontend-nanodegree-arcade-game/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "موقع SamValley للتسوق",
+                    "description": "تصميم واجهة متجر إلكتروني باستخدام Tailwind CSS لتوفير تجربة تصفح جذابة وسلسة.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/Samvalley.png",
+                            "alt": "موقع SamValley"
+                        }
+                    ],
+                    "cta": {
+                        "label": "تجربة",
+                        "href": "http://yousif-A2.github.io/SamVally-header-footer/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                }
+            ]
+        }
+    },
+    "contact": {
+        "title": "تواصل معي",
+        "subtitle": "يسعدني تواصلك",
+        "cards": [
+            {
+                "icon": "uil uil-phone",
+                "title": "اتصل بي",
+                "value": "+966 532499001"
+            },
+            {
+                "icon": "uil uil-envelope",
+                "title": "البريد الإلكتروني",
+                "value": "Yf.alnasser@gmail.com"
+            },
+            {
+                "icon": "uil uil-map-marker",
+                "title": "الموقع",
+                "value": "المملكة العربية السعودية"
+            }
+        ],
+        "socialLinks": [
+            {
+                "label": "LinkedIn",
+                "icon": "uil uil-linkedin-alt",
+                "url": "https://www.linkedin.com/in/yalnasser/"
+            },
+            {
+                "label": "GitHub",
+                "icon": "uil uil-github-alt",
+                "url": "https://github.com/Yousif-A2"
+            },
+            {
+                "label": "Hugging Face",
+                "icon": "hf-icon",
+                "url": "https://huggingface.co/Yousif22"
+            },
+            {
+                "label": "X",
+                "icon": "uil uil-twitter-alt",
+                "url": "https://twitter.com/yousif_022"
+            },
+            {
+                "label": "Email",
+                "icon": "uil uil-envelope",
+                "url": "mailto:yf.alnasser@gmail.com"
+            },
+            {
+                "label": "WhatsApp",
+                "icon": "uil uil-whatsapp",
+                "url": "https://wa.me/+966532499001"
+            }
+        ],
+        "form": {
+            "placeholders": {
+                "name": "اسمك",
+                "email": "بريدك الإلكتروني",
+                "project": "نوع مشروعك",
+                "message": "رسالتك"
+            },
+            "button": {
+                "label": "إرسال الرسالة",
+                "icon": "uil uil-message"
+            }
+        }
+    },
+    "footer": {
+        "title": "الموقع الشخصي ليوسف",
+        "subtitle": "هندسة الحاسب",
+        "links": [
+            {
+                "href": "#home",
+                "label": "الرئيسية"
+            },
+            {
+                "href": "#about",
+                "label": "نبذة"
+            },
+            {
+                "href": "#skills",
+                "label": "المهارات"
+            },
+            {
+                "href": "#qualification",
+                "label": "المؤهلات"
+            },
+            {
+                "href": "#service",
+                "label": "الخدمات"
+            },
+            {
+                "href": "#projects",
+                "label": "المشاريع"
+            },
+            {
+                "href": "#contact",
+                "label": "التواصل"
+            }
+        ],
+        "socials": [
+            {
+                "label": "X",
+                "icon": "uil uil-twitter-alt",
+                "url": "https://twitter.com/yousif_022"
+            },
+            {
+                "label": "GitHub",
+                "icon": "uil uil-github-alt",
+                "url": "https://github.com/Yousif-A2"
+            },
+            {
+                "label": "Hugging Face",
+                "icon": "hf-icon",
+                "url": "https://huggingface.co/Yousif22"
+            },
+            {
+                "label": "LinkedIn",
+                "icon": "uil uil-linkedin",
+                "url": "https://www.linkedin.com/in/yalnasser/"
+            }
+        ],
+        "copy": "© يوسف. جميع الحقوق محفوظة"
+    },
+    "scrollUp": {
+        "icon": "uil uil-arrow-up"
+    }
+}

@@ -61,14 +61,21 @@
                         <div class="nav__name">Contact</div>
                         <i class="uil uil-message nav__icon"></i>
                     </a>
-
-                    <div class="nav__btns">
-                        <!-- Theme change button -->
+                </div>
+                <div class="nav__btns" id="nav-btns">
+                    <button
+                        type="button"
+                        class="language-toggle"
+                        id="language-toggle"
+                        aria-label="Switch language"
+                    >
                         <i
-                            class="uil uil-moon change-theme"
-                            id="theme-button"
+                            class="uil uil-globe language-toggle__icon"
+                            aria-hidden="true"
                         ></i>
-                    </div>
+                    </button>
+                    <!-- Theme change button -->
+                    <i class="uil uil-moon change-theme" id="theme-button"></i>
                 </div>
             </nav>
         </header>
@@ -167,7 +174,7 @@
 
                 <div class="qaulification__container container">
                     <div class="qualification__tabs" id="qualification-tabs"></div>
-                    <div class="qualification__sections" id="qualification-content"></div>
+                    <div class="qualification__section" id="qualification-content"></div>
                 </div>
             </section>
             <!--==================== SERVICES ====================-->

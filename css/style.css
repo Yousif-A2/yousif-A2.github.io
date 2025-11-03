@@ -69,6 +69,7 @@ body.dark-theme {
 .nav__btns {
     display: flex;
     align-items: center;
+    column-gap: var(--mb-0-75);
 }
 
 .change-theme {
@@ -203,6 +204,62 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.language-toggle {
+    border: none;
+    background: transparent;
+    color: var(--title-color);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: var(--mb-0-75);
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.language-toggle:hover,
+.language-toggle:focus-visible {
+    color: var(--first-color);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.language-toggle:focus-visible {
+    outline: 2px solid var(--first-color);
+    outline-offset: 2px;
+}
+
+.language-toggle__icon {
+    font-size: 1.2rem;
+}
+
+.hf-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.nav__icon.hf-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.home__social-icon .hf-icon,
+.home__social-contact .hf-icon,
+.contact__information .hf-icon {
+    width: 2.15rem;
+    height: 2.15rem;
+}
+
+.footer__social .hf-icon,
+.footer__socials .hf-icon {
+    width: 1.25rem;
+    height: 1.25rem;
 }
 
 .nav__icon {
@@ -684,6 +741,19 @@ nav {
     border-radius: 0.5rem;
 }
 
+.project__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.project__media .project__img {
+    width: 140px;
+    margin: 0;
+}
+
 .project__title {
     font-size: var(--h3-font-size);
     margin-bottom: var(--mb-0-5);
@@ -1029,6 +1099,11 @@ body::-webkit-scrollbar-track {
     .nav__name {
         display: none;
     }
+
+    [dir="rtl"] .left-qualification {
+        margin-right: 2rem;
+        margin-left: 0;
+    }
 }
 /* For medium devices */
 
@@ -1183,6 +1258,9 @@ body::-webkit-scrollbar-track {
     .project__img {
         width: 320px;
     }
+    .project__media .project__img {
+        width: 200px;
+    }
     .project__content {
         align-items: center;
     }
@@ -1312,6 +1390,9 @@ body::-webkit-scrollbar-track {
     .project__img {
         width: 320px;
     }
+    .project__media .project__img {
+        width: 200px;
+    }
     .project__content {
         align-items: center;
     }
@@ -1359,4 +1440,94 @@ body::-webkit-scrollbar-track {
         --small-font-size: 0.875rem;
         --smaller-font-size: 0.813rem;
     }
+}
+
+.scrollup {
+    position: fixed;
+    right: 1rem;
+    bottom: -20%;
+    background-color: var(--first-color);
+    padding: 0.75rem;
+    border-radius: 0.4rem;
+    display: inline-flex;
+    color: #fff;
+    z-index: var(--z-tooltip);
+    transition: 0.4s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.scrollup:hover {
+    transform: translateY(-0.5rem);
+}
+
+.scrollup__icon {
+    font-size: 1.25rem;
+}
+
+.show-scroll {
+    bottom: 3rem;
+    opacity: 1;
+    pointer-events: auto;
+    display: inline-flex;
+}
+
+[dir="rtl"] nav {
+    direction: rtl;
+}
+
+[dir="rtl"] .nav__menu {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .nav__btns {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .language-toggle {
+    margin-right: 0;
+    margin-left: var(--mb-0-75);
+}
+
+[dir="rtl"] .home__social {
+    justify-self: start;
+}
+
+[dir="rtl"] .home__data,
+[dir="rtl"] .home__description,
+[dir="rtl"] .about__description,
+[dir="rtl"] .new-project__data,
+[dir="rtl"] .projects__data,
+[dir="rtl"] .services__modal-services,
+[dir="rtl"] .contact__form,
+[dir="rtl"] .footer__container {
+    text-align: right;
+}
+
+[dir="rtl"] .new-project__data {
+    text-align: center;
+    margin-inline: auto;
+}
+
+[dir="rtl"] .footer__links {
+    align-items: flex-end;
+}
+
+[dir="rtl"] .contact__information {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+[dir="rtl"] .contact__icon {
+    margin-left: var(--mb-1);
+    margin-right: 0;
+}
+
+[dir="rtl"] .qualification__data {
+    direction: rtl;
+}
+
+[dir="rtl"] .left-qualification {
+    margin-right: 8rem;
+    margin-left: 0;
 }

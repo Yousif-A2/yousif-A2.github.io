@@ -1,162 +1,191 @@
-// Accordion Skills
-const skillsContent = document.getElementsByClassName("skills__content");
-const skillsHeader = document.querySelectorAll(".skills__header");
+(() => {
+    let interactionsInitialized = false;
 
-function toggleSkills() {
-    let itemClass = this.parentNode.className;
+    function initializePortfolioUI() {
+        if (interactionsInitialized) return;
+        interactionsInitialized = true;
 
-    for (let i = 0; i < skillsContent.length; i++) {
-        skillsContent[i].className = "skills__content skills__close";
-    }
+        const skillsContent = document.getElementsByClassName("skills__content");
+        const skillsHeader = document.querySelectorAll(".skills__header");
 
-    if (itemClass === "skills__content skills__close") {
-        this.parentNode.className = "skills__content skills__open";
-    }
-}
+        const toggleSkills = function () {
+            const itemClass = this.parentNode.className;
 
-skillsHeader.forEach((el) => {
-    el.addEventListener("click", toggleSkills);
-});
+            for (let i = 0; i < skillsContent.length; i++) {
+                skillsContent[i].className = "skills__content skills__close";
+            }
 
-// Qualification Tabs
-const tabs = document.querySelectorAll("[data-target]"),
-    tabContents = document.querySelectorAll("[data-content]");
+            if (itemClass === "skills__content skills__close") {
+                this.parentNode.className = "skills__content skills__open";
+            }
+        };
 
-tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-        const target = document.querySelector(tab.dataset.target);
-
-        tabContents.forEach((tabContent) => {
-            tabContent.classList.remove("qualification__active");
-        });
-        target.classList.add("qualification__active");
-
-        tabs.forEach((tab) => {
-            tab.classList.remove("qualification__active");
-        });
-        tab.classList.add("qualification__active");
-    });
-});
-
-// Projects Tabs
-const tabp = document.querySelectorAll("[data-target-p]"),
-    tabContentp = document.querySelectorAll("[data-content-p]");
-console.log(tabContentp);
-
-tabp.forEach((tab) => {
-    tab.addEventListener("click", () => {
-        const target = document.querySelector(tab.dataset.targetP);
-        tabContentp.forEach((tabContent) => {
-            tabContent.classList.remove("projects__active");
-        });
-        target.classList.add("projects__active");
-
-        tabp.forEach((tab) => {
-            tab.classList.remove("projects__active");
-        });
-        tab.classList.add("projects__active");
-    });
-});
-
-// Services Modal
-const modalViews = document.querySelectorAll(".services__modal"),
-    modalBtns = document.querySelectorAll(".services__button"),
-    modalCloses = document.querySelectorAll(".services__modal-close");
-
-let modal = function (modalClick) {
-    modalViews[modalClick].classList.add("active-modal");
-};
-
-modalBtns.forEach((modalBtn, i) => {
-    modalBtn.addEventListener("click", () => {
-        modal(i);
-    });
-});
-
-modalCloses.forEach((modalClose) => {
-    modalClose.addEventListener("click", () => {
-        modalViews.forEach((modalView) => {
-            modalView.classList.remove("active-modal");
-        });
-    });
-});
-
-// Scroll Section Active Link
-const sections = document.querySelectorAll("section[id]");
-
-function scrollActive() {
-    const scrollY = window.pageYOffset;
-
-    sections.forEach((current) => {
-        const sectionHeight = current.offsetHeight;
-        const sectionTop = current.offsetTop - 50;
-        const sectionId = current.getAttribute("id");
-
-        const link = document.querySelector(
-            ".nav__menu a[href*=" + sectionId + "]"
-        );
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            link.classList.add("active-link");
-        } else {
-            link.classList.remove("active-link");
+        if (skillsHeader.length) {
+            skillsHeader.forEach((el) => {
+                el.addEventListener("click", toggleSkills);
+            });
         }
-    });
-}
 
-window.addEventListener("scroll", scrollActive);
+        const tabs = document.querySelectorAll("[data-target]");
+        const tabContents = document.querySelectorAll("[data-content]");
 
-// Change Background Header
-function scrollHeader() {
-    const nav = document.getElementById("header");
-    // When the scroll is greater than 200 viewport height, add the scroll-header class to the header tag
-    if (this.scrollY >= 10) nav.classList.add("scroll-header");
-    else nav.classList.remove("scroll-header");
-}
-window.addEventListener("scroll", scrollHeader);
+        if (tabs.length && tabContents.length) {
+            tabs.forEach((tab) => {
+                tab.addEventListener("click", () => {
+                    const target = document.querySelector(tab.dataset.target);
+                    if (!target) return;
 
-// Show Scroll Up
-function scrollUp() {
-    const scrollUp = document.getElementById("scroll-up");
-    // When the scroll is higher than 560 viewport height, add the show-scroll class to the a tag with the scroll-top class
-    if (this.scrollY >= 560) scrollUp.classList.add("show-scroll");
-    else scrollUp.classList.remove("show-scroll");
-}
-window.addEventListener("scroll", scrollUp);
+                    tabContents.forEach((tabContent) => {
+                        tabContent.classList.remove("qualification__active");
+                    });
+                    target.classList.add("qualification__active");
 
-// Dark Light Theme
+                    tabs.forEach((item) => {
+                        item.classList.remove("qualification__active");
+                    });
+                    tab.classList.add("qualification__active");
+                });
+            });
+        }
 
-const themeButton = document.getElementById("theme-button");
-const darkTheme = "dark-theme";
-const iconTheme = "uil-sun";
+        const projectTabs = document.querySelectorAll("[data-target-p]");
+        const projectContents = document.querySelectorAll("[data-content-p]");
 
-// Previously selected topic (if user selected)
-const selectedTheme = localStorage.getItem("selected-theme");
-const selectedIcon = localStorage.getItem("selected-icon");
+        if (projectTabs.length && projectContents.length) {
+            projectTabs.forEach((tab) => {
+                tab.addEventListener("click", () => {
+                    const target = document.querySelector(tab.dataset.targetP);
+                    if (!target) return;
 
-// We obtain the current theme that the interface has by validating the dark-theme class
-const getCurrentTheme = () =>
-    document.body.classList.contains(darkTheme) ? "dark" : "light";
-const getCurrentIcon = () =>
-    themeButton.classList.contains(iconTheme) ? "uil-moon" : "uil-sun";
+                    projectContents.forEach((tabContent) => {
+                        tabContent.classList.remove("projects__active");
+                    });
+                    target.classList.add("projects__active");
 
-// We validate if the user previously chose a topic
-if (selectedTheme) {
-    // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
-    document.body.classList[selectedTheme === "dark" ? "add" : "remove"](
-        darkTheme
-    );
-    themeButton.classList[selectedIcon === "uil-moon" ? "add" : "remove"](
-        iconTheme
-    );
-}
+                    projectTabs.forEach((item) => {
+                        item.classList.remove("projects__active");
+                    });
+                    tab.classList.add("projects__active");
+                });
+            });
+        }
 
-// Activate / deactivate the theme manually with the button
-themeButton.addEventListener("click", () => {
-    // Add or remove the dark / icon theme
-    document.body.classList.toggle(darkTheme);
-    themeButton.classList.toggle(iconTheme);
-    // We save the theme and the current icon that the user chose
-    localStorage.setItem("selected-theme", getCurrentTheme());
-    localStorage.setItem("selected-icon", getCurrentIcon());
-});
+        const modalViews = document.querySelectorAll(".services__modal");
+        const modalBtns = document.querySelectorAll(".services__button");
+        const modalCloses = document.querySelectorAll(".services__modal-close");
+
+        const openModal = function (modalClick) {
+            if (modalViews[modalClick]) {
+                modalViews[modalClick].classList.add("active-modal");
+            }
+        };
+
+        if (modalBtns.length && modalViews.length) {
+            modalBtns.forEach((modalBtn, i) => {
+                modalBtn.addEventListener("click", () => {
+                    openModal(i);
+                });
+            });
+        }
+
+        if (modalCloses.length) {
+            modalCloses.forEach((modalClose) => {
+                modalClose.addEventListener("click", () => {
+                    modalViews.forEach((modalView) => {
+                        modalView.classList.remove("active-modal");
+                    });
+                });
+            });
+        }
+
+        const sections = document.querySelectorAll("section[id]");
+
+        function scrollActive() {
+            const scrollY = window.pageYOffset;
+
+            sections.forEach((current) => {
+                const sectionHeight = current.offsetHeight;
+                const sectionTop = current.offsetTop - 50;
+                const sectionId = current.getAttribute("id");
+
+                const link = document.querySelector(
+                    `.nav__menu a[href*="#${sectionId}"]`
+                );
+
+                if (!link) return;
+
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    link.classList.add("active-link");
+                } else {
+                    link.classList.remove("active-link");
+                }
+            });
+        }
+
+        window.addEventListener("scroll", scrollActive);
+
+        function scrollHeader() {
+            const nav = document.getElementById("header");
+            if (!nav) return;
+
+            if (window.scrollY >= 10) {
+                nav.classList.add("scroll-header");
+            } else {
+                nav.classList.remove("scroll-header");
+            }
+        }
+        window.addEventListener("scroll", scrollHeader);
+
+        function scrollUp() {
+            const scrollUpElement = document.getElementById("scroll-up");
+            if (!scrollUpElement) return;
+
+            if (window.scrollY >= 560) {
+                scrollUpElement.classList.add("show-scroll");
+            } else {
+                scrollUpElement.classList.remove("show-scroll");
+            }
+        }
+        window.addEventListener("scroll", scrollUp);
+    }
+
+    function setupThemeToggle() {
+        const themeButton = document.getElementById("theme-button");
+        if (!themeButton) return;
+
+        const darkTheme = "dark-theme";
+        const iconTheme = "uil-sun";
+
+        const selectedTheme = localStorage.getItem("selected-theme");
+        const selectedIcon = localStorage.getItem("selected-icon");
+
+        const getCurrentTheme = () =>
+            document.body.classList.contains(darkTheme) ? "dark" : "light";
+        const getCurrentIcon = () =>
+            themeButton.classList.contains(iconTheme) ? "uil-moon" : "uil-sun";
+
+        if (selectedTheme) {
+            document.body.classList[selectedTheme === "dark" ? "add" : "remove"](
+                darkTheme
+            );
+            themeButton.classList[selectedIcon === "uil-moon" ? "add" : "remove"](
+                iconTheme
+            );
+        }
+
+        themeButton.addEventListener("click", () => {
+            document.body.classList.toggle(darkTheme);
+            themeButton.classList.toggle(iconTheme);
+            localStorage.setItem("selected-theme", getCurrentTheme());
+            localStorage.setItem("selected-icon", getCurrentIcon());
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", setupThemeToggle);
+
+    window.initializePortfolioUI = initializePortfolioUI;
+    window.resetPortfolioUI = () => {
+        interactionsInitialized = false;
+        initializePortfolioUI();
+    };
+})();

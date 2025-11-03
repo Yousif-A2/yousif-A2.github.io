@@ -1,0 +1,621 @@
+{
+    "site": {
+        "title": "Yousif`s Portfolio",
+        "logoText": "Yousif`s Portfolio"
+    },
+    "navigation": [
+        {
+            "id": "home",
+            "label": "Home",
+            "icon": "uil uil-estate"
+        },
+        {
+            "id": "about",
+            "label": "About",
+            "icon": "uil uil-user"
+        },
+        {
+            "id": "skills",
+            "label": "Skills",
+            "icon": "uil uil-file-check-alt"
+        },
+        {
+            "id": "qualification",
+            "label": "Qualification",
+            "icon": "uil uil-briefcase-alt"
+        },
+        {
+            "id": "service",
+            "label": "Service",
+            "icon": "uil uil-server-network-alt"
+        },
+        {
+            "id": "projects",
+            "label": "Projects",
+            "icon": "uil uil-folder-open"
+        },
+        {
+            "id": "contact",
+            "label": "Contact",
+            "icon": "uil uil-message"
+        }
+    ],
+    "home": {
+        "socialLinks": [
+            {
+                "label": "LinkedIn",
+                "icon": "uil uil-linkedin-alt",
+                "url": "https://www.linkedin.com/in/yalnasser/"
+            },
+            {
+                "label": "GitHub",
+                "icon": "uil uil-github-alt",
+                "url": "https://github.com/Yousif-A2"
+            },
+            {
+                "label": "Hugging Face",
+                "icon": "hf-icon",
+                "url": "https://huggingface.co/Yousif22"
+            },
+            {
+                "label": "Twitter",
+                "icon": "uil uil-twitter-alt",
+                "url": "https://twitter.com/yousif_022"
+            }
+        ],
+        "image": {
+            "src": "Assets/img/after editing.jpg",
+            "alt": "Portrait illustration of Yousif"
+        },
+        "title": "Hi, I'm Yousif",
+        "subtitle": "Computer Engineer, Freelancer Developer",
+        "description": "Experience the power of innovation with a freelance developer who is passionate about creating seamless user experiences. From AI-driven applications to responsive websites, let's collaborate and take your digital presence to the next level.",
+        "cta": {
+            "label": "Contact me",
+            "href": "#contact",
+            "icon": "uil uil-message"
+        },
+        "scroll": {
+            "label": "Scroll down",
+            "href": "#about",
+            "mouseIcon": "uil uil-mouse-alt",
+            "arrowIcon": "uil uil-arrow-down"
+        }
+    },
+    "about": {
+        "title": "About me",
+        "subtitle": "My introduction",
+        "image": {
+            "src": "Assets/img/about.png",
+            "alt": "Illustration for about section"
+        },
+        "description": "Welcome to my portfolio website! I am a freelance developer with a passion for leveraging technology to create innovative solutions. With expertise in Artificial Intelligence implementation, software development, web development, and mobile app development, I possess a diverse skill set that allows me to tackle a wide range of projects. I thrive on challenges and enjoy finding elegant solutions to complex problems. My journey in the tech industry has equipped me with a deep understanding of various programming languages and technologies. Whether it's crafting cutting-edge AI algorithms or building user-friendly web applications, I am dedicated to delivering high-quality work that exceeds client expectations. I am committed to staying updated with the latest industry trends and continuously expanding my skill set to ensure I provide the best possible solutions for my clients. Let's collaborate and bring your ideas to life!",
+        "stats": [
+            {
+                "value": "08+",
+                "label": "Years experience"
+            },
+            {
+                "value": "20+",
+                "label": "Completed projects"
+            },
+            {
+                "value": "04+",
+                "label": "Companies worked"
+            }
+        ],
+        "buttons": [
+            {
+                "label": "Check my CV",
+                "href": "https://drive.google.com/file/d/16RB5LDw8RtXw10e3m8h_DQT9G0SB6FfT/view?usp=drive_link",
+                "icon": "uil uil-download-alt",
+                "target": "_blank",
+                "rel": "noopener noreferrer"
+            }
+        ]
+    },
+    "skills": {
+        "title": "Skills",
+        "subtitle": "My technical skills",
+        "groups": [
+            {
+                "title": "FrontEnd developer",
+                "subtitle": "More than 4 Years",
+                "icon": "uil uil-brackets-curly",
+                "isOpen": true,
+                "items": [
+                    {
+                        "name": "HTML",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "CSS",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "JavaScript",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "React",
+                        "percentage": 100
+                    }
+                ]
+            },
+            {
+                "title": "Artificial intelligence",
+                "subtitle": "More than 4 Years",
+                "icon": "uil uil-brain",
+                "isOpen": false,
+                "items": [
+                    {
+                        "name": "Machine Learning",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "Deep Learning",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "Python",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "TensorFlow",
+                        "percentage": 100
+                    }
+                ]
+            },
+            {
+                "title": "Electronics",
+                "subtitle": "More than 4 Years",
+                "icon": "uil uil-robot",
+                "isOpen": false,
+                "items": [
+                    {
+                        "name": "Arduino",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "Raspberry Pi",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "Circuit",
+                        "percentage": 100
+                    }
+                ]
+            }
+        ]
+    },
+    "qualification": {
+        "title": "Qualification",
+        "subtitle": "My personal journey",
+        "tabs": [
+            {
+                "id": "education",
+                "label": "Education",
+                "icon": {
+                    "src": "https://cdn.lordicon.com/lenjvibx.json",
+                    "trigger": "morph",
+                    "state": "morph-open"
+                }
+            },
+            {
+                "id": "work",
+                "label": "Work",
+                "icon": {
+                    "src": "https://cdn.lordicon.com/rdfmytjv.json",
+                    "trigger": "hover",
+                    "stroke": "bold"
+                }
+            }
+        ],
+        "entries": {
+            "education": [
+                {
+                    "title": "Bachelor of Computer Engineering",
+                    "subtitle": "KING FAISAL UNIVERSITY",
+                    "period": "2019 - 2024",
+                    "alignment": "left"
+                },
+                {
+                    "title": "Udacity",
+                    "subtitle": "Security Engineering",
+                    "period": "January 04, 2023",
+                    "alignment": "right"
+                },
+                {
+                    "title": "Udacity",
+                    "subtitle": "Front-End Web Developer",
+                    "period": "March 28, 2020",
+                    "alignment": "left"
+                }
+            ],
+            "work": [
+                {
+                    "title": "User Experince",
+                    "subtitle": "GGC Consulting",
+                    "period": "Aug 2022 - Sep 2022",
+                    "alignment": "left"
+                },
+                {
+                    "title": "IT Support Specialist",
+                    "subtitle": "ABYAT",
+                    "period": "Mar 2021 - Apr 2021",
+                    "alignment": "right"
+                },
+                {
+                    "title": "Instructor",
+                    "subtitle": "SAFCSP",
+                    "period": "Nov 2019 - Feb 2020",
+                    "alignment": "left"
+                },
+                {
+                    "title": "Freelancer",
+                    "period": "2019 - now",
+                    "alignment": "right"
+                }
+            ]
+        }
+    },
+    "services": {
+        "title": "Services",
+        "subtitle": "What I offer",
+        "items": [
+            {
+                "title": "Web Development",
+                "icon": "uil uil-browser",
+                "modalTitle": "Web Design",
+                "features": [
+                    "Responsive Design",
+                    "UI/UX Design",
+                    "Testing & Deployment"
+                ]
+            },
+            {
+                "title": "Application development",
+                "icon": "uil uil-mobile-android",
+                "modalTitle": "Application development",
+                "features": [
+                    "Code development",
+                    "Testing & Optimization",
+                    "Design & Prototyping"
+                ]
+            },
+            {
+                "title": "AI modeling",
+                "icon": "uil uil-brain",
+                "modalTitle": "AI modeling",
+                "features": [
+                    "Data analytics",
+                    "Data Engineering",
+                    "Deployment"
+                ]
+            }
+        ]
+    },
+    "cta": {
+        "title": "You have a new project",
+        "description": "Contact me for any project or development",
+        "button": {
+            "label": "Contact Me",
+            "href": "#contact",
+            "icon": "uil uil-message"
+        }
+    },
+    "projects": {
+        "title": "Projects",
+        "subtitle": {
+            "heading": "Most recent work",
+            "cta": {
+                "text": "Find more projects on Github",
+                "href": "https://github.com/Yousif-A2",
+                "icon": "uil uil-github-alt"
+            }
+        },
+        "tabs": [
+            {
+                "id": "AI",
+                "label": "AI",
+                "icon": "uil uil-brain"
+            },
+            {
+                "id": "web",
+                "label": "web",
+                "icon": "uil uil-window"
+            }
+        ],
+        "groups": {
+            "AI": [
+                {
+                    "title": "Object Tracking Video Model",
+                    "description": "Object Tracking Video is a visual analysis technique that enables the accurate and real-time identification and tracking of specific objects within a video stream.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/object-tracking-video.jpg",
+                            "alt": "Object tracking project screenshot"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Demo",
+                        "href": "https://github.com/Yousif-A2/object-tracking-video",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "Face Detection Model",
+                    "description": "Identifies and locates human faces within an image or video, enabling various applications such as facial recognition, emotion analysis, and augmented reality.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/Face_Detection.jpg",
+                            "alt": "Face detection project screenshot"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Demo",
+                        "href": "https://github.com/Yousif-A2/Face_Detection/tree/master",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "Stock News Analysis Natural Language Processing",
+                    "description": "Analyze news articles and extract key information related to stock market trends and company performance.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/NLP.jpg",
+                            "alt": "Stock news analysis project screenshot"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Demo",
+                        "href": "#",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "SECURE LINK APP",
+                    "description": "Defend against online threats effortlessly with SecureLink. Developed in Flutter and backed by advanced AI, it swiftly identifies spam links, ensuring a secure browsing experience.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/malicious_phish.png",
+                            "alt": "Secure Link app mobile screen",
+                            "style": {
+                                "width": "15%"
+                            }
+                        },
+                        {
+                            "src": "Assets/projects-img/malicious_phish2.png",
+                            "alt": "Secure Link app results screen",
+                            "style": {
+                                "width": "15%"
+                            }
+                        }
+                    ],
+                    "cta": {
+                        "label": "Demo",
+                        "href": "https://app.flutterflow.io/share/ghsdfghjkl-oiqtxp",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "Emotion detection with CNN-main",
+                    "description": "Using Convolutional Neural Networks, it analyzes real-time facial expressions for applications in human-computer interaction and sentiment analysis. The project, with its intuitive interface, underscores my commitment to advancing AI for practical solutions.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/object-tracking-video.jpg",
+                            "alt": "Emotion detection dashboard screenshot"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Demo",
+                        "href": "https://github.com/Yousif-A2/Emotion_detection_with_CNN-main",
+                        "icon": "uil uil-arrow-right"
+                    }
+                }
+            ],
+            "web": [
+                {
+                    "title": "KFU registration-V2 Pro",
+                    "description": "Simplify course registration with our Chrome Extension. Input your CRNs and let automation take care of the rest, enrolling you in seconds.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/KFU registration-V2 Pro.png",
+                            "alt": "KFU registration extension screenshot"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Try",
+                        "href": "https://chrome.google.com/webstore/detail/kfu-registration-v2-pro/nibolaajjcnkfdhfkeminnhclfpaobgm",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "Matching Game Web",
+                    "description": "Test your memory and speed in our Flip Card Matching Game with a timer. Can you match them all in record time?",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/Matching Game.png",
+                            "alt": "Matching game web app screenshot"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Try",
+                        "href": "https://yousif-A2.github.io/Matching-Game-Udacity-FEND-/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "Restaurant menu websit",
+                    "description": "Explore our interactive restaurant menu website. Add dishes to your basket and see the total price in real-time.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/Restaurant-menu-web.png",
+                            "alt": "Restaurant menu website screenshot"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Try",
+                        "href": "https://yousif-A2.github.io/Restaurant-menu-web/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "Arcade Game Websit",
+                    "description": "Online arcade gaming experience! Powered by HTML, CSS, and JavaScript, my games offer seamless and interactive gameplay right in your web browser.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/frontend-nanodegree-arcade-game.png",
+                            "alt": "Arcade game project screenshot"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Try",
+                        "href": "https://yousif-A2.github.io/frontend-nanodegree-arcade-game/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "SamValley Shopping Websit",
+                    "description": "Built the frontend with Tailwind CSS for a clean, modern look. It's all about smooth navigation, eye-catching displays, and an overall seamless shopping vibe.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/Samvalley.png",
+                            "alt": "SamValley shopping website screenshot"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Try",
+                        "href": "http://yousif-A2.github.io/SamVally-header-footer/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                }
+            ]
+        }
+    },
+    "contact": {
+        "title": "Contact Me",
+        "subtitle": "Get in touch",
+        "cards": [
+            {
+                "icon": "uil uil-phone",
+                "title": "Call Me",
+                "value": "+966 532499001"
+            },
+            {
+                "icon": "uil uil-envelope",
+                "title": "Email",
+                "value": "Yf.alnasser@gmail.com"
+            },
+            {
+                "icon": "uil uil-map-marker",
+                "title": "Location",
+                "value": "Saudi Arabia"
+            }
+        ],
+        "socialLinks": [
+            {
+                "label": "LinkedIn",
+                "icon": "uil uil-linkedin-alt",
+                "url": "https://www.linkedin.com/in/yalnasser/"
+            },
+            {
+                "label": "GitHub",
+                "icon": "uil uil-github-alt",
+                "url": "https://github.com/Yousif-A2"
+            },
+            {
+                "label": "Hugging Face",
+                "icon": "hf-icon",
+                "url": "https://huggingface.co/Yousif22"
+            },
+            {
+                "label": "Twitter",
+                "icon": "uil uil-twitter-alt",
+                "url": "https://twitter.com/yousif_022"
+            },
+            {
+                "label": "Email",
+                "icon": "uil uil-envelope",
+                "url": "mailto:yf.alnasser@gmail.com"
+            },
+            {
+                "label": "WhatsApp",
+                "icon": "uil uil-whatsapp",
+                "url": "https://wa.me/+966532499001"
+            }
+        ],
+        "form": {
+            "placeholders": {
+                "name": "Your Name",
+                "email": "Your Email",
+                "project": "Type of your Project",
+                "message": "Your Message"
+            },
+            "button": {
+                "label": "Send Message",
+                "icon": "uil uil-message"
+            }
+        }
+    },
+    "footer": {
+        "title": "Yousif`s Portfolio",
+        "subtitle": "Computer engineering",
+        "links": [
+            {
+                "href": "#home",
+                "label": "Home"
+            },
+            {
+                "href": "#about",
+                "label": "About"
+            },
+            {
+                "href": "#skills",
+                "label": "Skills"
+            },
+            {
+                "href": "#qualification",
+                "label": "Qualification"
+            },
+            {
+                "href": "#service",
+                "label": "Services"
+            },
+            {
+                "href": "#projects",
+                "label": "Projects"
+            },
+            {
+                "href": "#contact",
+                "label": "Contact"
+            }
+        ],
+        "socials": [
+            {
+                "label": "Twitter",
+                "icon": "uil uil-twitter-alt",
+                "url": "https://twitter.com/yousif_022"
+            },
+            {
+                "label": "GitHub",
+                "icon": "uil uil-github-alt",
+                "url": "https://github.com/Yousif-A2"
+            },
+            {
+                "label": "Hugging Face",
+                "icon": "hf-icon",
+                "url": "https://huggingface.co/Yousif22"
+            },
+            {
+                "label": "LinkedIn",
+                "icon": "uil uil-linkedin",
+                "url": "https://www.linkedin.com/in/yalnasser/"
+            }
+        ],
+        "copy": "\u00A9 Yousif. All right reserved"
+    },
+    "scrollUp": {
+        "icon": "uil uil-arrow-up"
+    }
+}
