@@ -183,6 +183,18 @@
                     {
                         "name": "Circuit",
                         "percentage": 100
+                    },
+                    {
+                        "name": "PCB Design",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "Embedded Systems",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "Drone Technology",
+                        "percentage": 100
                     }
                 ]
             }
@@ -214,47 +226,84 @@
         "entries": {
             "education": [
                 {
+                    "title": "Tuwaiq Academy",
+                    "subtitle": "Data science & AI diploma",
+                    "period": "October 2025",
+                    "alignment": "right"
+                },
+                {
                     "title": "Bachelor of Computer Engineering",
                     "subtitle": "KING FAISAL UNIVERSITY",
-                    "period": "2019 - 2024",
+                    "period": "2019 - 2025",
                     "alignment": "left"
                 },
                 {
                     "title": "Udacity",
                     "subtitle": "Security Engineering",
-                    "period": "January 04, 2023",
+                    "period": "January 2023",
                     "alignment": "right"
                 },
                 {
                     "title": "Udacity",
                     "subtitle": "Front-End Web Developer",
-                    "period": "March 28, 2020",
+                    "period": "March 2020",
                     "alignment": "left"
                 }
             ],
             "work": [
                 {
-                    "title": "User Experince",
-                    "subtitle": "GGC Consulting",
+                    "title": "Founder",
+                    "subtitle": "Muqallam || \u0645\u064f\u0642\u0644\u0651\u064e\u0645",
+                    "period": "Aug 2024 - Present",
+                    "alignment": "left"
+                },
+                {
+                    "title": "Technology Consulting New Associate ",
+                    "subtitle": "Accenture Middle East - Riyadh",
+                    "period": "Apr 2025 - Jun 2025",
+                    "alignment": "right"
+                },
+                {
+                    "title": "Site Manager & TA ",
+                    "subtitle": "KAUST Academy",
+                    "period": "Feb 2025 - Mar 2025",
+                    "alignment": "left"
+                },
+                {
+                    "title": "Information Technology",
+                    "subtitle": "Ministry of Health Saudi Arabia - On-site",
+                    "period": "Jul 2024 - Sep 2024",
+                    "alignment": "right"
+                },
+                {
+                    "title": "Tech Team Leader ",
+                    "subtitle": "King Faisal University & Alber AlAhsa Charity Organization",
+                    "period": "Jul 2024 - Aug 2024",
+                    "alignment": "left"
+                },
+                {
+                    "title": "Artificial Intelligence Trainer",
+                    "subtitle": "King Faisal University & Alber Charity Organization",
+                    "period": "Jul 2023 - Aug 2023",
+                    "alignment": "right"
+                },
+                {
+                    "title": "Confidential ",
+                    "subtitle": "GGC",
                     "period": "Aug 2022 - Sep 2022",
                     "alignment": "left"
                 },
                 {
-                    "title": "IT Support Specialist",
-                    "subtitle": "ABYAT",
-                    "period": "Mar 2021 - Apr 2021",
+                    "title": "Trainer & Mentor",
+                    "subtitle": "SAFCSP - Remote",
+                    "period": "Jan 2020 - Feb 2020",
                     "alignment": "right"
                 },
                 {
-                    "title": "Instructor",
-                    "subtitle": "SAFCSP",
-                    "period": "Nov 2019 - Feb 2020",
+                    "title": "Instructor Assistant (Twaiq Bootcamp)",
+                    "subtitle": "SAFCSP - Saudi Arabia",
+                    "period": "Nov 2019 - Jan 2020",
                     "alignment": "left"
-                },
-                {
-                    "title": "Freelancer",
-                    "period": "2019 - now",
-                    "alignment": "right"
                 }
             ]
         }
@@ -329,6 +378,51 @@
         "groups": {
             "AI": [
                 {
+                    "title": "\"Najmah\" Multi-Agent AI Platform",
+                    "description": "Najmah is a multilingual multi-agent AI platform tailored for the Saudi market. It understands user intent beyond scripted replies and spins up specialized agents for customer care, admin supervisors, academic advising, creative Arabic poetry, and government service guidance\u2014proving AI can overcome language and cultural barriers.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/star.png",
+                            "alt": "Najmah AI platform preview"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Visit",
+                        "href": "https://star.yousif.engineer/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "Email Auto-Reply System",
+                    "description": "AI-powered customer service assistant built on SmolLM2-360M that drafts empathetic replies, categorizes tickets, keeps multi-turn context, and offers advanced settings for tone and priority control.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/Email Auto-Reply System.png",
+                            "alt": "Email auto-reply system preview"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Launch Demo",
+                        "href": "https://yousif22-email-auto-reply-system.hf.space/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "Arabic LSTM Language Model",
+                    "description": "Interactive Arabic text prediction and generation demo built with PyTorch LSTM, offering token prediction confidence, controllable temperature, and batch processing via Hugging Face Spaces.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/Arabic LSTM Language Model.png",
+                            "alt": "Arabic LSTM language model interface"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Launch Demo",
+                        "href": "https://yousif22-arabic-lstm-demo.hf.space/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
                     "title": "Object Tracking Video Model",
                     "description": "Object Tracking Video is a visual analysis technique that enables the accurate and real-time identification and tracking of specific objects within a video stream.",
                     "images": [
@@ -363,13 +457,13 @@
                     "description": "Analyze news articles and extract key information related to stock market trends and company performance.",
                     "images": [
                         {
-                            "src": "Assets/projects-img/NLP.jpg",
+                            "src": "Assets/projects-img/Stock News Analysis.png",
                             "alt": "Stock news analysis project screenshot"
                         }
                     ],
                     "cta": {
                         "label": "Demo",
-                        "href": "#",
+                        "href": "https://yousif22-financial-sentiment-analyzer.hf.space/",
                         "icon": "uil uil-arrow-right"
                     }
                 },
@@ -613,7 +707,7 @@
                 "url": "https://www.linkedin.com/in/yalnasser/"
             }
         ],
-        "copy": "\u00A9 Yousif. All right reserved"
+        "copy": "\u00a9 Yousif. All right reserved"
     },
     "scrollUp": {
         "icon": "uil uil-arrow-up"

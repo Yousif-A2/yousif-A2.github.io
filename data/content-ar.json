@@ -47,7 +47,6 @@
                 "icon": "uil uil-linkedin-alt",
                 "url": "https://www.linkedin.com/in/yalnasser/"
             },
-            
             {
                 "label": "GitHub",
                 "icon": "uil uil-github-alt",
@@ -109,10 +108,9 @@
             {
                 "label": "تصفح السيرة الذاتية",
                 "href": "https://drive.google.com/file/d/16RB5LDw8RtXw10e3m8h_DQT9G0SB6FfT/view?usp=drive_link",
-                "icon": "uil uil-download-alt",            
+                "icon": "uil uil-download-alt",
                 "target": "_blank",
                 "rel": "noopener noreferrer"
-            
             }
         ]
     },
@@ -185,6 +183,18 @@
                     {
                         "name": "Circuit Design",
                         "percentage": 100
+                    },
+                    {
+                        "name": "PCB Design",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "Embedded Systems",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "Drone Technology",
+                        "percentage": 100
                     }
                 ]
             }
@@ -216,6 +226,12 @@
         "entries": {
             "education": [
                 {
+                    "title": "Tuwaiq Academy",
+                    "subtitle": "دبلوم علوم البيانات والذكاء الاصطناعي",
+                    "period": "أكتوبر 2025",
+                    "alignment": "right"
+                },
+                {
                     "title": "بكالوريوس هندسة الحاسب",
                     "subtitle": "جامعة الملك فيصل",
                     "period": "2019 - 2024",
@@ -224,39 +240,70 @@
                 {
                     "title": "Udacity",
                     "subtitle": "هندسة الأمن السيبراني",
-                    "period": "4 يناير 2023",
+                    "period": "يناير 2023",
                     "alignment": "right"
                 },
                 {
                     "title": "Udacity",
                     "subtitle": "تطوير واجهات الويب",
-                    "period": "28 مارس 2020",
+                    "period": "مارس 2020",
                     "alignment": "left"
                 }
             ],
             "work": [
                 {
-                    "title": "تجربة المستخدم",
-                    "subtitle": "GGC Consulting",
+                    "title": "المؤسس",
+                    "subtitle": "Muqallam || مُقلَّم",
+                    "period": "أغسطس 2024 - حتى الآن",
+                    "alignment": "left"
+                },
+                {
+                    "title": "زميل في الاستشارات التقنية ",
+                    "subtitle": "أكسنتشر الشرق الأوسط - الرياض",
+                    "period": "أبريل 2025 - يونيو 2025",
+                    "alignment": "right"
+                },
+                {
+                    "title": "مدير موقع ومساعد تعليمي",
+                    "subtitle": "أكاديمية كاوست",
+                    "period": "فبراير 2025 - مارس 2025",
+                    "alignment": "left"
+                },
+                {
+                    "title": "تقنية المعلومات",
+                    "subtitle": "وزارة الصحة السعودية - عمل حضوري",
+                    "period": "يوليو 2024 - سبتمبر 2024",
+                    "alignment": "right"
+                },
+                {
+                    "title": "قائد الفريق التقني ",
+                    "subtitle": "جامعة الملك فيصل وجمعية البر بالأحساء",
+                    "period": "يوليو 2024 - أغسطس 2024",
+                    "alignment": "left"
+                },
+                {
+                    "title": "مدرب ذكاء اصطناعي ",
+                    "subtitle": "جامعة الملك فيصل وجمعية البر - الأحساء",
+                    "period": "يوليو 2023 - أغسطس 2023",
+                    "alignment": "right"
+                },
+                {
+                    "title": "منصب سري",
+                    "subtitle": "GGC",
                     "period": "أغسطس 2022 - سبتمبر 2022",
                     "alignment": "left"
                 },
                 {
-                    "title": "أخصائي دعم تقني",
-                    "subtitle": "ABYAT",
-                    "period": "مارس 2021 - أبريل 2021",
+                    "title": "مدرب ومرشد",
+                    "subtitle": "SAFCSP - ",
+                    "period": "يناير 2020 - فبراير 2020",
                     "alignment": "right"
                 },
                 {
-                    "title": "مدرب تقني",
-                    "subtitle": "SAFCSP",
-                    "period": "نوفمبر 2019 - فبراير 2020",
+                    "title": "مساعد مدرب (معسكر طويق)",
+                    "subtitle": "SAFCSP - السعودية",
+                    "period": "نوفمبر 2019 - يناير 2020",
                     "alignment": "left"
-                },
-                {
-                    "title": "مطوّر مستقل",
-                    "period": "2019 - الآن",
-                    "alignment": "right"
                 }
             ]
         }
@@ -331,6 +378,51 @@
         "groups": {
             "AI": [
                 {
+                    "title": "\"نجمة\" منصة ذكاء اصطناعي متعددة الوكلاء",
+                    "description": "تجمع \"نجمة\" بين عدة وكلاء أذكياء ثنائيي اللغة يفهمون السياق، ويتولون خدمة العملاء، ودعم المشرفين الإداريين، وإرشاد طلاب أكاديمية طويق، وكتابة القصائد العربية، وتوجيه المستخدم في خدمات أبشر؛ لتبرهن أن الذكاء الاصطناعي قادر على تجاوز الحواجز اللغوية والثقافية وتقديم حلول مصممة لسوقنا المحلي.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/star.png",
+                            "alt": "عرض لمنصة نجمة"
+                        }
+                    ],
+                    "cta": {
+                        "label": "جرّب المنصة",
+                        "href": "https://star.yousif.engineer/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "نظام الردود التلقائية على البريد",
+                    "description": "مساعد ذكي لخدمة العملاء يعتمد على نموذج SmolLM2-360M لتوليد ردود احترافية متعاطفة، وتصنيف التذاكر، والحفاظ على سياق المحادثة مع إتاحة إعدادات متقدمة للتحكم في النبرة والأولويات.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/Email Auto-Reply System.png",
+                            "alt": "واجهة نظام الردود التلقائية"
+                        }
+                    ],
+                    "cta": {
+                        "label": "جرّب الأداة",
+                        "href": "https://yousif22-email-auto-reply-system.hf.space/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
+                    "title": "نموذج LSTM للغة العربية",
+                    "description": "تجربة تفاعلية لتنبؤ وتوليد النصوص العربية مبنية على PyTorch LSTM، مع عرض لاحتمالات التوكنات، وتحكم بدرجة الحرارة، ومعالجة دفعية عبر منصة Hugging Face Spaces.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/Arabic LSTM Language Model.png",
+                            "alt": "واجهة نموذج LSTM العربي"
+                        }
+                    ],
+                    "cta": {
+                        "label": "إطلاق العرض",
+                        "href": "https://yousif22-arabic-lstm-demo.hf.space/",
+                        "icon": "uil uil-arrow-right"
+                    }
+                },
+                {
                     "title": "نمذجة تتبع الأجسام في الفيديو",
                     "description": "نموذج يتتبّع الأجسام داخل الفيديو بدقة وفي الزمن الحقيقي، مما يسهّل تحليل المشاهد وتوقع الحركة.",
                     "images": [
@@ -365,13 +457,13 @@
                     "description": "نظام يعالج الأخبار الاقتصادية ويستخرج مؤشرات تساعد على فهم اتجاهات الأسواق والشركات.",
                     "images": [
                         {
-                            "src": "Assets/projects-img/NLP.jpg",
+                            "src": "Assets/projects-img/Stock News Analysis.png",
                             "alt": "تحليل أخبار الأسهم"
                         }
                     ],
                     "cta": {
                         "label": "تجربة",
-                        "href": "#",
+                        "href": "https://yousif22-financial-sentiment-analyzer.hf.space/",
                         "icon": "uil uil-arrow-right"
                     }
                 },
