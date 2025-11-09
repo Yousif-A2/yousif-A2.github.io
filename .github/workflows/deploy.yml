@@ -1,0 +1,51 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Generate EmailJS config
+        run: |
+          mkdir -p js
+          cat <<'EOF' > js/config.js
+          window.__EMAILJS_PUBLIC_KEY__ = "${{ secrets.EMAILJS_PUBLIC_KEY }}";
+          EOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
