@@ -25,10 +25,10 @@
         <script src="https://cdn.lordicon.com/lordicon.js"></script>
         <script type="text/javascript">
             (function () {
-                const publicKey = window.__EMAILJS_PUBLIC_KEY__;
+                const publicKey = window.EMAILJS_PUBLIC_KEY;
                 if (!publicKey) {
                     console.warn(
-                        "EmailJS public key is missing. Please define window.__EMAILJS_PUBLIC_KEY__ in js/config.js."
+                        "EmailJS public key is missing. Please define window.EMAILJS_PUBLIC_KEY in js/config.js."
                     );
                     return;
                 }
