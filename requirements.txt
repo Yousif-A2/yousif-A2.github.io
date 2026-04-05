@@ -1,0 +1,4 @@
+fastapi[standard]==0.115.0
+uvicorn==0.30.6
+google-auth==2.35.0
+python-dotenv==1.0.1

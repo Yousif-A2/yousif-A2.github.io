@@ -96,6 +96,7 @@
         populateContact(data.contact);
         populateFooter(data.footer);
         populateScrollUp(data.scrollUp);
+        populateVoiceAgentFab(data.voiceAgent);
 
         applyLanguageAttributes(lang);
         updateLanguageToggle();
@@ -107,6 +108,18 @@
         }
 
         initSwipers();
+    }
+
+    function populateVoiceAgentFab(voiceAgent) {
+        const fabLabel = document.getElementById("voice-agent-fab-label");
+        if (fabLabel && voiceAgent?.fabLabel) {
+            fabLabel.textContent = voiceAgent.fabLabel;
+        }
+        const ctaBtn = document.getElementById("voice-agent-cta");
+        if (ctaBtn && voiceAgent?.ctaLabel) {
+            const span = ctaBtn.querySelector("span");
+            if (span) span.textContent = voiceAgent.ctaLabel;
+        }
     }
 
     function populateNavigation(data) {

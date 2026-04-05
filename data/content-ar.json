@@ -711,5 +711,9 @@
     },
     "scrollUp": {
         "icon": "uil uil-arrow-up"
+    },
+    "voiceAgent": {
+        "fabLabel": "تحدّث مع ذكائي",
+        "ctaLabel": "تحدّث مع ذكائي"
     }
 }

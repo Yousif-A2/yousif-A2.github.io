@@ -2,34 +2,36 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width"
-            ,
-            initial-scale="1.0"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Yousif Al-Nasser — AI Engineer</title>
+
+        <!-- SEO Meta -->
+        <meta name="description" content="Yousif Al-Nasser — AI Engineer, Computer Engineer & Freelance Developer. Building intelligent solutions with Machine Learning, Deep Learning, and modern web technologies." />
+        <meta name="theme-color" content="#0a0a0f" />
+        <meta property="og:title" content="Yousif Al-Nasser — AI Engineer Portfolio" />
+        <meta property="og:description" content="Experience the power of innovation with an AI engineer passionate about creating seamless, intelligent solutions." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://yousif.engineer" />
+
+        <!-- Favicon -->
         <link rel="shortcut icon" type="image/png" href="Assets/img/ai.png" />
-        <link
-            rel="stylesheet"
-            href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
-        />
+
+        <!-- Icons -->
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
+
+        <!-- CSS -->
         <link rel="stylesheet" href="css/swiper-bundle.min.css" />
         <link rel="stylesheet" href="css/style.css" />
-        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" /> -->
-        <title>Yousif`s Portfolio</title>
-        <script
-            type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
-        ></script>
+
+        <!-- EmailJS -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
         <script src="js/config.js"></script>
         <script src="https://cdn.lordicon.com/lordicon.js"></script>
         <script type="text/javascript">
             (function () {
                 const publicKey = "EHbwHNOepI3FFk_7e";
                 if (!publicKey) {
-                    console.warn(
-                        "EmailJS public key is missing. Please define window.EMAILJS_PUBLIC_KEY in js/config.js."
-                    );
+                    console.warn("EmailJS public key is missing.");
                     return;
                 }
                 emailjs.init(publicKey);
@@ -37,250 +39,194 @@
         </script>
     </head>
     <body>
+        <!-- ==================== HEADER ==================== -->
         <header class="header" id="header">
             <nav class="container" id="nav-container">
-                <a href="#" class="nav__logo" id="nav-logo">Yousif`s Portfolio</a>
+                <a href="#" class="nav__logo" id="nav-logo">Yousif's Portfolio</a>
                 <div class="nav__menu" id="nav-menu">
                     <a href="#home" class="active-link">
-                        <div class="nav__name">Home</div>
                         <i class="uil uil-estate nav__icon"></i>
+                        <div class="nav__name">Home</div>
                     </a>
                     <a href="#about">
-                        <div class="nav__name">About</div>
                         <i class="uil uil-user nav__icon"></i>
+                        <div class="nav__name">About</div>
                     </a>
                     <a href="#skills">
-                        <div class="nav__name">Skills</div>
                         <i class="uil uil-file-check-alt nav__icon"></i>
+                        <div class="nav__name">Skills</div>
                     </a>
                     <a href="#qualification">
-                        <div class="nav__name">Qualification</div>
                         <i class="uil uil-briefcase-alt nav__icon"></i>
+                        <div class="nav__name">Qualification</div>
                     </a>
                     <a href="#service">
-                        <div class="nav__name">Service</div>
                         <i class="uil uil-server-network-alt nav__icon"></i>
+                        <div class="nav__name">Service</div>
                     </a>
                     <a href="#projects">
-                        <div class="nav__name">Projects</div>
                         <i class="uil uil-folder-open nav__icon"></i>
+                        <div class="nav__name">Projects</div>
                     </a>
                     <a href="#contact">
-                        <div class="nav__name">Contact</div>
                         <i class="uil uil-message nav__icon"></i>
+                        <div class="nav__name">Contact</div>
                     </a>
                 </div>
                 <div class="nav__btns" id="nav-btns">
-                    <button
-                        type="button"
-                        class="language-toggle"
-                        id="language-toggle"
-                        aria-label="Switch language"
-                    >
-                        <i
-                            class="uil uil-globe language-toggle__icon"
-                            aria-hidden="true"
-                        ></i>
+                    <button type="button" class="language-toggle" id="language-toggle" aria-label="Switch language">
+                        <i class="uil uil-globe language-toggle__icon" aria-hidden="true"></i>
                     </button>
-                    <!-- Theme change button -->
                     <i class="uil uil-moon change-theme" id="theme-button"></i>
                 </div>
             </nav>
         </header>
 
         <main class="main">
-            <!--==================== HOME ====================-->
+            <!-- ==================== HOME ==================== -->
             <section class="home section" id="home">
-                <div class="home__container grid">
+                <div class="home__container container grid">
                     <div class="home__content container grid">
-                        <div class="home__social" id="home-social"></div>
-                        <div class="home__img">
-                            <svg
-                                class="home__blod"
-                                viewBox="0 0 200 187"
-                                xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                            >
+                        <div class="home__data reveal">
+                            <h3 class="home__subtitle" id="home-subtitle"></h3>
+                            <h1 class="home__title" id="home-title"></h1>
+                            <p class="home__description" id="home-description"></p>
+                            <div class="home__social" id="home-social"></div>
+                            <div class="home__buttons">
+                                <a href="#" class="button button--primary" id="home-cta">
+                                    <span id="home-cta-label"></span>
+                                    <i class="button__icon" id="home-cta-icon"></i>
+                                </a>
+                                <a href="voice-agent.html" class="button button--ghost" id="voice-agent-cta">
+                                    <i class="uil uil-microphone"></i>
+                                    <span>Talk to My AI</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="home__img reveal-scale">
+                            <svg class="home__blod" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <mask id="mask0" mask-type="alpha">
-                                    <path
-                                        d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
+                                    <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
                                     130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
                                     97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
-                                    0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"
-                                    />
+                                    0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z" />
                                 </mask>
                                 <g mask="url(#mask0)">
-                                    <path
-                                        d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
+                                    <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
                                     165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
                                     129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
-                                    -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"
-                                    />
-                                    <image
-                                        class="home__blod-img"
-                                        x="0"
-                                        y="-10"
-                                        xlink:href=""
-                                        id="home-image"
-                                    />
+                                    -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z" />
+                                    <image class="home__blod-img" x="0" y="-10" xlink:href="" id="home-image" />
                                 </g>
                             </svg>
                         </div>
-                        <div class="home__data">
-                            <h1 class="home__title" id="home-title"></h1>
-                            <h3 class="home__subtitle" id="home-subtitle"></h3>
-                            <p class="home__description" id="home-description">
-                                <!-- filled dynamically -->
-                            </p>
-                            <a href="#" class="button button--flex" id="home-cta">
-                                <span id="home-cta-label"></span>
-                                <i class="button__icon" id="home-cta-icon"></i>
-                            </a>
-                        </div>
                     </div>
                     <div class="home__scroll">
-                        <a
-                            href="#"
-                            class="home__scroll-button button--flex"
-                            id="home-scroll"
-                        >
-                            <i
-                                class="home__scroll-mouse"
-                                id="home-scroll-mouse"
-                            ></i>
+                        <a href="#" class="home__scroll-button button--flex" id="home-scroll">
+                            <i class="home__scroll-mouse" id="home-scroll-mouse"></i>
                             <span class="home__scroll-name" id="home-scroll-label"></span>
                             <i class="home__scroll-arrow" id="home-scroll-arrow"></i>
                         </a>
                     </div>
                 </div>
             </section>
-            <!--==================== ABOUT ====================-->
+
+            <!-- ==================== ABOUT ==================== -->
             <section class="about section" id="about">
-                <h2 class="section__title" id="about-title"></h2>
-                <span class="section__subtitle" id="about-subtitle"></span>
+                <h2 class="section__title reveal" id="about-title"></h2>
+                <span class="section__subtitle reveal" id="about-subtitle"></span>
 
                 <div class="about__container container grid">
-                    <img src="" alt="" class="about__img" id="about-image" />
-                    <div class="about__data">
+                    <img src="" alt="" class="about__img reveal-left" id="about-image" />
+                    <div class="about__data reveal-right">
                         <p class="about__description" id="about-description"></p>
-                        <div class="about__info" id="about-info"></div>
+                        <div class="about__info stagger-children" id="about-info"></div>
                         <div class="about__buttons" id="about-buttons"></div>
                     </div>
                 </div>
             </section>
-            <!--==================== SKILLS ====================-->
+
+            <!-- ==================== SKILLS ==================== -->
             <section class="skills section" id="skills">
-                <h2 class="section__title" id="skills-title"></h2>
-                <span class="section__subtitle" id="skills-subtitle"></span>
+                <h2 class="section__title reveal" id="skills-title"></h2>
+                <span class="section__subtitle reveal" id="skills-subtitle"></span>
 
-                <div class="skills__container container grid" id="skills-container"></div>
+                <div class="skills__container container grid stagger-children" id="skills-container"></div>
             </section>
-            <!--==================== qualification ====================-->
-            <section class="qualification section" id="qualification">
-                <h2 class="section__title" id="qualification-title"></h2>
-                <span class="section__subtitle" id="qualification-subtitle"></span>
 
-                <div class="qaulification__container container">
+            <!-- ==================== QUALIFICATION ==================== -->
+            <section class="qualification section" id="qualification">
+                <h2 class="section__title reveal" id="qualification-title"></h2>
+                <span class="section__subtitle reveal" id="qualification-subtitle"></span>
+
+                <div class="qaulification__container container reveal">
                     <div class="qualification__tabs" id="qualification-tabs"></div>
                     <div class="qualification__section" id="qualification-content"></div>
                 </div>
             </section>
-            <!--==================== SERVICES ====================-->
-            <section class="services section" id="service">
-                <h2 class="section__title" id="services-title"></h2>
-                <span class="section__subtitle" id="services-subtitle"></span>
 
-                <div class="services__container container grid" id="services-container"></div>
+            <!-- ==================== SERVICES ==================== -->
+            <section class="services section" id="service">
+                <h2 class="section__title reveal" id="services-title"></h2>
+                <span class="section__subtitle reveal" id="services-subtitle"></span>
+
+                <div class="services__container container grid stagger-children" id="services-container"></div>
             </section>
-            <!--==================== NEW PROJECT ====================-->
+
+            <!-- ==================== CTA ==================== -->
             <section class="new-project section">
-                <div class="new-project-bg">
+                <div class="new-project-bg reveal-scale">
                     <div class="new-project__container container grid">
                         <div class="new-project__data">
                             <h2 class="new-project__title" id="cta-title"></h2>
                             <p class="new-project__description" id="cta-description"></p>
-                            <a
-                                href="#"
-                                class="button button--flex button--white"
-                                id="cta-button"
-                            >
+                            <a href="#" class="button button--white" id="cta-button">
                                 <span id="cta-button-label"></span>
-                                <i
-                                    class="project__icon button__icon"
-                                    id="cta-button-icon"
-                                ></i>
+                                <i class="project__icon button__icon" id="cta-button-icon"></i>
                             </a>
                         </div>
                     </div>
                 </div>
             </section>
-            <!--==================== PROJECTS ====================-->
-            <section class="projects section" id="projects">
-                <h2 class="section__title" id="projects-title"></h2>
-                <span class="section__subtitle" id="projects-subtitle"></span>
 
-                <div class="projects__tabs" id="projects-tabs"></div>
+            <!-- ==================== PROJECTS ==================== -->
+            <section class="projects section" id="projects">
+                <h2 class="section__title reveal" id="projects-title"></h2>
+                <span class="section__subtitle reveal" id="projects-subtitle"></span>
+
+                <div class="projects__tabs reveal" id="projects-tabs"></div>
 
                 <div class="projects__section container" id="projects-section"></div>
             </section>
-            <!--==================== CONTACT ====================-->
+
+            <!-- ==================== CONTACT ==================== -->
             <section class="contact section" id="contact">
-                <h2 class="section__title" id="contact-title"></h2>
-                <span class="section__subtitle" id="contact-subtitle"></span>
+                <h2 class="section__title reveal" id="contact-title"></h2>
+                <span class="section__subtitle reveal" id="contact-subtitle"></span>
 
                 <div class="contact__container container grid">
-                    <div>
+                    <div class="reveal-left">
                         <div id="contact-cards"></div>
                         <div class="home__social-contact" id="contact-socials"></div>
                     </div>
 
-                    <form action="" class="contact__form grid" id="contact-form">
+                    <form action="" class="contact__form grid reveal-right" id="contact-form">
                         <div class="contact__inputs grid">
                             <div class="contact__content">
-                                <input
-                                    type="text"
-                                    id="name"
-                                    class="contact__input contact"
-                                    placeholder=""
-                                    required
-                                />
+                                <input type="text" id="name" class="contact__input contact" placeholder="" required />
                             </div>
-
                             <div class="contact__content">
-                                <input
-                                    type="email"
-                                    id="email"
-                                    class="contact__input contact"
-                                    placeholder=""
-                                    required
-                                />
+                                <input type="email" id="email" class="contact__input contact" placeholder="" required />
                             </div>
-
                             <div class="contact__content">
-                                <input
-                                    type="text"
-                                    id="project"
-                                    class="contact__input contact"
-                                    placeholder=""
-                                />
+                                <input type="text" id="project" class="contact__input contact" placeholder="" />
                             </div>
-
                             <div class="contact__content">
-                                <textarea
-                                    id="message"
-                                    cols="0"
-                                    rows="7"
-                                    class="contact__input contact"
-                                    placeholder=""
-                                ></textarea>
+                                <textarea id="message" cols="0" rows="7" class="contact__input contact" placeholder=""></textarea>
                             </div>
                         </div>
                         <div>
-                            <button
-                                onclick="sendMail()"
-                                class="button button--flex"
-                                id="contact-submit"
-                            >
+                            <button onclick="sendMail()" class="button button--primary" id="contact-submit" type="button">
                                 <span id="contact-submit-label"></span>
                                 <i class="button__icon" id="contact-submit-icon"></i>
                             </button>
@@ -289,7 +235,7 @@
                 </div>
             </section>
 
-            <!--==================== FOOTER ====================-->
+            <!-- ==================== FOOTER ==================== -->
             <footer class="footer">
                 <div class="footer__bg">
                     <div class="footer__container container grid">
@@ -307,10 +253,18 @@
             </footer>
         </main>
 
+        <!-- Scroll Up -->
         <a href="#" class="scrollup" id="scroll-up">
             <i class="scrollup__icon" id="scroll-up-icon"></i>
         </a>
 
+        <!-- Voice Agent FAB -->
+        <a href="voice-agent.html" class="voice-agent-fab" id="voice-agent-fab">
+            <i class="uil uil-microphone voice-agent-fab__icon"></i>
+            <span id="voice-agent-fab-label">Talk to My AI</span>
+        </a>
+
+        <!-- Scripts -->
         <script src="js/swiper-bundle.min.js"></script>
         <script src="js/main.js"></script>
         <script src="js/content-loader.js"></script>
