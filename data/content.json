@@ -1,7 +1,7 @@
 {
     "site": {
-        "title": "Yousif`s Portfolio",
-        "logoText": "Yousif`s Portfolio"
+        "title": "Yousif Al-Nasser — AI Engineer",
+        "logoText": "Yousif.AI"
     },
     "navigation": [
         {
@@ -26,7 +26,7 @@
         },
         {
             "id": "service",
-            "label": "Service",
+            "label": "Services",
             "icon": "uil uil-server-network-alt"
         },
         {
@@ -65,11 +65,11 @@
         ],
         "image": {
             "src": "Assets/img/after editing.jpg",
-            "alt": "Portrait illustration of Yousif"
+            "alt": "Yousif Al-Nasser — AI Engineer"
         },
         "title": "Hi, I'm Yousif",
-        "subtitle": "Computer Engineer, Freelancer Developer",
-        "description": "Experience the power of innovation with a freelance developer who is passionate about creating seamless user experiences. From AI-driven applications to responsive websites, let's collaborate and take your digital presence to the next level.",
+        "subtitle": "AI Engineer & Software Developer",
+        "description": "I build intelligent systems that matter — from large language models and generative AI agents to full-stack applications powered by real machine learning. Let's turn your idea into a working AI product.",
         "cta": {
             "label": "Contact me",
             "href": "#contact",
@@ -87,9 +87,9 @@
         "subtitle": "My introduction",
         "image": {
             "src": "Assets/img/about.png",
-            "alt": "Illustration for about section"
+            "alt": "Yousif Al-Nasser"
         },
-        "description": "Welcome to my portfolio website! I am a freelance developer with a passion for leveraging technology to create innovative solutions. With expertise in Artificial Intelligence implementation, software development, web development, and mobile app development, I possess a diverse skill set that allows me to tackle a wide range of projects. I thrive on challenges and enjoy finding elegant solutions to complex problems. My journey in the tech industry has equipped me with a deep understanding of various programming languages and technologies. Whether it's crafting cutting-edge AI algorithms or building user-friendly web applications, I am dedicated to delivering high-quality work that exceeds client expectations. I am committed to staying updated with the latest industry trends and continuously expanding my skill set to ensure I provide the best possible solutions for my clients. Let's collaborate and bring your ideas to life!",
+        "description": "I'm Yousif Al-Nasser, an AI Engineer and Computer Engineering graduate from King Faisal University with 8+ years of hands-on experience building intelligent systems. I specialise in large language models, generative AI, multi-agent architectures, and full-stack development — turning cutting-edge research into production-ready solutions. From designing custom LLM pipelines and real-time voice AI agents to training deep learning models and deploying scalable APIs, I bring end-to-end AI engineering expertise to every project. Bilingual in Arabic and English, I'm passionate about building AI that understands culture, context, and real human needs.",
         "stats": [
             {
                 "value": "08+",
@@ -97,7 +97,7 @@
             },
             {
                 "value": "20+",
-                "label": "Completed projects"
+                "label": "AI & software projects"
             },
             {
                 "value": "04+",
@@ -116,80 +116,84 @@
     },
     "skills": {
         "title": "Skills",
-        "subtitle": "My technical skills",
+        "subtitle": "My technical expertise",
         "groups": [
             {
-                "title": "FrontEnd developer",
+                "title": "AI & Machine Learning",
                 "subtitle": "More than 4 Years",
-                "icon": "uil uil-brackets-curly",
+                "icon": "uil uil-brain",
                 "isOpen": true,
                 "items": [
                     {
-                        "name": "HTML",
+                        "name": "LLMs & Generative AI",
                         "percentage": 100
                     },
                     {
-                        "name": "CSS",
+                        "name": "Multi-Agent Systems",
                         "percentage": 100
                     },
                     {
-                        "name": "JavaScript",
+                        "name": "Deep Learning (PyTorch / TF)",
                         "percentage": 100
                     },
                     {
-                        "name": "React",
+                        "name": "RAG & Vector Databases",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "NLP & Computer Vision",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "MLOps & Model Deployment",
                         "percentage": 100
                     }
                 ]
             },
             {
-                "title": "Artificial intelligence",
-                "subtitle": "More than 4 Years",
-                "icon": "uil uil-brain",
+                "title": "Software & Full-Stack",
+                "subtitle": "More than 5 Years",
+                "icon": "uil uil-brackets-curly",
                 "isOpen": false,
                 "items": [
                     {
-                        "name": "Machine Learning",
+                        "name": "Python & FastAPI",
                         "percentage": 100
                     },
                     {
-                        "name": "Deep Learning",
+                        "name": "JavaScript & TypeScript",
                         "percentage": 100
                     },
                     {
-                        "name": "Python",
+                        "name": "React & Next.js",
                         "percentage": 100
                     },
                     {
-                        "name": "TensorFlow",
+                        "name": "Docker & Cloud (GCP / AWS)",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "REST APIs & WebSockets",
                         "percentage": 100
                     }
                 ]
             },
             {
-                "title": "Electronics",
+                "title": "Embedded & Electronics",
                 "subtitle": "More than 4 Years",
                 "icon": "uil uil-robot",
                 "isOpen": false,
                 "items": [
                     {
-                        "name": "Arduino",
-                        "percentage": 100
-                    },
-                    {
-                        "name": "Raspberry Pi",
-                        "percentage": 100
-                    },
-                    {
-                        "name": "Circuit",
-                        "percentage": 100
-                    },
-                    {
-                        "name": "PCB Design",
+                        "name": "Arduino & Raspberry Pi",
                         "percentage": 100
                     },
                     {
                         "name": "Embedded Systems",
+                        "percentage": 100
+                    },
+                    {
+                        "name": "PCB Design",
                         "percentage": 100
                     },
                     {
@@ -227,13 +231,13 @@
             "education": [
                 {
                     "title": "Tuwaiq Academy",
-                    "subtitle": "Data science & AI diploma",
+                    "subtitle": "Data Science & AI Diploma",
                     "period": "October 2025",
                     "alignment": "right"
                 },
                 {
                     "title": "Bachelor of Computer Engineering",
-                    "subtitle": "KING FAISAL UNIVERSITY",
+                    "subtitle": "King Faisal University",
                     "period": "2019 - 2025",
                     "alignment": "left"
                 },
@@ -253,100 +257,97 @@
             "work": [
                 {
                     "title": "Founder",
-                    "subtitle": "Muqallam || \u0645\u064f\u0642\u0644\u0651\u064e\u0645",
+                    "subtitle": "Muqallam || مُقلّم",
                     "period": "Aug 2024 - Present",
                     "alignment": "left"
                 },
                 {
-                    "title": "Technology Consulting New Associate ",
-                    "subtitle": "Accenture Middle East - Riyadh",
+                    "title": "Technology Consulting New Associate",
+                    "subtitle": "Accenture Middle East — Riyadh",
                     "period": "Apr 2025 - Jun 2025",
                     "alignment": "right"
                 },
                 {
-                    "title": "Site Manager & TA ",
+                    "title": "Site Manager & Teaching Assistant",
                     "subtitle": "KAUST Academy",
                     "period": "Feb 2025 - Mar 2025",
                     "alignment": "left"
                 },
                 {
                     "title": "Information Technology",
-                    "subtitle": "Ministry of Health Saudi Arabia - On-site",
+                    "subtitle": "Ministry of Health — Saudi Arabia",
                     "period": "Jul 2024 - Sep 2024",
                     "alignment": "right"
                 },
                 {
-                    "title": "Tech Team Leader ",
-                    "subtitle": "King Faisal University & Alber AlAhsa Charity Organization",
+                    "title": "Tech Team Leader",
+                    "subtitle": "King Faisal University & Alber AlAhsa Charity",
                     "period": "Jul 2024 - Aug 2024",
                     "alignment": "left"
                 },
                 {
                     "title": "Artificial Intelligence Trainer",
-                    "subtitle": "King Faisal University & Alber Charity Organization",
+                    "subtitle": "King Faisal University & Alber Charity",
                     "period": "Jul 2023 - Aug 2023",
                     "alignment": "right"
                 },
                 {
-                    "title": "Confidential ",
-                    "subtitle": "GGC",
-                    "period": "Aug 2022 - Sep 2022",
-                    "alignment": "left"
-                },
-                {
                     "title": "Trainer & Mentor",
-                    "subtitle": "SAFCSP - Remote",
+                    "subtitle": "SAFCSP — Remote",
                     "period": "Jan 2020 - Feb 2020",
-                    "alignment": "right"
+                    "alignment": "left"
                 },
                 {
-                    "title": "Instructor Assistant (Twaiq Bootcamp)",
-                    "subtitle": "SAFCSP - Saudi Arabia",
+                    "title": "Instructor Assistant (Tuwaiq Bootcamp)",
+                    "subtitle": "SAFCSP — Saudi Arabia",
                     "period": "Nov 2019 - Jan 2020",
-                    "alignment": "left"
+                    "alignment": "right"
                 }
             ]
         }
     },
     "services": {
         "title": "Services",
-        "subtitle": "What I offer",
+        "subtitle": "What I build",
         "items": [
             {
-                "title": "Web Development",
-                "icon": "uil uil-browser",
-                "modalTitle": "Web Design",
+                "title": "AI Agent Development",
+                "icon": "uil uil-robot",
+                "modalTitle": "AI Agent Development",
                 "features": [
-                    "Responsive Design",
-                    "UI/UX Design",
-                    "Testing & Deployment"
+                    "LLM-powered agents & chatbots",
+                    "Multi-agent orchestration",
+                    "Voice AI & real-time streaming",
+                    "RAG pipelines & knowledge bases"
                 ]
             },
             {
-                "title": "Application development",
-                "icon": "uil uil-mobile-android",
-                "modalTitle": "Application development",
-                "features": [
-                    "Code development",
-                    "Testing & Optimization",
-                    "Design & Prototyping"
-                ]
-            },
-            {
-                "title": "AI modeling",
+                "title": "ML & Data Engineering",
                 "icon": "uil uil-brain",
-                "modalTitle": "AI modeling",
+                "modalTitle": "ML & Data Engineering",
                 "features": [
-                    "Data analytics",
-                    "Data Engineering",
-                    "Deployment"
+                    "Model training & fine-tuning",
+                    "Data pipelines & preprocessing",
+                    "Computer vision & NLP",
+                    "Model deployment & MLOps"
+                ]
+            },
+            {
+                "title": "Full-Stack AI Apps",
+                "icon": "uil uil-browser",
+                "modalTitle": "Full-Stack AI Applications",
+                "features": [
+                    "AI-powered web applications",
+                    "FastAPI & Python backends",
+                    "React & modern frontends",
+                    "Cloud deployment & Docker"
                 ]
             }
         ]
     },
     "cta": {
-        "title": "You have a new project",
-        "description": "Contact me for any project or development",
+        "title": "Have an AI project in mind?",
+        "description": "Let's build something intelligent together — from prototype to production.",
         "button": {
             "label": "Contact Me",
             "href": "#contact",
@@ -358,7 +359,7 @@
         "subtitle": {
             "heading": "Most recent work",
             "cta": {
-                "text": "Find more projects on Github",
+                "text": "Find more on GitHub",
                 "href": "https://github.com/Yousif-A2",
                 "icon": "uil uil-github-alt"
             }
@@ -371,7 +372,7 @@
             },
             {
                 "id": "web",
-                "label": "web",
+                "label": "Web",
                 "icon": "uil uil-window"
             }
         ],
@@ -379,7 +380,7 @@
             "AI": [
                 {
                     "title": "\"Najmah\" Multi-Agent AI Platform",
-                    "description": "Najmah is a multilingual multi-agent AI platform tailored for the Saudi market. It understands user intent beyond scripted replies and spins up specialized agents for customer care, admin supervisors, academic advising, creative Arabic poetry, and government service guidance\u2014proving AI can overcome language and cultural barriers.",
+                    "description": "Najmah is a multilingual multi-agent AI platform tailored for the Saudi market. It understands user intent beyond scripted replies and spins up specialized agents for customer care, admin supervisors, academic advising, creative Arabic poetry, and government service guidance — proving AI can overcome language and cultural barriers.",
                     "images": [
                         {
                             "src": "Assets/projects-img/star.png",
@@ -424,7 +425,7 @@
                 },
                 {
                     "title": "Object Tracking Video Model",
-                    "description": "Object Tracking Video is a visual analysis technique that enables the accurate and real-time identification and tracking of specific objects within a video stream.",
+                    "description": "Real-time object tracking system using computer vision that accurately identifies and follows specific objects within video streams — enabling surveillance, sports analytics, and robotics applications.",
                     "images": [
                         {
                             "src": "Assets/projects-img/object-tracking-video.jpg",
@@ -432,14 +433,14 @@
                         }
                     ],
                     "cta": {
-                        "label": "Demo",
+                        "label": "View on GitHub",
                         "href": "https://github.com/Yousif-A2/object-tracking-video",
                         "icon": "uil uil-arrow-right"
                     }
                 },
                 {
                     "title": "Face Detection Model",
-                    "description": "Identifies and locates human faces within an image or video, enabling various applications such as facial recognition, emotion analysis, and augmented reality.",
+                    "description": "Deep learning model that identifies and locates human faces in images and video with high accuracy — enabling facial recognition, emotion analysis, and augmented reality applications.",
                     "images": [
                         {
                             "src": "Assets/projects-img/Face_Detection.jpg",
@@ -447,14 +448,14 @@
                         }
                     ],
                     "cta": {
-                        "label": "Demo",
+                        "label": "View on GitHub",
                         "href": "https://github.com/Yousif-A2/Face_Detection/tree/master",
                         "icon": "uil uil-arrow-right"
                     }
                 },
                 {
-                    "title": "Stock News Analysis Natural Language Processing",
-                    "description": "Analyze news articles and extract key information related to stock market trends and company performance.",
+                    "title": "Stock News Sentiment NLP",
+                    "description": "NLP pipeline that analyses financial news articles, extracts sentiment signals, and correlates them with market trends — helping investors understand news-driven market movements.",
                     "images": [
                         {
                             "src": "Assets/projects-img/Stock News Analysis.png",
@@ -462,39 +463,35 @@
                         }
                     ],
                     "cta": {
-                        "label": "Demo",
+                        "label": "Launch Demo",
                         "href": "https://yousif22-financial-sentiment-analyzer.hf.space/",
                         "icon": "uil uil-arrow-right"
                     }
                 },
                 {
-                    "title": "SECURE LINK APP",
-                    "description": "Defend against online threats effortlessly with SecureLink. Developed in Flutter and backed by advanced AI, it swiftly identifies spam links, ensuring a secure browsing experience.",
+                    "title": "SecureLink — AI Phishing Detector",
+                    "description": "Flutter mobile app backed by an AI classifier that detects malicious and phishing URLs in real time — protecting users from online threats with a single scan.",
                     "images": [
                         {
                             "src": "Assets/projects-img/malicious_phish.png",
                             "alt": "Secure Link app mobile screen",
-                            "style": {
-                                "width": "15%"
-                            }
+                            "style": { "width": "15%" }
                         },
                         {
                             "src": "Assets/projects-img/malicious_phish2.png",
                             "alt": "Secure Link app results screen",
-                            "style": {
-                                "width": "15%"
-                            }
+                            "style": { "width": "15%" }
                         }
                     ],
                     "cta": {
-                        "label": "Demo",
+                        "label": "View Demo",
                         "href": "https://app.flutterflow.io/share/ghsdfghjkl-oiqtxp",
                         "icon": "uil uil-arrow-right"
                     }
                 },
                 {
-                    "title": "Emotion detection with CNN-main",
-                    "description": "Using Convolutional Neural Networks, it analyzes real-time facial expressions for applications in human-computer interaction and sentiment analysis. The project, with its intuitive interface, underscores my commitment to advancing AI for practical solutions.",
+                    "title": "Emotion Detection CNN",
+                    "description": "Convolutional Neural Network that classifies real-time facial expressions into emotion categories — with applications in human-computer interaction, UX research, and sentiment analysis.",
                     "images": [
                         {
                             "src": "Assets/projects-img/object-tracking-video.jpg",
@@ -502,7 +499,7 @@
                         }
                     ],
                     "cta": {
-                        "label": "Demo",
+                        "label": "View on GitHub",
                         "href": "https://github.com/Yousif-A2/Emotion_detection_with_CNN-main",
                         "icon": "uil uil-arrow-right"
                     }
@@ -510,8 +507,8 @@
             ],
             "web": [
                 {
-                    "title": "KFU registration-V2 Pro",
-                    "description": "Simplify course registration with our Chrome Extension. Input your CRNs and let automation take care of the rest, enrolling you in seconds.",
+                    "title": "KFU Registration Automation",
+                    "description": "Chrome extension that automates KFU course registration — input your CRNs and let the extension enroll you in seconds, eliminating the manual registration race.",
                     "images": [
                         {
                             "src": "Assets/projects-img/KFU registration-V2 Pro.png",
@@ -519,14 +516,14 @@
                         }
                     ],
                     "cta": {
-                        "label": "Try",
+                        "label": "Try It",
                         "href": "https://chrome.google.com/webstore/detail/kfu-registration-v2-pro/nibolaajjcnkfdhfkeminnhclfpaobgm",
                         "icon": "uil uil-arrow-right"
                     }
                 },
                 {
-                    "title": "Matching Game Web",
-                    "description": "Test your memory and speed in our Flip Card Matching Game with a timer. Can you match them all in record time?",
+                    "title": "Memory Matching Game",
+                    "description": "Browser-based flip card matching game with a live timer — test your memory and speed against the clock.",
                     "images": [
                         {
                             "src": "Assets/projects-img/Matching Game.png",
@@ -534,14 +531,14 @@
                         }
                     ],
                     "cta": {
-                        "label": "Try",
+                        "label": "Play",
                         "href": "https://yousif-A2.github.io/Matching-Game-Udacity-FEND-/",
                         "icon": "uil uil-arrow-right"
                     }
                 },
                 {
-                    "title": "Restaurant menu websit",
-                    "description": "Explore our interactive restaurant menu website. Add dishes to your basket and see the total price in real-time.",
+                    "title": "Restaurant Menu App",
+                    "description": "Interactive restaurant menu website — browse dishes, add items to a live basket, and see the total price update in real time.",
                     "images": [
                         {
                             "src": "Assets/projects-img/Restaurant-menu-web.png",
@@ -549,29 +546,14 @@
                         }
                     ],
                     "cta": {
-                        "label": "Try",
+                        "label": "Try It",
                         "href": "https://yousif-A2.github.io/Restaurant-menu-web/",
                         "icon": "uil uil-arrow-right"
                     }
                 },
                 {
-                    "title": "Arcade Game Websit",
-                    "description": "Online arcade gaming experience! Powered by HTML, CSS, and JavaScript, my games offer seamless and interactive gameplay right in your web browser.",
-                    "images": [
-                        {
-                            "src": "Assets/projects-img/frontend-nanodegree-arcade-game.png",
-                            "alt": "Arcade game project screenshot"
-                        }
-                    ],
-                    "cta": {
-                        "label": "Try",
-                        "href": "https://yousif-A2.github.io/frontend-nanodegree-arcade-game/",
-                        "icon": "uil uil-arrow-right"
-                    }
-                },
-                {
-                    "title": "SamValley Shopping Websit",
-                    "description": "Built the frontend with Tailwind CSS for a clean, modern look. It's all about smooth navigation, eye-catching displays, and an overall seamless shopping vibe.",
+                    "title": "SamValley Shopping Frontend",
+                    "description": "Modern e-commerce frontend built with Tailwind CSS — clean product displays, smooth navigation, and a seamless shopping experience.",
                     "images": [
                         {
                             "src": "Assets/projects-img/Samvalley.png",
@@ -579,7 +561,7 @@
                         }
                     ],
                     "cta": {
-                        "label": "Try",
+                        "label": "Try It",
                         "href": "http://yousif-A2.github.io/SamVally-header-footer/",
                         "icon": "uil uil-arrow-right"
                     }
@@ -643,7 +625,7 @@
             "placeholders": {
                 "name": "Your Name",
                 "email": "Your Email",
-                "project": "Type of your Project",
+                "project": "Tell me about your project",
                 "message": "Your Message"
             },
             "button": {
@@ -653,37 +635,16 @@
         }
     },
     "footer": {
-        "title": "Yousif`s Portfolio",
-        "subtitle": "Computer engineering",
+        "title": "Yousif Al-Nasser",
+        "subtitle": "AI Engineer",
         "links": [
-            {
-                "href": "#home",
-                "label": "Home"
-            },
-            {
-                "href": "#about",
-                "label": "About"
-            },
-            {
-                "href": "#skills",
-                "label": "Skills"
-            },
-            {
-                "href": "#qualification",
-                "label": "Qualification"
-            },
-            {
-                "href": "#service",
-                "label": "Services"
-            },
-            {
-                "href": "#projects",
-                "label": "Projects"
-            },
-            {
-                "href": "#contact",
-                "label": "Contact"
-            }
+            { "href": "#home", "label": "Home" },
+            { "href": "#about", "label": "About" },
+            { "href": "#skills", "label": "Skills" },
+            { "href": "#qualification", "label": "Qualification" },
+            { "href": "#service", "label": "Services" },
+            { "href": "#projects", "label": "Projects" },
+            { "href": "#contact", "label": "Contact" }
         ],
         "socials": [
             {
@@ -707,7 +668,7 @@
                 "url": "https://www.linkedin.com/in/yalnasser/"
             }
         ],
-        "copy": "\u00a9 Yousif. All right reserved"
+        "copy": "© Yousif Al-Nasser. All rights reserved"
     },
     "scrollUp": {
         "icon": "uil uil-arrow-up"

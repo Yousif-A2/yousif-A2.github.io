@@ -8,28 +8,28 @@
 
 /* ===== DESIGN TOKENS ===== */
 :root {
-    /* ── Light Mode (soft dark — deep navy) ── */
-    --bg-primary:    #13131f;
-    --bg-secondary:  #1c1c2e;
-    --bg-tertiary:   #252540;
-    --bg-card:       rgba(255,255,255,0.04);
-    --bg-glass:      rgba(255,255,255,0.06);
-    --bg-glass-hover:rgba(255,255,255,0.10);
+    /* ── Light Mode (dark bg, warm emerald/amber accent palette) ── */
+    --bg-primary:    #0a0a0f;
+    --bg-secondary:  #0e0f14;
+    --bg-tertiary:   #141620;
+    --bg-card:       rgba(255,255,255,0.07);
+    --bg-glass:      rgba(255,255,255,0.09);
+    --bg-glass-hover:rgba(255,255,255,0.14);
 
-    --accent-cyan:   #00d4ff;
-    --accent-violet: #7c3aed;
-    --accent-pink:   #ec4899;
+    --accent-cyan:   #00ffb3;
+    --accent-violet: #f59e0b;
+    --accent-pink:   #fb7185;
     --accent-gradient: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
 
-    --text-primary:  #e8e8f5;
-    --text-secondary:#9898b8;
-    --text-muted:    #686885;
+    --text-primary:  #ffffff;
+    --text-secondary:#d4d4e8;
+    --text-muted:    #9090aa;
 
-    --border-glass:  rgba(255,255,255,0.10);
-    --border-glow:   rgba(0,212,255,0.3);
+    --border-glass:  rgba(255,255,255,0.14);
+    --border-glow:   rgba(0,255,179,0.35);
 
-    --glow-cyan:     0 0 20px rgba(0,212,255,0.15);
-    --glow-violet:   0 0 20px rgba(124,58,237,0.15);
+    --glow-cyan:     0 0 24px rgba(0,255,179,0.22);
+    --glow-violet:   0 0 24px rgba(245,158,11,0.2);
 
     /* ── Typography ── */
     --font-body:     "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -156,6 +156,14 @@ body::before {
         radial-gradient(ellipse 60% 40% at 80% 20%, rgba(124,58,237,0.06) 0%, transparent 50%),
         radial-gradient(ellipse 70% 60% at 50% 80%, rgba(236,72,153,0.04) 0%, transparent 50%);
     animation: meshFloat 20s ease-in-out infinite alternate;
+}
+
+/* ── Light mode — warm emerald/amber mesh ── */
+body:not(.dark-theme)::before {
+    background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0,255,179,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(245,158,11,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse 70% 60% at 50% 80%, rgba(251,113,133,0.05) 0%, transparent 50%);
 }
 
 @keyframes meshFloat {
