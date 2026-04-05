@@ -1,28 +1,48 @@
 import os
+import base64
+import asyncio
 from pathlib import Path
-from fastapi import FastAPI, HTTPException
+
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-import google.auth
-import google.auth.transport.requests
+from google import genai
+from google.genai.types import (
+    AudioTranscriptionConfig, Blob, Content,
+    HttpOptions, LiveConnectConfig, Modality, Part,
+)
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent
-# Force load env vars to avoid Uvicorn caching them incorrectly during reloads
 load_dotenv(BASE_DIR / ".env", override=True)
 
-# GUARANTEE the service-account.json path is explicitly set in the OS environment
-cred_path = str(BASE_DIR / "service-account.json")
-if os.path.exists(cred_path):
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = cred_path
-    print(f"Force-set Credentials Path: {cred_path}")
+# --- Credentials ---
+# Prefer GOOGLE_CREDENTIALS_JSON env var (Coolify secret / Docker env)
+# Fall back to service-account.json file for local dev
+_creds_json = os.environ.get("GOOGLE_CREDENTIALS_JSON")
+if _creds_json:
+    _cred_path = "/tmp/service-account.json"
+    with open(_cred_path, "w") as _f:
+        _f.write(_creds_json)
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = _cred_path
+    print("Credentials loaded from GOOGLE_CREDENTIALS_JSON env var")
+else:
+    _cred_path = str(BASE_DIR / "service-account.json")
+    if os.path.exists(_cred_path):
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = _cred_path
+        print(f"Credentials loaded from {_cred_path}")
+    else:
+        print("WARNING: No credentials found. Set GOOGLE_CREDENTIALS_JSON env var.")
 
-app = FastAPI(title="Yousif Portfolio & Voice Agent API")
+PROJECT  = os.environ.get("GOOGLE_CLOUD_PROJECT", "mystic-curve-416821")
+LOCATION = os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1")
+MODEL_ID = "gemini-live-2.5-flash-native-audio"
 
-# Mount static directories
-app.mount("/css", StaticFiles(directory="css"), name="css")
-app.mount("/js", StaticFiles(directory="js"), name="js")
-app.mount("/data", StaticFiles(directory="data"), name="data")
+app = FastAPI(title="Yousif Portfolio & Voice Agent")
+
+app.mount("/css",    StaticFiles(directory="css"),    name="css")
+app.mount("/js",     StaticFiles(directory="js"),     name="js")
+app.mount("/data",   StaticFiles(directory="data"),   name="data")
 app.mount("/Assets", StaticFiles(directory="Assets"), name="Assets")
 
 @app.get("/")
@@ -33,49 +53,136 @@ async def read_index():
 async def read_voice_agent():
     return FileResponse("voice-agent.html")
 
-@app.get("/api/token")
-async def get_token():
-    """
-    Generates a short-lived OAuth 2.0 access token using Google Application Credentials.
-    This token is sent to the frontend so it can securely open a WebSocket directly to Vertex AI.
-    """
+
+# --- Gemini Live WebSocket Proxy ---
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
     try:
-        # Ensure GOOGLE_APPLICATION_CREDENTIALS is an absolute path if it is set as a relative path
-        env_cred_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-        if env_cred_path and not os.path.isabs(env_cred_path):
-            abs_path = str(BASE_DIR / env_cred_path)
-            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = abs_path
-            print(f"DEBUG: Rewrote creds path to {abs_path}")
-
-        # Load credentials from the environment (e.g. GOOGLE_APPLICATION_CREDENTIALS)
-        credentials, project_id = google.auth.default(
-            scopes=["https://www.googleapis.com/auth/cloud-platform"]
+        # 1. Receive setup message from frontend
+        initial_msg = await websocket.receive_json()
+        system_instruction = (
+            initial_msg.get("setup", {})
+            .get("system_instruction", "You are a helpful assistant.")
         )
-        
-        # Refresh the credentials to ensure the token is valid and populated
-        request = google.auth.transport.requests.Request()
-        credentials.refresh(request)
-        
-        # Determine Project ID and Location from auth or environment variables
-        final_project_id = os.environ.get("GOOGLE_CLOUD_PROJECT", project_id)
-        location = os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1")
-        
-        if not final_project_id:
-            raise ValueError("Google Cloud Project ID is missing. Set GOOGLE_CLOUD_PROJECT env var.")
-            
-        if not credentials.token:
-            raise ValueError("Failed to generate a valid access token.")
 
-        return {
-            "token": credentials.token,
-            "projectId": final_project_id,
-            "location": location
-        }
+        # 2. Build Gemini client + config
+        client = genai.Client(
+            http_options=HttpOptions(api_version="v1beta1"),
+            vertexai=True,
+            project=PROJECT,
+            location=LOCATION,
+        )
+        config = LiveConnectConfig(
+            response_modalities=[Modality.AUDIO],
+            output_audio_transcription=AudioTranscriptionConfig(),
+            input_audio_transcription=AudioTranscriptionConfig(),
+            system_instruction=Content(parts=[Part(text=system_instruction)]),
+        )
+
+        # 3. Open Gemini Live session
+        async with client.aio.live.connect(model=MODEL_ID, config=config) as session:
+
+            async def receive_from_gemini():
+                try:
+                    while True:
+                        got_any = False
+                        async for message in session.receive():
+                            got_any = True
+                            sc = getattr(message, "server_content", None)
+                            if sc is None:
+                                continue
+
+                            # Audio chunks
+                            model_turn = getattr(sc, "model_turn", None)
+                            if model_turn:
+                                for part in getattr(model_turn, "parts", []):
+                                    inline_data = getattr(part, "inline_data", None)
+                                    if inline_data and getattr(inline_data, "data", None):
+                                        await websocket.send_json({
+                                            "audio": base64.b64encode(inline_data.data).decode()
+                                        })
+
+                            # Model transcript
+                            out_t = getattr(sc, "output_transcription", None)
+                            if out_t:
+                                text = getattr(out_t, "text", None)
+                                if text:
+                                    await websocket.send_json({"transcript": text, "type": "model"})
+
+                            # User transcript
+                            in_t = getattr(sc, "input_transcription", None)
+                            if in_t:
+                                text = getattr(in_t, "text", None)
+                                if text:
+                                    await websocket.send_json({"transcript": text, "type": "user"})
+
+                        if not got_any:
+                            print("Gemini session closed.")
+                            break
+
+                except asyncio.CancelledError:
+                    pass
+                except Exception as e:
+                    print(f"Gemini error: {e}")
+                    try:
+                        await websocket.send_json({"error": str(e)})
+                    except Exception:
+                        pass
+                finally:
+                    try:
+                        await websocket.close()
+                    except Exception:
+                        pass
+
+            receive_task = asyncio.create_task(receive_from_gemini())
+            await websocket.send_json({"status": "ready"})
+
+            try:
+                while True:
+                    data = await websocket.receive_json()
+
+                    if "ping" in data:
+                        await websocket.send_json({"pong": True})
+                        continue
+
+                    if "audio" in data:
+                        raw = base64.b64decode(data["audio"])
+                        await session.send(
+                            input=Blob(data=raw, mime_type="audio/pcm;rate=16000"),
+                            end_of_turn=False,
+                        )
+
+                    if "text" in data:
+                        await session.send(input=data["text"], end_of_turn=True)
+
+            except WebSocketDisconnect:
+                print("Client disconnected.")
+            finally:
+                receive_task.cancel()
+                try:
+                    await receive_task
+                except (asyncio.CancelledError, Exception):
+                    pass
+
     except Exception as e:
-        print(f"Error generating token: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"WebSocket error: {e}")
+        try:
+            await websocket.send_json({"error": str(e)})
+        except Exception:
+            pass
+        try:
+            await websocket.close()
+        except Exception:
+            pass
+
 
 if __name__ == "__main__":
     import uvicorn
-    # For local testing, runs on port 3000
-    uvicorn.run("main:app", host="0.0.0.0", port=3000, reload=True)
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8000,
+        ws_ping_interval=None,
+        ws_ping_timeout=None,
+    )

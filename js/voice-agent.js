@@ -6,18 +6,18 @@
     "use strict";
 
     /* ── Configuration ── */
-    const MODEL = "gemini-live-2.5-flash-native-audio";
     const INPUT_SAMPLE_RATE = 16000;
     const OUTPUT_SAMPLE_RATE = 24000;
-    const BUFFER_SIZE = 4096;
 
     /* ── State ── */
     let ws = null;
     let audioCtx = (window.AudioContext || window.webkitAudioContext) ? new (window.AudioContext || window.webkitAudioContext)({ sampleRate: OUTPUT_SAMPLE_RATE }) : null;
     let mediaStream = null;
-    let scriptProcessor = null;
+    let inputCtx = null;
+    let workletNode = null;
     let sourceNode = null;
     let isConnected = false;
+    let heartbeatTimer = null;
     let isListening = false;
     let isSpeaking = false;
     let audioQueue = [];
@@ -26,6 +26,7 @@
     let waveformAnimId = null;
     let analyserNode = null;
     let systemPrompt = "";
+    let activeAiMessageEl = null;  // current in-progress AI transcript element
 
     /* ── DOM Elements ── */
     const el = {
@@ -49,12 +50,6 @@
         await loadSystemPrompt();
         setupEventListeners();
         setupWaveform();
-        // Immediately try to prepare the backend token connection silently
-        try {
-            await fetch("/api/token");
-        } catch (e) {
-            console.log("Backend offline or auth missing.");
-        }
     }
 
     /* ── Load Yousif's data as system prompt ── */
@@ -171,7 +166,7 @@ RULES:
             if (isListening) {
                 stopListening();
             } else {
-                startListening();
+                await startListening();
             }
             return;
         }
@@ -183,20 +178,12 @@ RULES:
     async function connect() {
         setStatus("connecting");
 
+        // Recreate AudioContext if it was closed during a previous disconnect
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: OUTPUT_SAMPLE_RATE });
+        }
+
         try {
-            // Fetch token and project details from local backend
-            const authResp = await fetch("/api/token");
-            if (!authResp.ok) {
-                const errorData = await authResp.text();
-                throw new Error("Backend authentication failed. Make sure server is running and Google Cloud auth is configured. Details: " + errorData);
-            }
-            const authData = await authResp.json();
-
-            const accessToken = authData.token;
-            const projectId = authData.projectId;
-            const location = authData.location;
-
-
             // Get microphone
             mediaStream = await navigator.mediaDevices.getUserMedia({
                 audio: {
@@ -208,42 +195,16 @@ RULES:
                 },
             });
 
-            // Assemble Vertex AI Regionalized WebSocket URL
-            const url = `wss://${location}-aiplatform.googleapis.com/ws/google.cloud.aiplatform.v1beta1.LlmBidiService/BidiGenerateContent`;
-
-            // Connect to Google Cloud
-            // In browsers, you cannot set Authorization headers on WebSockets easily,
-            // so we pass the access token as a Bearer token or URL parameter if supported, but Vertex AI natively supports it in the URL when running from JS SDKs
-            // Wait, Vertex AI requires Authorization Header, but browsers don't support custom headers in WebSocket() API!
-            // Wait! If they don't support it, is an access_token query param valid? Yes, but sometimes it needs to be sent differently.
-            // Oh, wait, the URL query param is usually allowed as a fallback: ?access_token=token or ?bearer_token=token.
-            // I'll leave the url construction as:
-            ws = new WebSocket(`${url}?access_token=${accessToken}`);
+            const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
+            ws = new WebSocket(`${proto}//${window.location.host}/ws`);
 
             ws.onopen = () => {
-                // Determine the fully qualified Vertex AI Model Name
-                const fullModelName = `projects/${projectId}/locations/${location}/publishers/google/models/${MODEL.split('/').pop()}`;
-
-                // Send setup message
-                const setup = {
+                console.log("Connected to backend proxy. Sending setup...");
+                ws.send(JSON.stringify({
                     setup: {
-                        model: fullModelName,
-                        generationConfig: {
-                            responseModalities: ["AUDIO"],
-                            speechConfig: {
-                                voiceConfig: {
-                                    prebuiltVoiceConfig: {
-                                        voiceName: "Puck",
-                                    },
-                                },
-                            },
-                        },
-                        systemInstruction: {
-                            parts: [{ text: systemPrompt }],
-                        },
-                    },
-                };
-                ws.send(JSON.stringify(setup));
+                        system_instruction: systemPrompt
+                    }
+                }));
             };
 
             ws.onmessage = (event) => {
@@ -254,15 +215,12 @@ RULES:
                 console.error("WebSocket error:", err);
                 setStatus("error");
                 addMessage("ai", "Connection error. Please check your API key and try again.");
-                disconnect();
             };
 
             ws.onclose = (event) => {
                 console.log("WebSocket closed:", event.code, event.reason);
-                if (event.code >= 4000) {
-                    addMessage("ai", `Connection closed by server (${event.code}). Token expired or failed.`);
-                } else if (!isConnected) {
-                    addMessage("ai", "Failed to connect to Vertex AI. Make sure Google Cloud auth is fully configured in the backend.");
+                if (!isConnected) {
+                    addMessage("ai", "Failed to connect to backend proxy.");
                 }
                 disconnect();
             };
@@ -271,126 +229,126 @@ RULES:
             if (err.name === "NotAllowedError") {
                 addMessage("ai", "Microphone access denied. Please allow microphone access and try again.");
             } else {
-                addMessage("ai", "Failed to connect. Please check your API key and try again.");
+                addMessage("ai", "Failed to connect. Please make sure the backend server (FastAPI) is running.");
             }
             setStatus("offline");
             disconnect();
         }
     }
 
-    /* ── Handle incoming server messages ── */
+    /* ── Handle incoming server messages (via Proxy) ── */
     async function handleServerMessage(event) {
         let data;
-
-        if (event.data instanceof Blob) {
-            const text = await event.data.text();
-            try {
-                data = JSON.parse(text);
-            } catch {
-                return;
-            }
-        } else {
-            try {
-                data = JSON.parse(event.data);
-            } catch {
-                return;
-            }
+        try {
+            data = JSON.parse(event.data);
+        } catch {
+            return;
         }
 
-        // Setup complete
-        if (data.setupComplete) {
+        // 1. Wait for ready signal from proxy
+        if (data.status === "ready" && !isConnected) {
             isConnected = true;
             setStatus("active");
             el.chatInput.disabled = false;
             el.btnSend.disabled = false;
             el.chatInput.placeholder = "Type a message to Yousif's AI...";
-            startListening();
-            addMessage("ai", "Hi! I'm Yousif's AI assistant. Feel free to ask me anything about my experience, projects, or skills!");
+            addMessage("ai", "Hi! I'm Yousif's AI assistant. Feel free to ask me anything!");
+            heartbeatTimer = setInterval(() => {
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({ ping: true }));
+                }
+            }, 20000);
+            await startListening();
             return;
         }
 
-        // Server content (audio/text responses)
-        if (data.serverContent) {
-            const parts = data.serverContent.modelTurn?.parts || [];
-
-            for (const part of parts) {
-                // Text response
-                if (part.text) {
-                    addMessage("ai", part.text);
+        // 2. Handle transcripts
+        if (data.transcript) {
+            if (data.type === "model") {
+                // Append chunks to the same message element
+                if (!activeAiMessageEl) {
+                    activeAiMessageEl = addMessage("ai", data.transcript);
+                } else {
+                    activeAiMessageEl.textContent += data.transcript;
+                    el.transcript.scrollTop = el.transcript.scrollHeight;
                 }
-
-                // Audio response
-                if (part.inlineData?.mimeType?.startsWith("audio/") && part.inlineData.data) {
-                    const audioBytes = base64ToArrayBuffer(part.inlineData.data);
-                    queueAudio(audioBytes);
-                }
+                setSpeaking(true);
+            } else {
+                // User transcript — finalize any in-progress AI message first
+                activeAiMessageEl = null;
+                addMessage("user", data.transcript);
             }
+            return;
+        }
 
-            // Turn complete
-            if (data.serverContent.turnComplete) {
-                setSpeaking(false);
-            }
+        // 3. Handle audio responses
+        if (data.audio) {
+            const audioBytes = base64ToArrayBuffer(data.audio);
+            queueAudio(audioBytes);
+            return;
+        }
+
+        // 4. Handle errors from proxy
+        if (data.error) {
+            console.error("Proxy error:", data.error);
+            addMessage("ai", `Error: ${data.error}`);
+            return;
         }
     }
 
     /* ── Audio Input (Microphone → PCM → WebSocket) ── */
-    function startListening() {
+    async function startListening() {
         if (!mediaStream || !ws || ws.readyState !== WebSocket.OPEN) return;
 
-        isListening = true;
-        el.micBtn.classList.add("active");
-        el.micIcon.className = "uil uil-microphone-slash";
-        setStatus("listening");
+        try {
+            // Create audio pipeline
+            inputCtx = new (window.AudioContext || window.webkitAudioContext)({
+                sampleRate: INPUT_SAMPLE_RATE,
+            });
 
-        // Create audio pipeline
-        const inputCtx = new (window.AudioContext || window.webkitAudioContext)({
-            sampleRate: INPUT_SAMPLE_RATE,
-        });
+            await inputCtx.audioWorklet.addModule("/js/audio-processor.js");
 
-        sourceNode = inputCtx.createMediaStreamSource(mediaStream);
-        analyserNode = inputCtx.createAnalyser();
-        analyserNode.fftSize = 256;
-        sourceNode.connect(analyserNode);
+            sourceNode = inputCtx.createMediaStreamSource(mediaStream);
+            analyserNode = inputCtx.createAnalyser();
+            analyserNode.fftSize = 256;
+            sourceNode.connect(analyserNode);
 
-        scriptProcessor = inputCtx.createScriptProcessor(BUFFER_SIZE, 1, 1);
-        analyserNode.connect(scriptProcessor);
-        scriptProcessor.connect(inputCtx.destination);
+            workletNode = new AudioWorkletNode(inputCtx, "pcm-audio-processor");
+            analyserNode.connect(workletNode);
+            workletNode.connect(inputCtx.destination);
 
-        scriptProcessor.onaudioprocess = (e) => {
-            if (!isListening || !ws || ws.readyState !== WebSocket.OPEN) return;
-
-            const inputData = e.inputBuffer.getChannelData(0);
-            const pcm16 = float32ToPcm16(inputData);
-            const b64 = arrayBufferToBase64(pcm16.buffer);
-
-            const msg = {
-                realtimeInput: {
-                    mediaChunks: [{
-                        mimeType: `audio/pcm;rate=${INPUT_SAMPLE_RATE}`,
-                        data: b64,
-                    }],
-                },
+            workletNode.port.onmessage = (e) => {
+                if (!isListening || !ws || ws.readyState !== WebSocket.OPEN) return;
+                const pcm16 = float32ToPcm16(e.data);
+                const b64 = arrayBufferToBase64(pcm16.buffer);
+                try {
+                    ws.send(JSON.stringify({ audio: b64 }));
+                } catch (err) {
+                    console.warn("Failed to send audio:", err);
+                }
             };
 
-            try {
-                ws.send(JSON.stringify(msg));
-            } catch (err) {
-                console.warn("Failed to send audio:", err);
-            }
-        };
-
-        startWaveformAnimation();
+            // Only set state after pipeline is ready
+            isListening = true;
+            el.micBtn.classList.add("active");
+            el.micIcon.className = "uil uil-microphone-slash";
+            setStatus("listening");
+            startWaveformAnimation();
+        } catch (err) {
+            console.error("Failed to start listening:", err);
+            stopListening(true);
+        }
     }
 
-    function stopListening() {
+    function stopListening(silent = false) {
         isListening = false;
         el.micBtn.classList.remove("active");
         el.micIcon.className = "uil uil-microphone";
-        setStatus("active");
+        if (!silent) setStatus("active");
 
-        if (scriptProcessor) {
-            scriptProcessor.disconnect();
-            scriptProcessor = null;
+        if (workletNode) {
+            workletNode.disconnect();
+            workletNode = null;
         }
         if (sourceNode) {
             sourceNode.disconnect();
@@ -399,6 +357,10 @@ RULES:
         if (analyserNode) {
             analyserNode.disconnect();
             analyserNode = null;
+        }
+        if (inputCtx) {
+            try { inputCtx.close(); } catch { }
+            inputCtx = null;
         }
     }
 
@@ -415,6 +377,12 @@ RULES:
         if (audioQueue.length === 0) {
             isPlayingAudio = false;
             setSpeaking(false);
+            return;
+        }
+
+        if (!audioCtx) {
+            isPlayingAudio = false;
+            audioQueue = [];
             return;
         }
 
@@ -454,15 +422,9 @@ RULES:
         // Add to transcript immediately
         addMessage("user", text);
 
-        // Construct Vertex AI Multimodal Live API clientContent message
+        // Simplified message for the proxy
         const msg = {
-            clientContent: {
-                turns: [{
-                    role: "user",
-                    parts: [{ text: text }]
-                }],
-                turnComplete: true
-            }
+            text: text
         };
 
         try {
@@ -474,7 +436,19 @@ RULES:
 
     /* ── Disconnect ── */
     function disconnect() {
-        stopListening();
+        if (heartbeatTimer) {
+            clearInterval(heartbeatTimer);
+            heartbeatTimer = null;
+        }
+
+        // Null ws before closing so the onclose handler doesn't re-enter disconnect
+        const _ws = ws;
+        ws = null;
+        if (_ws) {
+            try { _ws.close(); } catch { }
+        }
+
+        stopListening(true);
 
         if (currentPlaybackSource) {
             try { currentPlaybackSource.stop(); } catch { }
@@ -482,11 +456,6 @@ RULES:
         }
         audioQueue = [];
         isPlayingAudio = false;
-
-        if (ws) {
-            try { ws.close(); } catch { }
-            ws = null;
-        }
 
         if (mediaStream) {
             mediaStream.getTracks().forEach(t => t.stop());
@@ -500,6 +469,7 @@ RULES:
 
         isConnected = false;
         isSpeaking = false;
+        activeAiMessageEl = null;
         el.endBtn.style.display = "none";
 
         el.chatInput.disabled = true;
@@ -556,6 +526,10 @@ RULES:
         if (val) {
             setStatus("speaking");
         } else if (isListening) {
+            // Resume inputCtx if the browser suspended it during playback
+            if (inputCtx && inputCtx.state === "suspended") {
+                inputCtx.resume().catch(() => {});
+            }
             setStatus("listening");
         } else if (isConnected) {
             setStatus("active");
@@ -581,8 +555,8 @@ RULES:
         msg.appendChild(textEl);
         el.transcript.appendChild(msg);
 
-        // Auto-scroll
         el.transcript.scrollTop = el.transcript.scrollHeight;
+        return textEl;  // caller can append more text to this element
     }
 
     function clearTranscript() {
