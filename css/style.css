@@ -8,28 +8,28 @@
 
 /* ===== DESIGN TOKENS ===== */
 :root {
-    /* ── Light Mode (default) ── */
-    --bg-primary:    #f4f6fb;
-    --bg-secondary:  #eaecf7;
-    --bg-tertiary:   #dde1f5;
-    --bg-card:       rgba(0,0,0,0.03);
-    --bg-glass:      rgba(255,255,255,0.7);
-    --bg-glass-hover:rgba(255,255,255,0.9);
+    /* ── Light Mode (soft dark — deep navy) ── */
+    --bg-primary:    #13131f;
+    --bg-secondary:  #1c1c2e;
+    --bg-tertiary:   #252540;
+    --bg-card:       rgba(255,255,255,0.04);
+    --bg-glass:      rgba(255,255,255,0.06);
+    --bg-glass-hover:rgba(255,255,255,0.10);
 
-    --accent-cyan:   #0099cc;
-    --accent-violet: #6d28d9;
-    --accent-pink:   #db2777;
+    --accent-cyan:   #00d4ff;
+    --accent-violet: #7c3aed;
+    --accent-pink:   #ec4899;
     --accent-gradient: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
 
-    --text-primary:  #0d0d1a;
-    --text-secondary:#3a3a55;
-    --text-muted:    #7a7a95;
+    --text-primary:  #e8e8f5;
+    --text-secondary:#9898b8;
+    --text-muted:    #686885;
 
-    --border-glass:  rgba(0,0,0,0.08);
-    --border-glow:   rgba(0,153,204,0.3);
+    --border-glass:  rgba(255,255,255,0.10);
+    --border-glow:   rgba(0,212,255,0.3);
 
-    --glow-cyan:     0 0 20px rgba(0,153,204,0.12);
-    --glow-violet:   0 0 20px rgba(109,40,217,0.12);
+    --glow-cyan:     0 0 20px rgba(0,212,255,0.15);
+    --glow-violet:   0 0 20px rgba(124,58,237,0.15);
 
     /* ── Typography ── */
     --font-body:     "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
