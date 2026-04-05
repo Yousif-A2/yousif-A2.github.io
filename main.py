@@ -1,6 +1,7 @@
 import os
 import base64
 import asyncio
+import json
 from pathlib import Path
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
@@ -38,6 +39,20 @@ PROJECT  = os.environ.get("GOOGLE_CLOUD_PROJECT", "mystic-curve-416821")
 LOCATION = os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1")
 MODEL_ID = "gemini-live-2.5-flash-native-audio"
 
+def load_system_prompt() -> str:
+    """Load base system prompt rules from data/system-prompt.json."""
+    try:
+        prompt_path = BASE_DIR / "data" / "system-prompt.json"
+        with open(prompt_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        rules = "\n".join(f"{i+1}. {r}" for i, r in enumerate(data.get("rules", [])))
+        return f"{data.get('base', '')}\n\nRULES:\n{rules}"
+    except Exception as e:
+        print(f"Warning: Could not load system-prompt.json: {e}")
+        return "You are Yousif Al-Nasser's personal AI assistant. Be helpful, professional, and bilingual (English/Arabic)."
+
+BASE_SYSTEM_PROMPT = load_system_prompt()
+
 app = FastAPI(title="Yousif Portfolio & Voice Agent")
 
 app.mount("/css",    StaticFiles(directory="css"),    name="css")
@@ -61,10 +76,9 @@ async def websocket_endpoint(websocket: WebSocket):
     try:
         # 1. Receive setup message from frontend
         initial_msg = await websocket.receive_json()
-        system_instruction = (
-            initial_msg.get("setup", {})
-            .get("system_instruction", "You are a helpful assistant.")
-        )
+        # Merge base prompt (from file) with portfolio data (from frontend)
+        frontend_context = initial_msg.get("setup", {}).get("system_instruction", "")
+        system_instruction = f"{BASE_SYSTEM_PROMPT}\n\n{frontend_context}" if frontend_context else BASE_SYSTEM_PROMPT
 
         # 2. Build Gemini client + config
         client = genai.Client(

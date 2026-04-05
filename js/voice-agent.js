@@ -128,15 +128,7 @@ CONTACT:
 ${(contact.cards || []).map(c => `${c.title}: ${c.value}`).join("\n")}
 ${(contact.socialLinks || []).map(s => `${s.label}: ${s.url}`).join("\n")}
 
-RULES:
-1. Speak naturally and conversationally as Yousif
-2. Be enthusiastic about AI and technology
-3. When asked about projects, give brief but compelling descriptions
-4. Direct people to the portfolio website for more details
-5. You can discuss technical topics with depth
-6. Be bilingual — respond in Arabic if the user speaks Arabic
-7. Keep responses concise for voice (under 3 sentences usually)
-8. Be warm and professional`;
+`;
     }
 
     function getDefaultSystemPrompt() {
@@ -269,7 +261,7 @@ RULES:
                 if (!activeAiMessageEl) {
                     activeAiMessageEl = addMessage("ai", data.transcript);
                 } else {
-                    activeAiMessageEl.textContent += data.transcript;
+                    renderTextWithLinks(activeAiMessageEl, data.transcript);
                     el.transcript.scrollTop = el.transcript.scrollHeight;
                 }
                 setSpeaking(true);
@@ -549,14 +541,33 @@ RULES:
 
         const textEl = document.createElement("div");
         textEl.className = "va-msg__text";
-        textEl.textContent = text;
+        renderTextWithLinks(textEl, text);
 
         msg.appendChild(avatar);
         msg.appendChild(textEl);
         el.transcript.appendChild(msg);
 
         el.transcript.scrollTop = el.transcript.scrollHeight;
-        return textEl;  // caller can append more text to this element
+        return textEl;
+    }
+
+    function renderTextWithLinks(el, text) {
+        const urlPattern = /(https?:\/\/[^\s]+)/g;
+        const parts = text.split(urlPattern);
+        parts.forEach(part => {
+            if (urlPattern.test(part)) {
+                const a = document.createElement("a");
+                a.href = part;
+                a.textContent = part;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.style.cssText = "color: var(--accent-cyan); text-decoration: underline; word-break: break-all;";
+                el.appendChild(a);
+            } else if (part) {
+                el.appendChild(document.createTextNode(part));
+            }
+        });
+        urlPattern.lastIndex = 0;
     }
 
     function clearTranscript() {
