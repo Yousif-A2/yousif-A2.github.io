@@ -4,42 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Talk to Yousif's AI — Voice Agent</title>
-    <meta name="description" content="Have a real-time voice conversation with Yousif Al-Nasser's AI agent. Ask about his experience, projects, skills, and more." />
+    <meta name="description" content="Have a real-time voice or text conversation with Yousif Al-Nasser's AI agent." />
     <meta name="theme-color" content="#0a0a0f" />
     <link rel="shortcut icon" type="image/png" href="Assets/img/ai.png" />
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
     <link rel="stylesheet" href="css/voice-agent.css" />
 </head>
-<body>
-    <!-- Background -->
+<body class="dark-theme">
+    <script>
+        // Sync theme from portfolio preference (runs before paint to avoid flash)
+        (function() {
+            var theme = localStorage.getItem('selected-theme');
+            if (theme === 'light') {
+                document.body.classList.remove('dark-theme');
+            }
+        })();
+    </script>
     <div class="va-bg"></div>
 
     <div class="va-page">
         <!-- Top Bar -->
         <header class="va-topbar">
-            <a href="index.html" class="va-topbar__back" id="va-back">
+            <a href="index.html" class="va-topbar__back">
                 <i class="uil uil-arrow-left"></i>
-                <span id="va-back-label">Back to Portfolio</span>
+                <span>Portfolio</span>
             </a>
-            <div class="va-topbar__title" id="va-page-title">Yousif's AI Agent</div>
-            <div class="va-topbar__status">
-                <span class="va-status-dot" id="va-status-dot"></span>
-                <span id="va-status-text">Offline</span>
+            <div class="va-topbar__title">Yousif's AI Agent</div>
+            <div class="va-topbar__right">
+                <div class="va-topbar__status">
+                    <span class="va-status-dot" id="va-status-dot"></span>
+                    <span id="va-status-text">Offline</span>
+                </div>
+                <i class="uil uil-moon va-theme-toggle" id="theme-button" title="Toggle theme"></i>
             </div>
         </header>
 
         <!-- Main Content -->
         <div class="va-main">
+            <!-- Left: Orb + Controls -->
             <div class="va-center-col">
-                <!-- AI Orb -->
                 <div class="va-orb-container">
                     <div class="va-orb" id="va-orb">
                         <canvas class="va-waveform" id="va-waveform"></canvas>
                     </div>
                 </div>
                 <div class="va-orb-label" id="va-orb-label">Press the microphone to start</div>
-
-                <!-- Controls -->
                 <div class="va-controls">
                     <button class="va-btn va-btn--secondary" id="va-clear-btn" title="Clear transcript">
                         <i class="uil uil-trash-alt"></i>
@@ -48,22 +57,31 @@
                     <button class="va-btn va-btn--mic" id="va-mic-btn" title="Start conversation">
                         <i class="uil uil-microphone" id="va-mic-icon"></i>
                     </button>
-                    <button class="va-btn va-btn--end" id="va-end-btn" title="End session" style="display:none;">
-                        <i class="uil uil-phone-slash"></i>
+                    <button class="va-btn va-btn--mute" id="va-mute-btn" title="Mute AI voice">
+                        <i class="uil uil-volume" id="va-mute-icon"></i>
+                    </button>
+                    <button class="va-btn va-btn--connect" id="va-connect-btn" title="Connect">
+                        <i class="uil uil-link" id="va-connect-icon"></i>
+                        <span id="va-connect-label">Connect</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Transcript & Chat Col -->
+            <!-- Right: Transcript + Text Input -->
             <div class="va-transcript-col">
                 <div class="va-transcript" id="va-transcript">
                     <div class="va-transcript__empty" id="va-transcript-empty">
                         Your conversation will appear here...
                     </div>
                 </div>
-                
                 <div class="va-chat-input-wrapper">
-                    <input type="text" class="va-chat-input" id="va-chat-input" placeholder="Type a message (Connect first)..." disabled />
+                    <input
+                        type="text"
+                        class="va-chat-input"
+                        id="va-chat-input"
+                        placeholder="Type a message (Connect first)..."
+                        disabled
+                    />
                     <button class="va-btn va-btn-send" id="va-btn-send" title="Send message" disabled>
                         <i class="uil uil-message"></i>
                     </button>
@@ -73,5 +91,28 @@
     </div>
 
     <script src="js/voice-agent.js"></script>
+    <script>
+        // Theme toggle (syncs with portfolio localStorage)
+        (function() {
+            var btn = document.getElementById('theme-button');
+            if (!btn) return;
+            var darkClass = 'dark-theme';
+            var sunIcon = 'uil-sun';
+
+            // Set initial icon
+            if (!document.body.classList.contains(darkClass)) {
+                btn.classList.remove('uil-moon');
+                btn.classList.add(sunIcon);
+            }
+
+            btn.addEventListener('click', function() {
+                document.body.classList.toggle(darkClass);
+                btn.classList.toggle(sunIcon);
+                var isDark = document.body.classList.contains(darkClass);
+                localStorage.setItem('selected-theme', isDark ? 'dark' : 'light');
+                localStorage.setItem('selected-icon', btn.classList.contains(sunIcon) ? 'uil-moon' : 'uil-sun');
+            });
+        })();
+    </script>
 </body>
 </html>

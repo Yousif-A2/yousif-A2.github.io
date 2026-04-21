@@ -20,13 +20,15 @@
     let heartbeatTimer = null;
     let isListening = false;
     let isSpeaking = false;
+    let isMuted = false;
     let audioQueue = [];
     let isPlayingAudio = false;
     let currentPlaybackSource = null;
     let waveformAnimId = null;
     let analyserNode = null;
     let systemPrompt = "";
-    let activeAiMessageEl = null;  // current in-progress AI transcript element
+    let activeAiMessageEl = null;
+    let turnResetTimer = null;
 
     /* ── DOM Elements ── */
     const el = {
@@ -37,8 +39,12 @@
         statusText: document.getElementById("va-status-text"),
         micBtn: document.getElementById("va-mic-btn"),
         micIcon: document.getElementById("va-mic-icon"),
-        endBtn: document.getElementById("va-end-btn"),
+        connectBtn: document.getElementById("va-connect-btn"),
+        connectIcon: document.getElementById("va-connect-icon"),
+        connectLabel: document.getElementById("va-connect-label"),
         clearBtn: document.getElementById("va-clear-btn"),
+        muteBtn: document.getElementById("va-mute-btn"),
+        muteIcon: document.getElementById("va-mute-icon"),
         transcript: document.getElementById("va-transcript"),
         transcriptEmpty: document.getElementById("va-transcript-empty"),
         chatInput: document.getElementById("va-chat-input"),
@@ -50,6 +56,32 @@
         await loadSystemPrompt();
         setupEventListeners();
         setupWaveform();
+        showWelcome();
+    }
+
+    function showWelcome() {
+        el.transcriptEmpty.style.display = "none";
+        const msg = document.createElement("div");
+        msg.className = "va-msg va-msg--welcome";
+
+        const avatar = document.createElement("div");
+        avatar.className = "va-msg__avatar va-msg__avatar--ai";
+        avatar.textContent = "Y";
+
+        const body = document.createElement("div");
+        body.className = "va-msg__text";
+        body.innerHTML = `
+            <strong style="color:var(--text-primary)">👋 Welcome! I'm Yousif's AI Assistant</strong><br>
+            I can answer anything about Yousif — his experience, projects, skills, and more.
+            <br><br><span style="color:var(--accent-cyan);font-weight:600;">To get started:</span>
+            <div class="va-msg__step"><span class="va-msg__step-num">1</span> Click <strong style="color:var(--text-primary)">Connect</strong> to establish a session</div>
+            <div class="va-msg__step"><span class="va-msg__step-num">2</span> Press the <strong style="color:var(--text-primary)">🎤 Mic</strong> button to speak</div>
+            <div class="va-msg__step"><span class="va-msg__step-num">3</span> Or type your message in the box below</div>
+        `;
+
+        msg.appendChild(avatar);
+        msg.appendChild(body);
+        el.transcript.appendChild(msg);
     }
 
     /* ── Load Yousif's data as system prompt ── */
@@ -138,12 +170,27 @@ ${(contact.socialLinks || []).map(s => `${s.label}: ${s.url}`).join("\n")}
     /* ── Event Listeners ── */
     function setupEventListeners() {
         el.micBtn.addEventListener("click", handleMicClick);
-        el.endBtn.addEventListener("click", () => disconnect());
+        el.connectBtn.addEventListener("click", () => isConnected ? disconnect() : connect());
         el.clearBtn.addEventListener("click", clearTranscript);
+        el.muteBtn.addEventListener("click", toggleMute);
         el.btnSend.addEventListener("click", sendTextMessage);
         el.chatInput.addEventListener("keypress", (e) => {
             if (e.key === "Enter") sendTextMessage();
         });
+    }
+
+    function toggleMute() {
+        isMuted = !isMuted;
+        el.muteIcon.className = isMuted ? "uil uil-volume-mute" : "uil uil-volume";
+        el.muteBtn.title = isMuted ? "Unmute AI voice" : "Mute AI voice";
+        el.muteBtn.classList.toggle("muted", isMuted);
+        if (isMuted && currentPlaybackSource) {
+            try { currentPlaybackSource.stop(); } catch {}
+            currentPlaybackSource = null;
+            audioQueue = [];
+            isPlayingAudio = false;
+            setSpeaking(false);
+        }
     }
 
     /* ── Mic Button ── */
@@ -194,6 +241,7 @@ ${(contact.socialLinks || []).map(s => `${s.label}: ${s.url}`).join("\n")}
                 console.log("Connected to backend proxy. Sending setup...");
                 ws.send(JSON.stringify({
                     setup: {
+                        session_type: "voice",
                         system_instruction: systemPrompt
                     }
                 }));
@@ -211,8 +259,9 @@ ${(contact.socialLinks || []).map(s => `${s.label}: ${s.url}`).join("\n")}
 
             ws.onclose = (event) => {
                 console.log("WebSocket closed:", event.code, event.reason);
+                // Only show error if we never successfully connected
                 if (!isConnected) {
-                    addMessage("ai", "Failed to connect to backend proxy.");
+                    addMessage("ai", "⚠️ Could not connect. Make sure the server is running, then click Connect.");
                 }
                 disconnect();
             };
@@ -241,10 +290,12 @@ ${(contact.socialLinks || []).map(s => `${s.label}: ${s.url}`).join("\n")}
         if (data.status === "ready" && !isConnected) {
             isConnected = true;
             setStatus("active");
+            el.connectIcon.className = "uil uil-times";
+            el.connectLabel.textContent = "Disconnect";
+            el.connectBtn.classList.add("connected");
             el.chatInput.disabled = false;
             el.btnSend.disabled = false;
             el.chatInput.placeholder = "Type a message to Yousif's AI...";
-            addMessage("ai", "Hi! I'm Yousif's AI assistant. Feel free to ask me anything!");
             heartbeatTimer = setInterval(() => {
                 if (ws && ws.readyState === WebSocket.OPEN) {
                     ws.send(JSON.stringify({ ping: true }));
@@ -257,33 +308,50 @@ ${(contact.socialLinks || []).map(s => `${s.label}: ${s.url}`).join("\n")}
         // 2. Handle transcripts
         if (data.transcript) {
             if (data.type === "model") {
-                // Append chunks to the same message element
+                // Clear idle-reset timer while chunks are still arriving
+                clearTimeout(turnResetTimer);
+
                 if (!activeAiMessageEl) {
                     activeAiMessageEl = addMessage("ai", data.transcript);
                 } else {
+                    const prev = activeAiMessageEl.lastChild;
+                    if (prev && prev.nodeType === Node.TEXT_NODE) {
+                        const prevText = prev.textContent;
+                        if (prevText && !/\s$/.test(prevText) && !/^\s/.test(data.transcript)) {
+                            prev.textContent += " ";
+                        }
+                    }
                     renderTextWithLinks(activeAiMessageEl, data.transcript);
                     el.transcript.scrollTop = el.transcript.scrollHeight;
                 }
                 setSpeaking(true);
+
+                // After 800ms of silence, treat turn as done → next reply = new bubble
+                turnResetTimer = setTimeout(() => { activeAiMessageEl = null; }, 800);
             } else {
-                // User transcript — finalize any in-progress AI message first
+                clearTimeout(turnResetTimer);
                 activeAiMessageEl = null;
                 addMessage("user", data.transcript);
             }
             return;
         }
 
+        if (data.turn_complete) {
+            clearTimeout(turnResetTimer);
+            activeAiMessageEl = null;
+            return;
+        }
+
         // 3. Handle audio responses
         if (data.audio) {
-            const audioBytes = base64ToArrayBuffer(data.audio);
-            queueAudio(audioBytes);
+            if (!isMuted) queueAudio(base64ToArrayBuffer(data.audio));
             return;
         }
 
         // 4. Handle errors from proxy
         if (data.error) {
             console.error("Proxy error:", data.error);
-            addMessage("ai", `Error: ${data.error}`);
+            addErrorMessage(data.error);
             return;
         }
     }
@@ -408,10 +476,8 @@ ${(contact.socialLinks || []).map(s => `${s.label}: ${s.url}`).join("\n")}
         const text = el.chatInput.value.trim();
         if (!text) return;
 
-        // Clear input
         el.chatInput.value = "";
-
-        // Add to transcript immediately
+        activeAiMessageEl = null;   // reset so next AI reply gets a fresh bubble
         addMessage("user", text);
 
         // Simplified message for the proxy
@@ -462,7 +528,10 @@ ${(contact.socialLinks || []).map(s => `${s.label}: ${s.url}`).join("\n")}
         isConnected = false;
         isSpeaking = false;
         activeAiMessageEl = null;
-        el.endBtn.style.display = "none";
+
+        el.connectIcon.className = "uil uil-link";
+        el.connectLabel.textContent = "Connect";
+        el.connectBtn.classList.remove("connected");
 
         el.chatInput.disabled = true;
         el.btnSend.disabled = true;
@@ -487,14 +556,14 @@ ${(contact.socialLinks || []).map(s => `${s.label}: ${s.url}`).join("\n")}
                 el.statusDot.classList.add("va-status-dot--active");
                 el.statusText.textContent = "Connected";
                 el.orbLabel.textContent = "Press mic to talk";
-                el.endBtn.style.display = "flex";
+
                 break;
             case "listening":
                 el.statusDot.classList.add("va-status-dot--listening");
                 el.statusText.textContent = "Listening...";
                 el.orb.classList.add("va-orb--listening");
                 el.orbLabel.textContent = "Listening...";
-                el.endBtn.style.display = "flex";
+
                 break;
             case "speaking":
                 el.statusDot.classList.add("va-status-dot--speaking");
@@ -509,7 +578,7 @@ ${(contact.socialLinks || []).map(s => `${s.label}: ${s.url}`).join("\n")}
             default:
                 el.statusText.textContent = "Offline";
                 el.orbLabel.textContent = "Press the microphone to start";
-                el.endBtn.style.display = "none";
+
         }
     }
 
@@ -551,11 +620,38 @@ ${(contact.socialLinks || []).map(s => `${s.label}: ${s.url}`).join("\n")}
         return textEl;
     }
 
+    function addErrorMessage(text) {
+        const div = document.createElement("div");
+        div.style.cssText = "display:flex;align-items:flex-start;gap:0.65rem;margin-bottom:0.75rem;animation:msgIn 0.3s var(--ease);";
+
+        const icon = document.createElement("div");
+        icon.style.cssText = "width:26px;height:26px;border-radius:50%;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.35);color:#ef4444;display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0;margin-top:2px;";
+        icon.textContent = "!";
+
+        const bubble = document.createElement("div");
+        bubble.style.cssText = "font-size:0.82rem;line-height:1.5;color:#f87171;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:0.6rem;padding:0.5rem 0.75rem;max-width:90%;";
+        bubble.textContent = text;
+
+        div.appendChild(icon);
+        div.appendChild(bubble);
+        el.transcript.appendChild(div);
+        el.transcript.scrollTop = el.transcript.scrollHeight;
+    }
+
+    function isSafeUrl(url) {
+        try {
+            const parsed = new URL(url);
+            return parsed.protocol === "https:" || parsed.protocol === "http:";
+        } catch {
+            return false;
+        }
+    }
+
     function renderTextWithLinks(el, text) {
         const urlPattern = /(https?:\/\/[^\s]+)/g;
         const parts = text.split(urlPattern);
         parts.forEach(part => {
-            if (urlPattern.test(part)) {
+            if (urlPattern.test(part) && isSafeUrl(part)) {
                 const a = document.createElement("a");
                 a.href = part;
                 a.textContent = part;

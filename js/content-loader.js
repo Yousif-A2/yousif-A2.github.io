@@ -287,7 +287,10 @@
                 value.textContent = stat.value;
                 const label = document.createElement("span");
                 label.className = "about__info-name";
-                label.innerHTML = stat.label.replace(/\n/g, "<br />");
+                stat.label.split("\n").forEach((line, i, arr) => {
+                    label.appendChild(document.createTextNode(line));
+                    if (i < arr.length - 1) label.appendChild(document.createElement("br"));
+                });
                 wrapper.appendChild(value);
                 wrapper.appendChild(label);
                 infoContainer.appendChild(wrapper);

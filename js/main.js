@@ -243,10 +243,7 @@
                 );
                 if (!link) return;
 
-                if (
-                    scrollY > sectionTop &&
-                    scrollY <= sectionTop + sectionHeight
-                ) {
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                     link.classList.add("active-link");
                 } else {
                     link.classList.remove("active-link");

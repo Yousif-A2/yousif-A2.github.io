@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytics Dashboard — Yousif.AI</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="shortcut icon" type="image/png" href="Assets/img/ai.png" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/dashboard.css" />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body class="dark-theme">
+<script>
+    // Sync theme from portfolio preference (runs before paint to avoid flash)
+    (function() {
+        var theme = localStorage.getItem('selected-theme');
+        if (theme === 'light') {
+            document.body.classList.remove('dark-theme');
+        }
+    })();
+</script>
+
+<!-- ==================== LOGIN ==================== -->
+<div id="login-screen">
+    <div class="login-card">
+        <div class="login-logo">Yousif<span>.AI</span></div>
+        <div class="login-sub">Analytics Dashboard</div>
+        <input
+            type="password"
+            id="login-input"
+            placeholder="Enter dashboard token"
+            autocomplete="current-password"
+        />
+        <button class="login-btn" id="login-btn">Login</button>
+        <div class="login-error" id="login-error"></div>
+    </div>
+</div>
+
+<!-- ==================== APP ==================== -->
+<div id="app">
+
+    <!-- Header -->
+    <header class="dash-header">
+        <div class="dash-logo">Yousif<span>.AI</span> &mdash; Analytics</div>
+        <div class="dash-header-actions">
+            <i class="uil uil-moon dash-theme-toggle" id="theme-button" title="Toggle theme"></i>
+            <button class="dash-refresh-btn" id="refresh-btn">
+                <i class="uil uil-sync"></i> Refresh
+            </button>
+            <button class="dash-logout-btn" id="logout-btn">
+                <i class="uil uil-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </header>
+
+    <div class="dash-body">
+
+        <!-- ── Stats ── -->
+        <div class="stats-grid">
+            <div class="stat-card cyan">
+                <div class="stat-label">Total Sessions</div>
+                <div class="stat-value" id="stat-sessions">—</div>
+                <div class="stat-sub">All time</div>
+                <i class="uil uil-comments-alt stat-icon"></i>
+            </div>
+            <div class="stat-card violet">
+                <div class="stat-label">Total Messages</div>
+                <div class="stat-value" id="stat-messages">—</div>
+                <div class="stat-sub">Across all sessions</div>
+                <i class="uil uil-message stat-icon"></i>
+            </div>
+            <div class="stat-card amber">
+                <div class="stat-label">Page Views</div>
+                <div class="stat-value" id="stat-pageviews">—</div>
+                <div class="stat-sub">Today: <strong id="stat-pv-today">—</strong></div>
+                <i class="uil uil-eye stat-icon"></i>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-label">Sessions Today</div>
+                <div class="stat-value" id="stat-today">—</div>
+                <div class="stat-sub">UTC day</div>
+                <i class="uil uil-calendar-alt stat-icon"></i>
+            </div>
+            <div class="stat-card pink">
+                <div class="stat-label">Avg Duration</div>
+                <div class="stat-value" id="stat-duration">—</div>
+                <div class="stat-sub">Per session</div>
+                <i class="uil uil-clock stat-icon"></i>
+            </div>
+            <div class="stat-card violet" style="background:rgba(124,58,237,0.06);">
+                <div class="stat-label">Voice / Chat</div>
+                <div class="stat-value" style="font-size:1.4rem;">
+                    <span id="stat-voice" style="color:var(--violet)">—</span>
+                    <span style="color:var(--text3);font-size:1rem;"> / </span>
+                    <span id="stat-chat" style="color:var(--green)">—</span>
+                </div>
+                <div class="stat-sub">Session types</div>
+                <i class="uil uil-microphone stat-icon"></i>
+            </div>
+        </div>
+
+        <!-- ── Charts ── -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <div class="chart-title">
+                    <i class="uil uil-chart-line"></i> Sessions · Last 30 Days
+                </div>
+                <div class="chart-canvas-wrap">
+                    <canvas id="chart-sessions"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">
+                    <i class="uil uil-chart-bar"></i> Page Views · Last 30 Days
+                </div>
+                <div class="chart-canvas-wrap">
+                    <canvas id="chart-pageviews"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">
+                    <i class="uil uil-clock"></i> Messages by Hour of Day
+                </div>
+                <div class="chart-canvas-wrap">
+                    <canvas id="chart-hours"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Sessions Table ── -->
+        <div class="sessions-card">
+            <div class="sessions-toolbar">
+                <div class="sessions-toolbar-title">
+                    <i class="uil uil-list-ul"></i>
+                    Sessions
+                    <span id="sessions-info" style="color:var(--text3);font-weight:400;font-size:0.8rem;"></span>
+                </div>
+                <input
+                    type="text"
+                    class="sessions-search"
+                    id="sessions-search"
+                    placeholder="Search…"
+                />
+                <button class="filter-btn" data-type="voice">🎙 Voice</button>
+                <button class="filter-btn" data-type="chat">💬 Chat</button>
+            </div>
+
+            <table class="sessions-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date (UTC)</th>
+                        <th>Type</th>
+                        <th>Messages</th>
+                        <th>Duration</th>
+                        <th>IP</th>
+                        <th>Recording</th>
+                    </tr>
+                </thead>
+                <tbody id="sessions-tbody">
+                    <tr>
+                        <td colspan="7" class="sessions-empty">
+                            <div class="spinner"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                <button class="page-btn" id="page-prev" disabled>&#8592; Prev</button>
+                <span class="page-info" id="page-info">Page 1 / 1</span>
+                <button class="page-btn" id="page-next" disabled>Next &#8594;</button>
+            </div>
+        </div>
+
+    </div><!-- /.dash-body -->
+</div><!-- /#app -->
+
+<script src="js/dashboard.js"></script>
+<script>
+    // Theme toggle (syncs with portfolio localStorage)
+    (function() {
+        var btn = document.getElementById('theme-button');
+        if (!btn) return;
+        var darkClass = 'dark-theme';
+        var sunIcon = 'uil-sun';
+
+        // Set initial icon
+        if (!document.body.classList.contains(darkClass)) {
+            btn.classList.remove('uil-moon');
+            btn.classList.add(sunIcon);
+        }
+
+        btn.addEventListener('click', function() {
+            document.body.classList.toggle(darkClass);
+            btn.classList.toggle(sunIcon);
+            var isDark = document.body.classList.contains(darkClass);
+            localStorage.setItem('selected-theme', isDark ? 'dark' : 'light');
+            localStorage.setItem('selected-icon', btn.classList.contains(sunIcon) ? 'uil-moon' : 'uil-sun');
+        });
+    })();
+</script>
+</body>
+</html>
