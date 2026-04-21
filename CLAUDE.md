@@ -13,18 +13,18 @@ The FastAPI backend serves all static files — never open HTML files directly v
 ```bash
 pip install -r requirements.txt
 python main.py
-# Serves at http://localhost:8000
+# Serves at http://localhost:5000
 ```
 
-- Portfolio: `http://localhost:8000/`
-- Voice Agent: `http://localhost:8000/voice-agent.html`
-- Analytics Dashboard: `http://localhost:8000/dashboard` (requires token from `.env`)
+- Portfolio: `http://localhost:5000/`
+- Voice Agent: `http://localhost:5000/voice-agent.html`
+- Analytics Dashboard: `http://localhost:5000/dashboard` (requires token from `.env`)
 
 ### Docker
 
 ```bash
 docker build -t yousif-ai .
-docker run -p 8000:8000 -e GOOGLE_CREDENTIALS_JSON='<json>' -e DASHBOARD_TOKEN=<token> yousif-ai
+docker run -p 5000:5000 -e GOOGLE_CREDENTIALS_JSON='<json>' -e DASHBOARD_TOKEN=<token> yousif-ai
 ```
 
 ## Architecture
