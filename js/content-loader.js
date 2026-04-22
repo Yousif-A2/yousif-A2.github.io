@@ -108,6 +108,17 @@
         }
 
         initSwipers();
+
+        // Initialize Vanilla Tilt on the newly created cards
+        if (typeof VanillaTilt !== "undefined") {
+            VanillaTilt.init(document.querySelectorAll(".bento-card"), {
+                max: 4,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.2,
+                scale: 1.02
+            });
+        }
     }
 
     function populateVoiceAgentFab(voiceAgent) {
@@ -703,73 +714,138 @@
             content.dataset.contentP = "";
             content.id = tab.id;
 
-            const swiper = document.createElement("div");
-            swiper.className = "swiper mySwiper";
-            const wrapper = document.createElement("div");
-            wrapper.className = "swiper-wrapper";
+            // Mobile: Bento Grid (Fallback)
+            const mobileGrid = document.createElement("div");
+            mobileGrid.className = "projects__grid mobile-only-grid";
+
+            // Desktop: Neural Constellation
+            const desktopGalaxy = document.createElement("div");
+            desktopGalaxy.className = "neural-galaxy desktop-only-galaxy";
+            
+            const svgCanvas = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svgCanvas.className = "neural-lines";
+            svgCanvas.setAttribute("width", "100%");
+            svgCanvas.setAttribute("height", "100%");
+            desktopGalaxy.appendChild(svgCanvas);
 
             const groupProjects = projects.groups?.[tab.id] ?? [];
-            groupProjects.forEach((project) => {
-                const slide = createProjectSlide(project);
-                if (slide) {
-                    wrapper.appendChild(slide);
+            const nodes = [];
+
+            groupProjects.forEach((project, idx) => {
+                // Mobile Card
+                const bentoCard = createProjectBentoBox(project);
+                if (bentoCard) {
+                    mobileGrid.appendChild(bentoCard);
+                }
+
+                // Desktop Star Node
+                const starNode = createStarNode(project, idx, groupProjects.length);
+                if (starNode) {
+                    desktopGalaxy.appendChild(starNode);
+                    nodes.push(starNode);
                 }
             });
 
-            swiper.appendChild(wrapper);
+            // Draw SVG network lines based on percentage coordinates
+            drawNeuralLinesPercent(nodes, svgCanvas);
 
-            const nextButton = document.createElement("div");
-            nextButton.className = "swiper-button-next";
-            const nextIcon = document.createElement("i");
-            nextIcon.className = "uil uil-angle-right swiper-projects-icon";
-            nextButton.appendChild(nextIcon);
-
-            const prevButton = document.createElement("div");
-            prevButton.className = "swiper-button-prev";
-            const prevIcon = document.createElement("i");
-            prevIcon.className = "uil uil-angle-left swiper-projects-icon";
-            prevButton.appendChild(prevIcon);
-
-            const pagination = document.createElement("div");
-            pagination.className = "swiper-pagination";
-
-            swiper.appendChild(nextButton);
-            swiper.appendChild(prevButton);
-            swiper.appendChild(pagination);
-            content.appendChild(swiper);
+            content.appendChild(mobileGrid);
+            content.appendChild(desktopGalaxy);
             sectionContainer.appendChild(content);
         });
+
+        // Clean up Option 1 cursor tracker
+        const previewCursor = document.getElementById("cursor-preview");
+        if (previewCursor) previewCursor.remove();
+
+        // Inject Side Panel if it doesn't exist
+        let sidePanel = document.getElementById("project-side-panel");
+        if(!sidePanel) {
+            const overlay = document.createElement("div");
+            overlay.id = "panel-overlay";
+            overlay.className = "panel-overlay";
+            document.body.appendChild(overlay);
+
+            sidePanel = document.createElement("div");
+            sidePanel.id = "project-side-panel";
+            sidePanel.className = "project-side-panel";
+            sidePanel.innerHTML = `
+                <div class="panel-glass">
+                    <button id="close-panel-btn" class="close-panel-btn"><i class="uil uil-times"></i></button>
+                    <img id="panel-img" src="" alt="" class="panel-img"/>
+                    <h3 id="panel-title" class="panel-title"></h3>
+                    <div id="panel-tags" class="project-tags"></div>
+                    <p id="panel-desc" class="panel-desc"></p>
+                    <a id="panel-btn" class="button button--flex button--small bento-button" href="#" target="_blank">Visit</a>
+                </div>
+            `;
+            document.body.appendChild(sidePanel);
+            
+            const closePanel = () => {
+                sidePanel.classList.remove("open");
+                overlay.classList.remove("open");
+                document.querySelectorAll(".star-node").forEach(n => n.classList.remove("active"));
+            };
+
+            document.getElementById("close-panel-btn").addEventListener("click", closePanel);
+            overlay.addEventListener("click", closePanel);
+        }
     }
 
-    function createProjectSlide(project) {
+    function createProjectBentoBox(project) {
         if (!project?.title) return null;
 
-        const slide = document.createElement("div");
-        slide.className = "project__content grid swiper-slide";
+        const card = document.createElement("div");
+        card.className = "bento-card glass-card";
+
+        const mediaWrapper = document.createElement("div");
+        mediaWrapper.className = "bento-media";
 
         const media = createProjectMedia(project.images ?? []);
         if (media) {
-            slide.appendChild(media);
+            if (media.tagName === "IMG") {
+                media.classList.add("bento-img");
+            } else {
+                media.classList.add("bento-img-gallery");
+            }
+            mediaWrapper.appendChild(media);
         }
+        card.appendChild(mediaWrapper);
 
         const data = document.createElement("div");
-        data.className = "projects__data";
+        data.className = "bento-data";
 
+        const textWrapper = document.createElement("div");
+        
         const title = document.createElement("h3");
-        title.className = "project__title";
+        title.className = "bento-title";
         title.textContent = project.title;
-        data.appendChild(title);
+        textWrapper.appendChild(title);
 
         if (project.description) {
             const description = document.createElement("p");
-            description.className = "project__description";
+            description.className = "bento-description";
             description.textContent = project.description;
-            data.appendChild(description);
+            textWrapper.appendChild(description);
         }
+        
+        if (project.tags && project.tags.length > 0) {
+            const tagsWrapper = document.createElement("div");
+            tagsWrapper.className = "project-tags";
+            project.tags.forEach(t => {
+                const tag = document.createElement("span");
+                tag.className = "project-tag";
+                tag.textContent = t;
+                tagsWrapper.appendChild(tag);
+            });
+            textWrapper.appendChild(tagsWrapper);
+        }
+        
+        data.appendChild(textWrapper);
 
         if (project.cta?.label && project.cta?.href) {
             const button = document.createElement("a");
-            button.className = "button button--flex button--small project__button";
+            button.className = "button button--flex button--small bento-button";
             button.href = project.cta.href;
             if (isExternalLink(project.cta.href)) {
                 button.target = "_blank";
@@ -783,8 +859,132 @@
             data.appendChild(button);
         }
 
-        slide.appendChild(data);
-        return slide;
+        card.appendChild(data);
+        return card;
+    }
+
+    function createStarNode(project, idx, totalNodes) {
+        const node = document.createElement("div");
+        node.className = "star-node";
+        
+        // Randomize float animation
+        node.style.animationDelay = `${(Math.random() * 2).toFixed(2)}s`;
+
+        // Mathematical dynamic layout ensuring no overlap
+        const safeTotal = Math.max(1, totalNodes);
+        const cols = Math.ceil(Math.sqrt(safeTotal));
+        const rows = Math.ceil(safeTotal / cols);
+        const col = idx % cols;
+        const row = Math.floor(idx / cols);
+
+        const cellWidth = 100 / cols;
+        const cellHeight = 100 / rows;
+        const baseX = (col + 0.5) * cellWidth;
+        const baseY = (row + 0.5) * cellHeight;
+
+        // Jitter to make it look organic and non-grid-like
+        // Limits jitter to +-30% of the cell bounds to guarantee no overlap between cells
+        const jitterX = (Math.random() - 0.5) * (cellWidth * 0.6);
+        const jitterY = (Math.random() - 0.5) * (cellHeight * 0.6);
+
+        node.style.top = `${baseY + jitterY}%`;
+        node.style.left = `${baseX + jitterX}%`;
+
+        const icon = document.createElement("div");
+        icon.className = "star-icon";
+        const i = document.createElement("i");
+        i.className = "uil uil-brain";
+        icon.appendChild(i);
+        
+        const label = document.createElement("div");
+        label.className = "star-label";
+        label.textContent = project.title;
+
+        node.appendChild(icon);
+        node.appendChild(label);
+        
+        node.addEventListener("click", () => {
+             document.querySelectorAll(".star-node").forEach(n => n.classList.remove("active"));
+             node.classList.add("active");
+             openProjectPanel(project);
+        });
+
+        return node;
+    }
+
+    function drawNeuralLinesPercent(nodes, svgCanvas) {
+        svgCanvas.innerHTML = "";
+        const points = nodes.map(n => {
+            return {
+                x: parseFloat(n.style.left),
+                y: parseFloat(n.style.top)
+            };
+        });
+
+        for (let i = 0; i < points.length; i++) {
+            let distances = [];
+            for (let j = 0; j < points.length; j++) {
+                if (i === j) continue;
+                let d = Math.hypot(points[i].x - points[j].x, points[i].y - points[j].y);
+                distances.push({idx: j, dist: d});
+            }
+            distances.sort((a,b) => a.dist - b.dist);
+            
+            // Connect to 2 closest neighbors for a net
+            const edgesToDraw = Math.min(2, distances.length);
+            for (let k = 0; k < edgesToDraw; k++) {
+                const target = points[distances[k].idx];
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                // +1.5% to roughly center point on the icon
+                line.setAttribute("x1", `${points[i].x + 1.5}%`);
+                line.setAttribute("y1", `${points[i].y + 1.5}%`);
+                line.setAttribute("x2", `${target.x + 1.5}%`);
+                line.setAttribute("y2", `${target.y + 1.5}%`);
+                line.classList.add("neural-path");
+                svgCanvas.appendChild(line);
+            }
+        }
+    }
+
+    function openProjectPanel(project) {
+        const panel = document.getElementById("project-side-panel");
+        const overlay = document.getElementById("panel-overlay");
+        if(!panel) return;
+        
+        document.getElementById("panel-title").textContent = project.title;
+        document.getElementById("panel-desc").textContent = project.description || "";
+        
+        const tagsContainer = document.getElementById("panel-tags");
+        tagsContainer.innerHTML = "";
+        if (project.tags && project.tags.length > 0) {
+            project.tags.forEach(t => {
+                const tag = document.createElement("span");
+                tag.className = "project-tag";
+                tag.textContent = t;
+                tagsContainer.appendChild(tag);
+            });
+        }
+        
+        const imgEl = document.getElementById("panel-img");
+        if (project.images && project.images.length > 0 && project.images[0].src) {
+             imgEl.src = project.images[0].src;
+             imgEl.style.display = "block";
+        } else {
+             imgEl.style.display = "none";
+        }
+
+        const btn = document.getElementById("panel-btn");
+        if (project.cta?.label && project.cta?.href) {
+             btn.textContent = project.cta.label;
+             btn.href = project.cta.href;
+             btn.innerHTML = `${project.cta.label} <i class="button__icon ${project.cta.icon || ''}"></i>`;
+             btn.style.display = "inline-flex";
+        } else {
+             btn.style.display = "none";
+        }
+
+        panel.classList.add("open");
+        if (overlay) overlay.classList.add("open");
     }
 
     function createProjectMedia(images) {

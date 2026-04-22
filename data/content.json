@@ -391,7 +391,8 @@
                         "label": "Visit",
                         "href": "https://star.yousif.engineer/",
                         "icon": "uil uil-arrow-right"
-                    }
+                    },
+                    "tags": ["Python", "FastAPI", "LLMs", "LangChain"]
                 },
                 {
                     "title": "Email Auto-Reply System",
@@ -406,7 +407,8 @@
                         "label": "Launch Demo",
                         "href": "https://yousif22-email-auto-reply-system.hf.space/",
                         "icon": "uil uil-arrow-right"
-                    }
+                    },
+                    "tags": ["Python", "Gradio", "SmolLM2-360M"]
                 },
                 {
                     "title": "Arabic LSTM Language Model",
@@ -421,7 +423,8 @@
                         "label": "Launch Demo",
                         "href": "https://yousif22-arabic-lstm-demo.hf.space/",
                         "icon": "uil uil-arrow-right"
-                    }
+                    },
+                    "tags": ["PyTorch", "LSTM", "NLP", "Gradio"]
                 },
                 {
                     "title": "Object Tracking Video Model",
