@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: yousif-portfolio
+    # If the process crashes, restart it automatically
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      # This magical line ensures /app/data binds to a persistent physical drive.
+      # No matter how many times you redeploy, wipe, or update the container,
+      # the physical database and audio files will be safely carried over.
+      - portfolio_data:/app/data
+    environment:
+      # Coolify will mathematically inject these from your dashboard secrets
+      - GOOGLE_CREDENTIALS_JSON=${GOOGLE_CREDENTIALS_JSON}
+      - DASHBOARD_TOKEN=${DASHBOARD_TOKEN}
+
+# We define the named volume here so Docker knows it's a persistent entity
+volumes:
+  portfolio_data:
