@@ -14,9 +14,10 @@ services:
       # the physical database and audio files will be safely carried over.
       - portfolio_data:/app/data
     environment:
-      # Coolify will mathematically inject these from your dashboard secrets
       - GOOGLE_CREDENTIALS_JSON=${GOOGLE_CREDENTIALS_JSON}
       - DASHBOARD_TOKEN=${DASHBOARD_TOKEN}
+      - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT}
+      - GOOGLE_CLOUD_LOCATION=${GOOGLE_CLOUD_LOCATION}
 
 # We define the named volume here so Docker knows it's a persistent entity
 volumes:
