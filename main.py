@@ -28,16 +28,23 @@ RECORDINGS_DIR.mkdir(parents=True, exist_ok=True)
 load_dotenv(BASE_DIR / ".env", override=True)
 
 # --- Credentials ---
-_creds_json = os.environ.get("GOOGLE_CREDENTIALS_JSON")
-if _creds_json:
-    # Validate JSON before writing — catches copy/paste issues (extra quotes, encoding artifacts)
+_creds_raw = os.environ.get("GOOGLE_CREDENTIALS_JSON")
+if _creds_raw:
+    # Support both raw JSON and base64-encoded JSON (base64 avoids copy/paste corruption)
     try:
-        json.loads(_creds_json)
-    except json.JSONDecodeError as e:
-        raise RuntimeError(
-            f"GOOGLE_CREDENTIALS_JSON is not valid JSON: {e}\n"
-            "Make sure the value starts with {{ and has no surrounding quotes."
-        )
+        _creds_json = base64.b64decode(_creds_raw).decode("utf-8")
+        json.loads(_creds_json)  # validate after decoding
+        print("Credentials decoded from base64")
+    except Exception:
+        # Not base64 — try as raw JSON
+        _creds_json = _creds_raw
+        try:
+            json.loads(_creds_json)
+        except json.JSONDecodeError as e:
+            raise RuntimeError(
+                f"GOOGLE_CREDENTIALS_JSON is not valid JSON or base64: {e}\n"
+                "Encode the file with: python3 -c \"import base64; print(base64.b64encode(open('service-account.json','rb').read()).decode())\""
+            )
     _cred_path = "/tmp/service-account.json"
     with open(_cred_path, "w") as _f:
         _f.write(_creds_json)
