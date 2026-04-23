@@ -250,9 +250,19 @@ async def read_dashboard():
     return FileResponse("dashboard.html")
 
 # ─── Analytics API ────────────────────────────────────────────────────────────
+
+def get_real_ip(req) -> str | None:
+    x_forwarded_for = req.headers.get("x-forwarded-for")
+    if x_forwarded_for:
+        return x_forwarded_for.split(",")[0].strip()
+    x_real_ip = req.headers.get("x-real-ip")
+    if x_real_ip:
+        return x_real_ip.strip()
+    return req.client.host if req.client else None
+
 @app.post("/api/track")
 async def track_page_view(request: Request):
-    ip = request.client.host if request.client else None
+    ip = get_real_ip(request)
     if not _check_track_rate(ip):
         return {"ok": True}  # silent drop — don't reveal rate limiting
     try:
@@ -402,7 +412,9 @@ async def get_session_audio(session_id: int, _=Depends(check_auth)):
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     session_id = None
-    ip = websocket.client.host if websocket.client else None
+    
+    # Handle Reverse Proxies
+    ip = get_real_ip(websocket)
 
     # Enforce per-IP connection limit before doing any work
     with _ws_conn_lock:
