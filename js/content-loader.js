@@ -714,13 +714,9 @@
             content.dataset.contentP = "";
             content.id = tab.id;
 
-            // Mobile: Bento Grid (Fallback)
-            const mobileGrid = document.createElement("div");
-            mobileGrid.className = "projects__grid mobile-only-grid";
-
-            // Desktop: Neural Constellation
+            // Neural Constellation (All Devices)
             const desktopGalaxy = document.createElement("div");
-            desktopGalaxy.className = "neural-galaxy desktop-only-galaxy";
+            desktopGalaxy.className = "neural-galaxy";
             
             const svgCanvas = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             svgCanvas.className = "neural-lines";
@@ -732,13 +728,7 @@
             const nodes = [];
 
             groupProjects.forEach((project, idx) => {
-                // Mobile Card
-                const bentoCard = createProjectBentoBox(project);
-                if (bentoCard) {
-                    mobileGrid.appendChild(bentoCard);
-                }
-
-                // Desktop Star Node
+                // Neural Star Node
                 const starNode = createStarNode(project, idx, groupProjects.length);
                 if (starNode) {
                     desktopGalaxy.appendChild(starNode);
@@ -749,7 +739,6 @@
             // Draw SVG network lines based on percentage coordinates
             drawNeuralLinesPercent(nodes, svgCanvas);
 
-            content.appendChild(mobileGrid);
             content.appendChild(desktopGalaxy);
             sectionContainer.appendChild(content);
         });
@@ -792,76 +781,7 @@
         }
     }
 
-    function createProjectBentoBox(project) {
-        if (!project?.title) return null;
-
-        const card = document.createElement("div");
-        card.className = "bento-card glass-card";
-
-        const mediaWrapper = document.createElement("div");
-        mediaWrapper.className = "bento-media";
-
-        const media = createProjectMedia(project.images ?? []);
-        if (media) {
-            if (media.tagName === "IMG") {
-                media.classList.add("bento-img");
-            } else {
-                media.classList.add("bento-img-gallery");
-            }
-            mediaWrapper.appendChild(media);
-        }
-        card.appendChild(mediaWrapper);
-
-        const data = document.createElement("div");
-        data.className = "bento-data";
-
-        const textWrapper = document.createElement("div");
-        
-        const title = document.createElement("h3");
-        title.className = "bento-title";
-        title.textContent = project.title;
-        textWrapper.appendChild(title);
-
-        if (project.description) {
-            const description = document.createElement("p");
-            description.className = "bento-description";
-            description.textContent = project.description;
-            textWrapper.appendChild(description);
-        }
-        
-        if (project.tags && project.tags.length > 0) {
-            const tagsWrapper = document.createElement("div");
-            tagsWrapper.className = "project-tags";
-            project.tags.forEach(t => {
-                const tag = document.createElement("span");
-                tag.className = "project-tag";
-                tag.textContent = t;
-                tagsWrapper.appendChild(tag);
-            });
-            textWrapper.appendChild(tagsWrapper);
-        }
-        
-        data.appendChild(textWrapper);
-
-        if (project.cta?.label && project.cta?.href) {
-            const button = document.createElement("a");
-            button.className = "button button--flex button--small bento-button";
-            button.href = project.cta.href;
-            if (isExternalLink(project.cta.href)) {
-                button.target = "_blank";
-                button.rel = "noopener";
-            }
-            button.textContent = project.cta.label;
-            const icon = document.createElement("i");
-            icon.className = project.cta.icon ?? "";
-            icon.classList.add("button__icon");
-            button.appendChild(icon);
-            data.appendChild(button);
-        }
-
-        card.appendChild(data);
-        return card;
-    }
+    // Removed createProjectBentoBox as the Neural Galaxy is now universally displayed.
 
     function createStarNode(project, idx, totalNodes) {
         const node = document.createElement("div");

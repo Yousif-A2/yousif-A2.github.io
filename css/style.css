@@ -83,7 +83,6 @@
     /* ── Header ── */
     --header-height: 4rem;
 
-    /* Legacy compat */
     --first-color: var(--accent-cyan);
     --first-color-alt: var(--accent-violet);
     --first-color-second: var(--bg-secondary);
@@ -93,6 +92,12 @@
     --container-color: var(--bg-card);
     --input-color: var(--bg-tertiary);
     --body-color: var(--bg-primary);
+
+    /* Galaxy Theming defaults */
+    --galaxy-bg: #020a17;
+    --galaxy-grid: rgba(255, 255, 255, 0.03);
+    --galaxy-glow: rgba(0, 212, 255, 0.1);
+    --star-node-bg: rgba(0, 30, 60, 0.6);
 }
 
 /* ── Dark Mode ── */
@@ -117,6 +122,12 @@ body.dark-theme {
 
     --glow-cyan: 0 0 20px rgba(0, 212, 255, 0.15);
     --glow-violet: 0 0 20px rgba(124, 58, 237, 0.15);
+
+    /* Galaxy Theming override */
+    --galaxy-bg: #020a17;
+    --galaxy-grid: rgba(255, 255, 255, 0.03);
+    --galaxy-glow: rgba(0, 212, 255, 0.1);
+    --star-node-bg: rgba(0, 30, 60, 0.6);
 }
 
 /* ── Light Mode ── */
@@ -142,6 +153,12 @@ body:not(.dark-theme) {
 
     --glow-cyan: 0 0 20px rgba(14, 165, 233, 0.15);
     --glow-violet: 0 0 20px rgba(124, 58, 237, 0.15);
+
+    /* Galaxy Theming override */
+    --galaxy-bg: #f8fafc;
+    --galaxy-grid: rgba(0, 0, 0, 0.05);
+    --galaxy-glow: rgba(14, 165, 233, 0.15);
+    --star-node-bg: rgba(255, 255, 255, 0.9);
 
     /* Legacy compat */
     --first-color: #0ea5e9;
@@ -1334,25 +1351,26 @@ nav {
 /* ===== OPTION 3: NEURAL CONSTELLATION ===== */
 
 /* Desktop Galaxy Container */
-.desktop-only-galaxy {
+.neural-galaxy {
     display: block;
     position: relative;
     width: 100%;
     height: 65vh;
     min-height: 500px;
-    background-color: #020a17; /* Deep cyber space */
+    background-color: var(--galaxy-bg);
     background-image: 
-        radial-gradient(circle at center, rgba(0, 212, 255, 0.1) 0%, transparent 60%),
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        radial-gradient(circle at center, var(--galaxy-glow) 0%, transparent 60%),
+        linear-gradient(var(--galaxy-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--galaxy-grid) 1px, transparent 1px);
     background-size: 100% 100%, 50px 50px, 50px 50px;
     background-position: center center;
     overflow: hidden;
     margin: var(--space-6) 0;
     border-radius: var(--radius-xl);
     border: 1px solid var(--border-glow);
-    box-shadow: 0 0 50px rgba(0, 212, 255, 0.1) inset;
+    box-shadow: 0 0 50px var(--galaxy-glow) inset;
     animation: panGrid 60s linear infinite;
+    transition: background-color var(--duration-normal) var(--ease-out);
 }
 
 @keyframes panGrid {
@@ -1411,7 +1429,7 @@ nav {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: rgba(0, 30, 60, 0.6);
+    background: var(--star-node-bg);
     backdrop-filter: blur(5px);
     border: 1px solid var(--accent-cyan);
     display: flex;
@@ -1419,7 +1437,7 @@ nav {
     align-items: center;
     font-size: 1.5rem;
     color: var(--text-primary);
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4), inset 0 0 20px rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 15px var(--galaxy-glow), inset 0 0 20px var(--galaxy-glow);
     transition: all var(--duration-normal) var(--ease-out);
 }
 
@@ -1590,65 +1608,14 @@ nav {
 }
 
 /* Mobile Settings */
-.mobile-only-grid {
-    display: none; /* Default hidden on desktop */
-}
-
 @media screen and (max-width: 1023px) {
-    .desktop-only-galaxy {
-        display: none !important;
+    .neural-galaxy {
+        height: 80vh;
+        min-height: 600px;
     }
     
-    .mobile-only-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: var(--space-6);
-        padding: var(--space-4) 0;
-    }
-
-    /* Fallback Bento Cards styles */
-    .bento-card {
-        background: var(--bg-glass);
-        border: 1px solid var(--border-glass);
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-    
-    .bento-media {
-        width: 100%;
-        height: 200px;
-        background: rgba(0,0,0,0.2);
-    }
-    
-    .bento-img, .bento-img-gallery img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    
-    .bento-data {
-        padding: var(--space-5);
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-3);
-    }
-    
-    .bento-title {
-        font-size: var(--text-lg);
-        color: var(--text-primary);
-    }
-    
-    .bento-description {
-        font-size: var(--text-sm);
-        color: var(--text-secondary);
-    }
-    
-    .bento-button {
-        align-self: flex-start;
-        margin-top: var(--space-2);
+    .project-side-panel {
+        width: 100vw;
     }
 }
 
