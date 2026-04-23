@@ -30,6 +30,14 @@ load_dotenv(BASE_DIR / ".env", override=True)
 # --- Credentials ---
 _creds_json = os.environ.get("GOOGLE_CREDENTIALS_JSON")
 if _creds_json:
+    # Validate JSON before writing — catches copy/paste issues (extra quotes, encoding artifacts)
+    try:
+        json.loads(_creds_json)
+    except json.JSONDecodeError as e:
+        raise RuntimeError(
+            f"GOOGLE_CREDENTIALS_JSON is not valid JSON: {e}\n"
+            "Make sure the value starts with {{ and has no surrounding quotes."
+        )
     _cred_path = "/tmp/service-account.json"
     with open(_cred_path, "w") as _f:
         _f.write(_creds_json)
