@@ -6,13 +6,16 @@ services:
     container_name: yousif-portfolio
     # If the process crashes, restart it automatically
     restart: unless-stopped
-    ports:
-      - "5000:5000"
+    # No "ports:" on purpose: Coolify's proxy reaches the container on its
+    # internal network. Publishing 5000 would expose plain HTTP on the server IP.
+    expose:
+      - "5000"
     volumes:
-      # This magical line ensures /app/data binds to a persistent physical drive.
-      # No matter how many times you redeploy, wipe, or update the container,
-      # the physical database and audio files will be safely carried over.
-      - portfolio_data:/app/data
+      # Only runtime state (analytics.db, recordings/) is persistent. Don't mount
+      # all of /app/data: a named volume keeps its first contents forever, so
+      # content.json / system-prompt.json would never update on redeploy.
+      # Same volume as before, so the existing DB and recordings carry over.
+      - portfolio_data:/app/data/runtime
     environment:
       - GOOGLE_CREDENTIALS_JSON=${GOOGLE_CREDENTIALS_JSON}
       - DASHBOARD_TOKEN=${DASHBOARD_TOKEN}

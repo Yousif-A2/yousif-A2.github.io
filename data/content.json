@@ -379,6 +379,22 @@
         "groups": {
             "AI": [
                 {
+                    "title": "GlobeGuard: Retinoblastoma AI",
+                    "description": "A research AI system for children with retinoblastoma at KKESH. It finds tumours and vitreous seeds on RetCam fundus images, spots leukocoria (white pupil) on examination photos, and estimates per-eye outcomes such as globe salvage and chemotherapy failure. Built on DINOv2 re-trained on KKESH images, with tumour detection reaching 0.97 AUC on 6,386 images from 105 children. De-identified, all models run on-site, and it is a research tool, not a medical device.",
+                    "images": [
+                        {
+                            "src": "Assets/projects-img/globeguard.png",
+                            "alt": "GlobeGuard retinoblastoma AI preview"
+                        }
+                    ],
+                    "cta": {
+                        "label": "Visit",
+                        "href": "https://globeguard.yai.sa/",
+                        "icon": "uil uil-arrow-right"
+                    },
+                    "tags": ["Computer Vision", "DINOv2", "Medical AI", "Python"]
+                },
+                {
                     "title": "\"Najmah\" Multi-Agent AI Platform",
                     "description": "Najmah is a multilingual multi-agent AI platform tailored for the Saudi market. It understands user intent beyond scripted replies and spins up specialized agents for customer care, admin supervisors, academic advising, creative Arabic poetry, and government service guidance — proving AI can overcome language and cultural barriers.",
                     "images": [

@@ -13,3 +13,8 @@ test*.js
 inspect_*.py
 START-SERVER.bat
 *.md
+.venv/
+.claude/
+data/runtime/
+data/analytics.db
+data/recordings/

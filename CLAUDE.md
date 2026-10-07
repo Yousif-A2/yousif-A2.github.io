@@ -81,7 +81,7 @@ The AI system prompt is assembled from two sources:
 4. `main.py` decodes and forwards raw PCM to Gemini Live as `audio/pcm;rate=16000`
 5. Gemini returns PCM chunks at 24kHz; backend base64-encodes and sends back
 6. Frontend decodes, queues, and plays via Web Audio API at 24kHz
-7. At session end, backend converts the accumulated PCM buffer to WAV → `data/recordings/session_{id}.wav`
+7. At session end, backend converts the accumulated PCM buffer to WAV → `data/runtime/recordings/session_{id}.wav`
 
 **Two separate AudioContexts:** `inputCtx` runs at 16kHz (microphone capture), `audioCtx` runs at 24kHz (playback). They are created and destroyed independently per session.
 
@@ -91,7 +91,7 @@ All portfolio content lives in `data/content.json` (English) and `data/content-a
 
 ### Analytics
 
-SQLite database at `data/analytics.db`. Tables: `sessions`, `messages`, `page_views`. Page views are posted to `/api/track` (unauthenticated, fire-and-forget). Session and message details are under `/api/analytics` and `/api/sessions`, which require `X-Dashboard-Token` header.
+SQLite database at `data/runtime/analytics.db`. Only `data/runtime/` is a persistent volume in Docker/Coolify; `data/*.json` ships with the image, so content changes go live on redeploy. Tables: `sessions`, `messages`, `page_views`. Page views are posted to `/api/track` (unauthenticated, fire-and-forget). Session and message details are under `/api/analytics` and `/api/sessions`, which require `X-Dashboard-Token` header.
 
 ## Key Files
 

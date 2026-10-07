@@ -23,7 +23,10 @@ from google.genai.types import (
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent
-RECORDINGS_DIR = BASE_DIR / "data" / "recordings"
+# Runtime state (analytics DB, recordings) lives in data/runtime/, which is the
+# only directory mounted as a persistent volume. data/*.json ships with the image.
+RUNTIME_DIR = BASE_DIR / "data" / "runtime"
+RECORDINGS_DIR = RUNTIME_DIR / "recordings"
 RECORDINGS_DIR.mkdir(parents=True, exist_ok=True)
 load_dotenv(BASE_DIR / ".env", override=True)
 
@@ -64,7 +67,7 @@ LOCATION = os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1")
 MODEL_ID = "gemini-live-2.5-flash-native-audio"
 
 # ─── Analytics DB ───────────────────────────────────────────────────────────
-DB_PATH  = BASE_DIR / "data" / "analytics.db"
+DB_PATH  = RUNTIME_DIR / "analytics.db"
 _db_lock = threading.Lock()
 
 def _now() -> str:
@@ -412,7 +415,9 @@ async def get_session_audio(session_id: int, _=Depends(check_auth)):
     conn.close()
     if not row or not row["recording_path"]:
         raise HTTPException(404, "No recording for this session")
-    path = BASE_DIR / row["recording_path"]
+    # Resolve by file name: older rows store "data/recordings/...", from before
+    # recordings moved to data/runtime/recordings/.
+    path = RECORDINGS_DIR / Path(row["recording_path"]).name
     if not path.exists():
         raise HTTPException(404, "Recording file not found")
     return FileResponse(
